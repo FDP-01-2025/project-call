@@ -1,7 +1,168 @@
 #include <iostream>
+#include <windows.h>
+#include <cstdlib>
 using namespace std;
 
+void PrintWithPause(const string& Text, int Pause){
+    for (char c : Text) {
+        cout << c;
+        Sleep(0); // 0 para lectura rapida.  // Pause to normal
+    }
+}
+void LongPause(int MiliSeconds){
+    Sleep(0); // 0 para lectura rapida.  //MiliSeconds to normal
+}
 void Prologue(){
+    string x;
+    string prologue[] = {
+        "La lluvia golpea con insistencia los restos de una ciudad agonizante en plena guerra.",
+        "El cuerpo de un nino yace inconsciente entre los escombros.",
+        "Mas sin embargo...",
+        "Su mente no esta en silencio pacifico... escuchas \033[31m2\033[0m voces."
+    };
 
-    
+    string MysteriousVoice1[] = {
+        "Hey...", // 0
+        "Despierta...", // 1
+        "...", // 2
+        "Me sorprende que aun respire luego de lo sucedido.", // 3
+        "Quizas.", // 4
+        "Pero yo solo cumplo con mi trabajo.", // 5
+        "¿Crees que \033[31mEllos\033[0m hayan abandonado a los humanos a su suerte?.", // 6
+        "Y sin embargo... algo en este niño te inquieta.", // 7
+        "Sucede algo?", // 8
+        "Porque lo mencionas?", // 9
+        "Y esas ocasiones ocurrieron hace siglos", // 10
+        "Y sabemos como terminaron", // 11
+        "Mientras respire no, no tenemos ninguna autoridad para intervenir.", // 12
+        "Pero… sobrevive?", // 13
+        "Tal vez...", // 14
+        "Lo tendre en mira", // 15
+        "No bromees", // 16
+        "Nadie me arrebatara lo que se me encomendo", // 17
+        "Sea lo que sea, no somos nosotros quienes pagaremos las consecuencias.", // 18
+        "Sera mejor que nos retiremos", // 19
+        "Siento varias presencias, se dirigen en hacia nuestra direccion", // 20
+        "Sabes que no es tan simple", // 21
+        "En estos tiempos se exige mi presencia en muchos lugares", // 22
+        "Nos veremos otra vez… cuando el equinoccio del Acuario traiga consigo la última sombra", //23
+        "No es el momento para profecías vacias.", // 24
+        "No me hagas seguir perdiendo el tiempo", // 25
+    };
+
+    string MysteriousVoice2[] = {
+        "Crees que es demasiado joven para cruzar la frontera del sueno eterno?", // 0
+        "Qué efimera es la existencia humana.", // 1
+        "Los poderosos codician tanto, sin entender lo breve de su llama.", // 2
+        "Y los mas debiles se hunden en el silencio.", // 3
+        "Tal vez... no fueron mas que un simple experimento.", // 4
+        "Como arrojar ratones en un bosque repleto de bestias.", // 5
+        "Mientras que \033[31mNosotros\033[0m solo observamos y cumplimos nuestros roles.", // 6
+        "Lo observo.", // 7
+        "Su futuro se despliega ante mi... pero no logro descifrarlo.", // 8
+        "Es incierto... difuso... no soy capaz de predecir con exactitud que sucedera con el.", // 9
+        "Es ambiguo, rara fueron las ocasiones que veo estas anomalias en humanos.", // 10
+        "No... este es diferente.", // 11
+        "Este niño no tiene un destino... Tiene muchos.", // 12
+        "Como ramas que crecen en direcciones opuestas.", // 13
+        "Algunas grises como si no tuvieran vida...", // 14
+        "Otras claras y puras, como la primera luz del día...", // 15
+        "Y unas tan oscuras que soy incapaz de observar a travez de ellas...", // 16
+        "¿Deberiamos intervenir?", // 17
+        "No estoy seguro... su futuro me intriga, es como un arbol.", // 18
+        "No logro ver mas alla del tronco.", // 19
+        "le daras un tiempo?", //20
+        "Este tipo de anomalia, no debemos ignorarla.", //21
+        "Las veces que lo has mencionado se te salio de las manos y nos dieron una orden directa de intervenir.", // 22
+        "Solo no te confies esta vez.", // 23
+        "Puede convertirse en un angel salvador para su gente...", // 24
+        "O en el verdugo que termine sumiendo a todos a la oscuridad...", // 25
+        "Puede te quite el trabajo.", // 26
+        "bromeaba, solo era una idea... o tal vez no.", // 27
+        "Hay algo dentro de el que grita poder. Algo que aun no despierta.", // 28
+        "No hagas la vista gorda", // 29
+        "Nunca envaines tu arma en un camino con niebla.", // 30
+        "Bajar la guardia alimentara a la sombra que tomara tu cuerpo", // 31
+        "Ya estuvimos mas tiempo de lo previsto, hermano", // 32
+        "De todas maneras no son capaces de vernos.", // 33
+        "Cuando tu señor reclame lo que considera suyo...?", // 34
+        "Como quieras.", // 35
+        "Adios...", // 36
+        "T...h...a...n..." // 37
+    };
+
+    string V1 = "Voz misteriosa 1";
+    string V2 = "Voz misteriosa 2";
+    string Black = "\033[30m";
+    string Yellow = "\033[33m";
+
+    string colors[] = {
+    Black, Black, Black
+    };
+
+    string prefixes[] = {
+    V1, V1, V1
+    };
+
+    string texts[] = {
+        MysteriousVoice1[0],
+        MysteriousVoice1[1],
+        MysteriousVoice1[2]
+    };
+
+    system("cls");
+    for (int i = 0; i <= 3; i++){
+        cout << "\033[3m";
+        PrintWithPause(prologue[i], 50);
+        LongPause(1000); cout << endl;
+            if (i == 0){
+                cout << "Enter any letter to continue" << endl;
+            }
+        cin >> x;
+        cout << "\033[0m";
+        system("cls");
+    }
+
+    for (int i = 0; i < 3; i++){
+        cout << colors[i] << prefixes[i] << "\033[0m" << ": ";
+        PrintWithPause(texts[i], 50);
+        LongPause(1000); cout << endl;
+        cin >> x;
+        system("cls");
+    }
+
+/*
+    cout << "\033[30mVoz misteriosa 1: \033[0m"; PrintWithPause(MysteriousVoice1[0], 50);
+    LongPause(1000); cout << endl;
+    cin >> x;
+    system("cls");
+    cout << "\033[30mVoz misteriosa 1: \033[0m"; PrintWithPause(MysteriousVoice1[1], 50);
+    LongPause(1000); cout << endl;
+    cin >> x;
+    system("cls");
+    cout << "\033[30mVoz misteriosa 1: \033[0m"; PrintWithPause(MysteriousVoice1[2], 50);
+    LongPause(1000); cout << endl;
+    cin >> x;
+    system("cls");
+    cout << "\033[30mVoz misteriosa 1: \033[0m"; PrintWithPause(MysteriousVoice1[3], 50);
+    LongPause(1000); cout << endl;
+    cin >> x;
+    system("cls");
+    cout << "\033[33mVoz misteriosa 2: \033[0m"; PrintWithPause(MysteriousVoice2[0], 50);
+    LongPause(1000); cout << endl;
+    cin >> x;
+    system("cls");
+    cout << "\033[30mVoz misteriosa 1: \033[0m"; PrintWithPause(MysteriousVoice1[4], 50);
+    LongPause(1000); cout << endl;
+    cin >> x;
+    system("cls");
+    cout << "\033[30mVoz misteriosa 1: \033[0m"; PrintWithPause(MysteriousVoice1[5], 50);
+    LongPause(1000); cout << endl;
+    cin >> x;
+    system("cls");
+    cout << "\033[33mVoz misteriosa 2: \033[0m"; PrintWithPause(MysteriousVoice2[1], 50);
+    LongPause(1000); cout << endl;
+    cin >> x;
+    system("cls");
+    */
 }
