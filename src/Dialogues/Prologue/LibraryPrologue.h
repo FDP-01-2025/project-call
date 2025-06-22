@@ -3,8 +3,8 @@
 #include <string>
 using namespace std;
 
-void PrintWithPause(const string& Text, int Pause);
-void LongPause(int MiliSeconds);
+void PrintWithPause_P(const string& Text, int Pause);
+void LongPause_P(int MiliSeconds);
 void Prologue();
 
 #endif

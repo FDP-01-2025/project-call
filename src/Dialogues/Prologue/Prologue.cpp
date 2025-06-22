@@ -3,18 +3,19 @@
 #include <cstdlib>
 using namespace std;
 
-void PrintWithPause(const string& Text, int Pause){
+void PrintWithPause_P(const string& Text, int Pause){
     for (char c : Text) {
         cout << c;
-        Sleep(Pause); // 0 para lectura rapida.  // Pause to normal
+        Sleep(Pause); // 0 para lectura rapida.  // "Pause" to normal
     }
 }
-void LongPause(int MiliSeconds){
-    Sleep(MiliSeconds); // 0 para lectura rapida.  //MiliSeconds to normal
+void LongPause_P(int MiliSeconds){
+    Sleep(MiliSeconds); // 0 para lectura rapida.  // "MiliSeconds" to normal
 }
 void Prologue(){
     string x;
     string prologue[] = {
+        "\033[1;3;4mAnciente Greece. Atenas. 487 A. Magnus",
         "La lluvia golpea con insistencia los restos de una ciudad agonizante en plena guerra.",
         "El cuerpo de un nino yace inconsciente entre los escombros.",
         "Mas sin embargo...",
@@ -91,10 +92,34 @@ void Prologue(){
         "Th...a...n..." // 37
     };
 
+    string You[] = {
+        "Te despiertas bruscamente.", // 0
+        "Toses...", // 1
+        "Solo observas escombros y fuego a tu alrededor de lo que parece una ciudad.", // 2
+        "No pareces recordar como llegaste aqui.", // 3
+        "Estas muy debil como para caminar e ir a un lugar seguro.", // 4
+        "Estas sangrando, no crees sobrevivir por mucho tiempo en estas condiciones.", // 5
+        "Pero logras escuchar voces y pasos acercandose a tu direccion.", // 6
+        "Te sientes mareado... por la perdida de sangre.", // 7
+        "...", // 8
+    };
+
+    string Soldiers[] = {
+        "Hey! hay un sobreviviente en este sitio!.", // 0
+        "Vaya es muy joven, que hacia en este lugar.", // 1
+        "Sea cual sea la situacion envialo a el y el resto de supervivientes al campamento.", // 2
+        "De acuerdo, tengan cuidado, aun hay rebeldes por estas zonas.", // 3
+        "Vas a estar bien chico...", // 4
+        "\033[3mDe un momento a otro te desmayas nuevamente...\033[0m" // 5
+    };
+
     string V1 = "Voz misteriosa 1";
     string V2 = "Voz misteriosa 2";
+    string H1 = "Hoplita 1";
+    string H2 = "Hoplita 2";
     string Black = "\033[30m";
     string Yellow = "\033[33m";
+    string Green = "\033[32m";
 
     string colors[] = {
     Black, Black, Black, Black, Yellow, Black, Black, Yellow, Yellow, Yellow, Black, Yellow, Yellow, Yellow,
@@ -104,10 +129,18 @@ void Prologue(){
     Black, Black, Yellow, Black, Black, Yellow, Yellow, Yellow
     };
 
+    string ColorsH[] = {
+        Green, Yellow, Yellow, Green, Yellow, Black
+    };
+
     string prefixes[] = {
     V1, V1, V1, V1, V2, V1, V1, V2, V2, V2, V1, V2, V2, V2, V1, V1, V2, V2, V2, V1, V2, V1, V1, V2, V2, V2, V2,
     V2, V2, V2, V1, V1, V2, V2, V2, V1, V2, V1, V2, V2, V2, V2, V2, V1, V1, V2, V2, V1, V2, V2, V2, V1, V1, V2,
     V2, V1, V1, V1, V2, V1, V1, V2, V2, V2
+    };
+
+    string prefixesH[] = {
+        H1, H2, H2, H1, H2, ""
     };
 
     string texts[] = {
@@ -178,10 +211,10 @@ void Prologue(){
     };
 
     system("cls");
-    for (int i = 0; i < 4; i++){
+    for (int i = 0; i < 5; i++){
         cout << "\033[3m";
-        PrintWithPause(prologue[i], 50);
-        LongPause(1000); cout << endl;
+        PrintWithPause_P(prologue[i], 30);
+        LongPause_P(1000); cout << endl;
             if (i == 0){
                 cout << "Enter any letter to continue" << endl;
             }
@@ -193,16 +226,39 @@ void Prologue(){
     for (int i = 0; i < 64; i++){
         if (i == 63){
             cout << colors[i] << prefixes[i] << "\033[0m" << ": ";
-            PrintWithPause(texts[i], 500);
-            LongPause(1000); cout << endl;
+            PrintWithPause_P(texts[i], 500);
+            LongPause_P(1000); cout << endl;
             cin >> x;
             system("cls");
         } else {
             cout << colors[i] << prefixes[i] << "\033[0m" << ": ";
-            PrintWithPause(texts[i], 50);
-            LongPause(1000); cout << endl;
+            PrintWithPause_P(texts[i], 30);
+            LongPause_P(1000); cout << endl;
             cin >> x;
             system("cls");
         }
+    }
+        
+
+    for (int i = 0; i < 9; i++){
+        cout << "\033[3m";
+        PrintWithPause_P(You[i], 30);
+        LongPause_P(1000); cout << endl;
+        cin >> x;
+        system("cls");
+    } 
+
+    for (int i = 0; i < 6; i++){
+        if (i == 5){
+        PrintWithPause_P(Soldiers[i], 30);
+        LongPause_P(1000); cout << endl;
+        cin >> x;
+        system("cls");
+        }
+        cout << ColorsH[i] << prefixesH[i] << "\033[0m" << ": ";
+        PrintWithPause_P(Soldiers[i], 30);
+        LongPause_P(1000); cout << endl;
+        cin >> x;
+        system("cls");
     }
 }
