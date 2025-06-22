@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <cstdlib>
 #include <time.h>
+#include "Data/PlayerData/PlayerData.h"
 using namespace std;
 
 void PrintWithPause_Tu(const string& Text, int Pause){
@@ -46,7 +47,7 @@ void Tutorial(){
     "Bueno sigamos con tu entrenamiento...", //27
     "Ahora el siguiente boton de tu menu es la magia.", //28
     "No sabes usar magia? No me importa.", //29
-    "Vamos! prueba el boton \033[34mMAGIC\033[0m.", //30
+    "Vamos! prueba el boton \033[34mMAGIC\033[0m. Por cierto.\nLa magia usa \033[34mMANA\033[0m, Y es un recuros muy importante. Pero si se te acaba solo espera y se te regenera de poco en poco.", //30
     "Intentas usar magia", //31
     "Usas todas tus fuerzas y te pones rojo", //32
     "Logras crear una mini rafaga de aire hacia el muneco de entrenamiento", //33
@@ -66,9 +67,9 @@ void Tutorial(){
     "10 minutos despues", //47
     "Bien, al menos con mi vendaval tienes una mejor vista!, no hay que ser pesimistas!", //48
     "Ahora veamos el boton \033[33mACTION\033[0m", //49
-    "Y me asegurare de que tu mocoso no le des a otros botones como si no hubiera un manana.", //50
-    "Dentro de accion puedes hacer varias cosas como puedes ver.", //51
-    "MY STATS: muestra tus stats actuales.", //52
+    "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. ACTION 1\n5. ACTION 2\n6. ACTION 3\n7. RETURN\n", //50
+    "Dentro de \033[33mACTION\033[0m puedes hacer varias opciones como puedes ver, Te hare un resumen rapido.", //51
+    "usa \033[33mMY STATS\033[0m muestra tus stats actuales. miremos los tuyos.", //52
     " Ahora eres un debilucho.", //53
     "Pero si tienes curiosidad...", //54
     "Ah! y no consume tu turno. Puedes presumirle de tus stats a tus enemigos tanto como quieras!", //55
@@ -105,19 +106,23 @@ void Tutorial(){
     "*Muñeco de Neika aparecio*", //86
     };
 
+    bool Disobey = false;
+    bool Disobey2 = false;
     srand(time(NULL));
     int Option;
 
     string Conditionals[] = {
-        "No te hagas el listo, usa las \033[31mOPCIONES\033[0m que te muestra el menu!.",
+        "No te hagas el listo, usa las \033[31mOPCIONES\033[0m que te muestra el menu!.", // 0
         "Necio! ese no es.", // 1
         "Attack! Attack!.", // 2
         "Hablo en Persa o que? usa Attack.", // 3 
-        "NO es ese boton! Si Zeus te estuviera entrenando ya te hubiera lanzado un rayo!." // 4
+        "NO es ese boton! Si Zeus te estuviera entrenando ya te hubiera lanzado un rayo!.", // 4
         "No me importa si no usas magia usa el bendito... BOTON.", // 5
         "Magic! Magic!.", // 6
         "Hablo en Sumerio o que? usa Magic.", // 7
         "NO es ese boton! Si Poseidon te estuviera entrenando ya hubiera inundado tu casa!.", // 8
+        "Y me asegurare de que tu mocoso no le des a otros botones como si no hubiera un manana.", // 9
+        "Ni me molestare en reganarte." // 10
     };
 
     /*
@@ -171,6 +176,7 @@ system("cls");
             cin >> x;
             system("cls");
             cout << endl;
+            Disobey = true;
             break;
         default:
             cout << "\033[31mNaika: \033[0m";
@@ -235,7 +241,6 @@ system("cls");
             system("cls");
         }
     }
-        */
 
     do{
         int Index_2 = rand() % 4+5;
@@ -250,7 +255,71 @@ system("cls");
         case 3:
         case 1:
             cout << "\033[31mNaika: \033[0m"; 
-            for (char c : Conditionals[Index_2]){
+            for (char c : Conditionals[10]){
+            cout << c;
+            Sleep(30);
+        }
+            Sleep(1000);
+            cout << endl;
+            cin >> x;
+            system("cls");
+            cout << endl;
+            Disobey2 = true;
+            break;
+        default:
+            cout << "\033[31mNaika: \033[0m";
+            for (char c : Conditionals[0]){
+            cout << c;
+            Sleep(30);
+        }
+            Sleep(1000);
+            cout << endl;
+            cin >> x;
+            system("cls");
+            cout << endl;
+            break;
+        }
+    } while (true);
+    
+system("cls");
+    for (int i = 31; i < 50; i++){
+    if (i == 49){
+        cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
+        LongPause_Tu(1000); cout << endl;
+        if (Disobey == true && Disobey2 == true){
+            cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Conditionals[9], 30); cout << endl;
+        }
+        cin >> x;
+        system("cls");
+    } else if (i <= 35 || i >= 39 && i <= 43 || i == 47){
+        cout << "\033[3m";
+        PrintWithPause_Tu(Tutorial[i], 30);
+        LongPause_Tu(1000); cout << endl;
+        cin >> x;
+        cout << "\033[0m";
+        system("cls");
+    } else if (i <= 38 || i >= 44 && i <= 46 || i >= 48 && i <= 49){
+        cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
+        LongPause_Tu(1000); cout << endl;
+        cin >> x;
+        system("cls");
+        }
+    }
+
+
+    do{
+        cout << "Opcion: " << endl;
+        cout << "1. ATTACK\n2. MAGIC\n\033[33m3. ACTION\033[0m\n4. ITEM\n5. MERCY\n";
+        cin >> Option;
+        if (Option == 3) break;
+
+        switch (Option){
+        case 5:
+        case 4:
+        case 2:
+        case 1:
+        cout << "\033[31mNaika: \033[0m";
+            for (char c : Conditionals[10]){
             cout << c;
             Sleep(30);
         }
@@ -274,22 +343,22 @@ system("cls");
             break;
         }
     } while (true);
+     // */
 
 system("cls");
-    for (int i = 31; i < 50; i++){
-        // if (i <= 45){
-        if (i <= 35 || i >= 39 && i <= 43 || i == 47){
-            cout << "\033[3m";
-        PrintWithPause_Tu(Tutorial[i], 30);
-        LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        cout << "\033[0m";
+    for (int i = 50; i < 53; i++){
+        if (i == 50){
+            cout << "Opciones de accion: " << endl;
+            PrintWithPause_Tu(Tutorial[i], 30);
+            LongPause_Tu(1000); cout << endl;
+            cin >> x;
         system("cls");
-        } else if (i <= 38 || i >= 44 && i <= 46 || i >= 48 && i <= 49){
-        cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
-        LongPause_Tu(1000); cout << endl;
-        cin >> x;
+        } else {
+            cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
+            LongPause_Tu(1000); cout << endl;
+            cin >> x;
         system("cls");
         }
     }
+    // ShowStats(p);
 }

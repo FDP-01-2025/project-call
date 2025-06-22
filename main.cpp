@@ -1,27 +1,32 @@
 #include <iostream>
+#include <windows.h>
 #include "src/Dialogues/Prologue/LibraryPrologue.h"
 #include "src/Dialogues/Training/LibraryTraining.h"
 #include "src/Battles/Tutorial/LibraryTutorial.h"
+#include "src/Data/PlayerData/PlayerData.h"
 
 using namespace std;
 
-struct Player {
-    string PlayerName;
-};
-
 int main(){
+    int x;
+    system("cls");
 
-    string PlayerName;
-
-    /*
-system("cls");
     cout << "Bienvenido a Ashes of Olympus" << endl;
-    cout << "Ingrese el nombre de su jugador: " << endl;
-    cin >> PlayerName;
-    */
+    Player p = Global_Data(); // funcion para elegir la dificultad
+    ShowStats(p); // funcion para mostrar las estadisticas
+
+    cout << endl;
+    system("cls");
+    cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
+    cout << p.HP << endl;
+    cout << "Recibiste 10 de dano" << endl;
+    p.HP -= 10;
+    cout << p.HP << endl;
+    Sleep(2500);
 
     // Prologue();
-    // Training(PlayerName);
+    // Training(p.PlayerName);
     Tutorial();
+
     return 0;
 }

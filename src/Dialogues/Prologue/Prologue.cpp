@@ -62,7 +62,7 @@ void Prologue(){
         "Lo observo.", // 7
         "Su futuro se despliega ante mi... pero no logro descifrarlo.", // 8
         "Es incierto... difuso... no soy capaz de predecir con exactitud que sucedera con el.", // 9
-        "Es ambiguo, rara fueron las ocasiones que veo estas anomalias en humanos.", // 10
+        "Es ambiguo, raras fueron las ocasiones que veo estas anomalias en humanos.", // 10
         "No... este es diferente.", // 11
         "Este nino no tiene un destino... Tiene muchos.", // 12
         "Como ramas que crecen en direcciones opuestas.", // 13
@@ -78,7 +78,7 @@ void Prologue(){
         "Solo no te confies esta vez.", // 23
         "Puede convertirse en un angel salvador para su gente...", // 24
         "O en el verdugo que termine sumiendo a todos a la oscuridad...", // 25
-        "Puede te quite el trabajo.", // 26
+        "Puede que te quite el trabajo.", // 26
         "bromeaba, solo era una idea... o tal vez no.", // 27
         "Hay algo dentro de el que grita poder. Algo que aun no despierta.", // 28
         "No hagas la vista gorda.", // 29
@@ -254,11 +254,12 @@ void Prologue(){
         LongPause_P(1000); cout << endl;
         cin >> x;
         system("cls");
-        }
+        } else {
         cout << ColorsH[i] << prefixesH[i] << "\033[0m" << ": ";
         PrintWithPause_P(Soldiers[i], 30);
         LongPause_P(1000); cout << endl;
         cin >> x;
         system("cls");
+        }
     }
 }

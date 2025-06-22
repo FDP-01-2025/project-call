@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include <cstdlib>
+#include "Data/PlayerData/PlayerData.h"
 using namespace std;
 
 void PrintWithPause_T(const string& Text, int Pause){
@@ -12,7 +13,7 @@ void PrintWithPause_T(const string& Text, int Pause){
 void LongPause_T(int MiliSeconds){
     Sleep(MiliSeconds); // 0 para lectura rapida.  // "MiliSeconds" to normal
 }
-void Training(string &PlayerName){
+void Training(Player p){
     string x;
     string General[] = {
         "\033[1m-- 7 ANOS DESPUES --\033[0m", // 0
@@ -59,8 +60,8 @@ void Training(string &PlayerName){
     for (int i = 0; i < 24; i++) {
     if (i == 4) {
         cout << colors[i] << prefixes[i] << "\033[0m";
-        PrintWithPause_T(General[i], 10); 
-        cout << "\033[34m" << PlayerName << "\033[0m";
+        PrintWithPause_T(General[i], 30); 
+        cout << "\033[34m" << p.PlayerName << "\033[0m";
         LongPause_T(1000); 
         cout << endl;
         cin >> x;
@@ -75,7 +76,7 @@ void Training(string &PlayerName){
     }
     else {
         cout << colors[i] << prefixes[i] << "\033[0m";
-        PrintWithPause_T(General[i], 10);
+        PrintWithPause_T(General[i], 30);
         LongPause_T(1000); 
         cout << endl;
         cin >> x;
