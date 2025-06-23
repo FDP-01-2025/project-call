@@ -1,8 +1,8 @@
 #include <iostream>
 #include <windows.h>
-#include <cstdlib>
 #include <time.h>
 #include "Data/PlayerData/PlayerData.h"
+#include "Data/NaikaData/Naika.h"
 using namespace std;
 
 void PrintWithPause_Tu(const string& Text, int Pause){
@@ -14,7 +14,7 @@ void PrintWithPause_Tu(const string& Text, int Pause){
 void LongPause_Tu(int MiliSeconds){
     Sleep(0); // 0 para lectura rapida.  // "MiliSeconds" to normal
 }
-void Tutorial(){
+void Tutorial(Player p, Naika Na){
     string x;
     string Tutorial[] = {
     "Bien soldado, bienvenido a tu entrenamiento.", //0
@@ -68,35 +68,35 @@ void Tutorial(){
     "Bien, al menos con mi vendaval tienes una mejor vista!, no hay que ser pesimistas!", //48
     "Ahora veamos el boton \033[33mACTION\033[0m", //49
     "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. ACTION 1\n5. ACTION 2\n6. ACTION 3\n7. RETURN\n", //50
-    "Dentro de \033[33mACTION\033[0m puedes hacer varias opciones como puedes ver, Te hare un resumen rapido.", //51
+    "Dentro de \033[33mACTION\033[0m puedes hacer varias acciones como puedes ver, Te hare un resumen rapido.", //51
     "usa \033[33mMY STATS\033[0m muestra tus stats actuales. miremos los tuyos.", //52
-    " Ahora eres un debilucho.", //53
+    "Ahora eres un debilucho.", //53
     "Pero si tienes curiosidad...", //54
     "Ah! y no consume tu turno. Puedes presumirle de tus stats a tus enemigos tanto como quieras!", //55
-    "La cara de bobo que les verás a tus enemigos!", //56
+    "La cara de bobo que les veras a tus enemigos!", //56
     "sigamos.", //57
-    "ENEMY DESCRIPTION: usarlo para ver que tan debíl es tu enemigo y reirte de el...", //58
-    "Si es que no es más fuerte que tu claro, y no te haga papilla!", //59
+    "\033[33mENEMY DESCRIPTION\033[0m: usarlo para ver que tan debil es tu enemigo y reirte de el...", //58
+    "Si es que no es mas fuerte que tu claro, y no te haga papilla!", //59
     "COMO YO!", //60
-    "usalo conmigo! o… usa ese apestoso muneco...", //61
-    "Bien, ahora usa EXCHANGE MAGIC: Aqui si tienes más de 2 tipos de magia puedes intercambiarlos en una pelea!", //62
-    "¡Es util para cambiar de estrategia!", //63
-    "Luego tienes los ACTIONS 1, 2 y 3: Son botones apestosos para que intentes terminar un conflicto de manera pacifica y bla…bla…bla.", //64
-    "¡Estamos en Grecia! aquí es muerte!", //65
-    "Y de ultimo tienes el RETURN: eh, sirve si cambias de opinion y quieres liarte a palos con tu enemigo de ya.", //66
-    "Para mi es un 50/50, no te sirve… a menos que seas indeciso.", //67
-    "¡Pero eso es de gallinas!", //68
-    "Luego tenemos ITEM: basicamente te sirve para usar objetos que hayas tenido en el camino, no te daré más explicaciones.", // 69
-    "y de último tenemos MERCY", //70
+    "bien, usa \033[33mENEMY DESCRIPTION\033[0m conmigo! o... usa ese apestoso muneco... \033[3m(No soy tu enemiga pero bah)\033[0m.", //61
+    "Bien, ahora usa \033[33mEXCHANGE MAGIC\033[0m Aqui si tienes mas de 2 tipos de magia puedes intercambiarlos en una pelea!", //62
+    "Es util para cambiar de estrategia!", //63
+    "Luego tienes los \033[33mACTIONS 1, 2 y 3\033[0m Son botones para que realices diferentes acciones en una batalla si no deseas pelear,\ncomo terminar una batalla pacificamente y bla...bla...bla.", //64
+    "Pero aqui estamos en Grecia! aqui es muerte!", //65
+    "Y de ultimo tienes el \033[33mRETURN\033[0m eh, sirve si cambias de opinion y quieres liarte a palos con tu enemigo de ya.", //66
+    "Para mi es un 50/50, no te sirve... a menos que seas un indeciso.", //67
+    "Pero eso es de gallinas!", //68
+    "Luego tenemos \033[33mITEM\033[0m basicamente te sirve para usar objetos que hayas tenido en el camino, no te dare mas explicaciones.", // 69
+    "y de ultimo tenemos \033[33mMERCY\033[0m", //70
     "...", //71
-    "Siempre me pregunto por qué de este este inutil botón.", //72
-    "Basicamente si tienes suficientes “puntos de piedad” puedes perdonar a tu enemigo.", //73
-    "O si eres “bondadoso” bajale el HP a tu enemigo hasta casi matarlo y se rendira.", //74
-    "Somos griego", //75
-    "no monstruos...", //76
+    "Siempre me pregunto por que de este este inutil boton.", //72
+    "Basicamente si tienes suficientes \033[34mpuntos de piedad\033[0m puedes perdonar a tu enemigo.", //73
+    "O si eres un \033[31mbondadoso\033[0m bajale el HP a tu enemigo hasta casi matarlo y se rendira.", //74
+    "Somos griegos...", //75
+    "no mounstros...", //76
     "puedes perdonar a uno que otro plebeyo por ahi.", //77
     "Bien muchacho, Ahora toma esta otra espada de madera y...", //78
-    "*Neika saca un muneco de prueba con su forma*", //79
+    "Neika saca un muneco de prueba con su forma", //79
     "¡Usa todo lo aprendido para luchar conmigo!", //80
     "Claro... use magia para que pelee por mi.", //81
     ":Aún no estás en forma para enfrentarme!. ",//82
@@ -122,7 +122,9 @@ void Tutorial(){
         "Hablo en Sumerio o que? usa Magic.", // 7
         "NO es ese boton! Si Poseidon te estuviera entrenando ya hubiera inundado tu casa!.", // 8
         "Y me asegurare de que tu mocoso no le des a otros botones como si no hubiera un manana.", // 9
-        "Ni me molestare en reganarte." // 10
+        "Ni me molestare en reganarte.", // 10
+        "No tienes nada que ver... es solo un apestoso muneco.", // 11
+        "Por alguna razon tiene consciencia. Le caes mal..." //12
     };
 
     /*
@@ -343,7 +345,6 @@ system("cls");
             break;
         }
     } while (true);
-     // */
 
 system("cls");
     for (int i = 50; i < 53; i++){
@@ -360,5 +361,65 @@ system("cls");
         system("cls");
         }
     }
-    // ShowStats(p);
+    ShowStats(p);
+    for (int i = 53; i < 62; i++){
+        cout << "\033[31mNaika: \033[0m";
+        PrintWithPause_Tu(Tutorial[i], 30);
+        LongPause_Tu(1000); cout << endl;
+        cin >> x;
+        system("cls");
+    }
+
+    bool Close = false;
+    cout << "Que stats deseas ver?\n1. \033[31mNaika: \033[0m\n2. Muneco de entrenamiento" << endl;
+    do{
+    cin >> Option;
+
+system("cls");
+    switch (Option){
+    case 1:
+        ShowStats(Na);
+        cout << endl;
+        cout << "Descripcion: Joven oficial del ejercito Ateniennse.\nNaika es una guerrera experimentada, tiene un temperamento algo explosivo, pero tambien tiene un corazon bondadoso.\nUsara todos los recursos necesarios para salvar a quienes lo necesiten.";
+        cout << endl << endl;
+        Close = true;
+        break;
+    case 2:
+        for (int i = 11; i < 13; i++){
+        cout << "\033[3m";
+        PrintWithPause_Tu(Conditionals[i], 30);
+        LongPause_Tu(1000); cout << endl;
+        cin >> x;
+        cout << "\033[0m";
+        system("cls");
+        }
+        Close = true;
+        break;
+    default:
+        cout << "\033[31mNaika: \033[0m";
+            for (char c : Conditionals[0]){
+            cout << c;
+            Sleep(30);
+        }
+        break;
+        }
+    } while (Close != true);
+    */
+
+    for (int i = 62; i < 80; i++){
+        if (i == 79){
+        cout << "\033[3m";
+        PrintWithPause_Tu(Tutorial[i], 30);
+        cout << "\033[0m";
+        LongPause_Tu(1000); cout << endl;
+        cin >> x;
+        system("cls");
+        } else {
+        cout << "\033[31mNaika: \033[0m";
+        PrintWithPause_Tu(Tutorial[i], 30);
+        LongPause_Tu(1000); cout << endl;
+        cin >> x;
+        system("cls");
+        }
+    }
 }

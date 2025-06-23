@@ -1,6 +1,5 @@
-#ifndef PLAYERUTILS_H
-#define PLAYERUTILS_H
-
+#ifndef PLAYERDATA_H
+#define PLAYERDATA_H
 #include <string>
 using namespace std;
 

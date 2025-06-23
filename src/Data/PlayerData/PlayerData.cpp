@@ -1,5 +1,6 @@
 #include <iostream>
 #include "PlayerData.h"
+#include <windows.h>
 
 struct Player Global_Data(){
     struct Player p;
@@ -13,6 +14,8 @@ struct Player Global_Data(){
     cin >> Difficulty;
 
 system("cls");
+
+system("cls");
     switch (Difficulty){
     case 1:
     cout << "Escogiste la dificultad normal, buena suerte en tu viaje!" << endl;
@@ -23,7 +26,7 @@ system("cls");
         p.DEFENSE = 0;
         p.MANA = 100;
         p.MAX_MANA = 100;
-        p.MONEY = 50;
+        p.MONEY = 100;
         break;
     case 2:
     cout << "Elegiste algo desafiante, buena eleccion. Ahora tienes:\n1. 25% menos de vida.\n2. 50% menos de dano.\n3. 50% menos capacidad de mana.\nY comienzas sin un centavo.\nBuena suerte!." << endl << endl;
@@ -38,6 +41,7 @@ system("cls");
         break;
     case 3:
     cout << "Activaste el modo desarrollador" << endl;
+        p.Level = 100;
         p.HP = 9999;
         p.MAX_HP = 9999;
         p.ATTACK = 9999;

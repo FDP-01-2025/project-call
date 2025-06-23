@@ -4,6 +4,7 @@
 #include "src/Dialogues/Training/LibraryTraining.h"
 #include "src/Battles/Tutorial/LibraryTutorial.h"
 #include "src/Data/PlayerData/PlayerData.h"
+#include "src/Data/NaikaData/Naika.h"
 
 using namespace std;
 
@@ -13,22 +14,18 @@ int main(){
 
     cout << "Bienvenido a Ashes of Olympus" << endl;
     Player p = Global_Data(); // funcion para elegir la dificultad
-    ShowStats(p); // funcion para mostrar las estadisticas
+    ShowStats(p);             // funcion para mostrar las estadisticas
+    cout << "Tienes un momento para ver tus estadisticas iniciales";
+    Naika Na = Naika_Data();
 
     cout << endl;
-    system("cls");
     cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
-    cout << p.HP << endl;
-    cout << "Recibiste 10 de dano" << endl;
-    p.HP -= 10;
-    cout << p.HP << endl;
-    Sleep(2500);
+    Sleep(5000);
 
-    // Prologue();
-    // Training(p.PlayerName);
-    Tutorial();
+system("cls");
+    Prologue();
+    Training(p);
+    Tutorial(p, Na);
 
     return 0;
 }
-
-//prueba

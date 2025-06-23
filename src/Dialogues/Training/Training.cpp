@@ -13,7 +13,7 @@ void PrintWithPause_T(const string& Text, int Pause){
 void LongPause_T(int MiliSeconds){
     Sleep(MiliSeconds); // 0 para lectura rapida.  // "MiliSeconds" to normal
 }
-void Training(Player p){
+void Training(Player& p){
     string x;
     string General[] = {
         "\033[1m-- 7 ANOS DESPUES --\033[0m", // 0
