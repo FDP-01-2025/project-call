@@ -2,7 +2,7 @@
 #include "Naika.h"
 using namespace std;
 
-struct Naika Naika_Data(){
+Naika Naika_Data(){
     struct Naika Na;
     Na.NaikaName = "\033[31mNaika\033[0m";
     Na.Level = 50;
@@ -17,7 +17,7 @@ struct Naika Naika_Data(){
     return Na;
 }
 
-void ShowStats(Naika Na){
+void ShowStats(const Naika& Na){
     cout << "\033[3;4m-- NAIKA STATS --\033[0m" << endl << endl;
     cout << "\033[34m" << Na.NaikaName << "\033[0m" << endl;
     cout << "Nivel:    "  << Na.Level << endl;

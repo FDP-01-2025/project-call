@@ -16,7 +16,7 @@ struct Naika {
     string ARMOR;
 };
 
-struct Naika Naika_Data();
-void ShowStats(Naika Na);
+Naika Naika_Data();
+void ShowStats(const Naika& Na);
 
 #endif

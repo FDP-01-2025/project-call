@@ -2,7 +2,7 @@
 #include "PlayerData.h"
 #include <windows.h>
 
-struct Player Global_Data(){
+Player Global_Data(){
     struct Player p;
     int Difficulty;
 
@@ -10,10 +10,13 @@ struct Player Global_Data(){
     cin >> p.PlayerName;
     system("cls");
     p.Level = 1;
+    do {
     cout << "Escoja su dificultad:\n1. Normal\n2. Dificil\n3. Modo Desarrollador\n" << endl;
     cin >> Difficulty;
-
-system("cls");
+    if (Difficulty < 1 || Difficulty > 3) {
+        cout << "Opcion invalida, intente otra vez." << endl;
+    }
+} while (Difficulty < 1 || Difficulty > 3);
 
 system("cls");
     switch (Difficulty){
@@ -23,13 +26,15 @@ system("cls");
         p.MAX_HP = 100;
         p.ATTACK = 20;
         p.CRITICAL_ATTACK = p.ATTACK*2;
-        p.DEFENSE = 0;
+        p.DEFENSE = 5;
         p.MANA = 100;
         p.MAX_MANA = 100;
         p.MONEY = 100;
+        p.WEAPON = "N/A";
+        p.ARMOR = "Armadura de cuero";
         break;
     case 2:
-    cout << "Elegiste algo desafiante, buena eleccion. Ahora tienes:\n1. 25% menos de vida.\n2. 50% menos de dano.\n3. 50% menos capacidad de mana.\nY comienzas sin un centavo.\nBuena suerte!." << endl << endl;
+    cout << "Elegiste algo desafiante, buena eleccion. Ahora tienes:\n1. 25% menos de vida.\n2. 50% menos de dano.\n3. 50% menos capacidad de mana.\ncomienzas sin un centavo.\nY sin armadura.\nBuena suerte!." << endl << endl;
         p.HP = 75; 
         p.MAX_HP = 75; // 25% menos de hp
         p.ATTACK = 10; // 50% menos de daño
@@ -38,6 +43,8 @@ system("cls");
         p.MANA = 50;
         p.MAX_MANA = 50; // 50% menos de mana
         p.MONEY = 0; // inicias sin dinero
+        p.WEAPON = "N/A";
+        p.ARMOR = "N/A";
         break;
     case 3:
     cout << "Activaste el modo desarrollador" << endl;
@@ -50,6 +57,8 @@ system("cls");
         p.MANA = 9999;
         p.MAX_MANA = 9999;
         p.MONEY = 9999;
+        p.WEAPON = "N/A";
+        p.ARMOR = "N/A";
         break;
     default:
         cout << "Opcion invalida" << endl;
@@ -58,13 +67,15 @@ system("cls");
     return p;
 }
 
-void ShowStats(Player p) {
+void ShowStats(const Player& p){
     cout << "\033[3;4m-- Your STATS --\033[0m" << endl << endl;
     cout << "\033[34m" << p.PlayerName << "\033[0m" << endl;
-    cout << "Nivel:   " << p.Level << endl;
-    cout << "Vida:    " << p.HP << "/" << p.MAX_HP << endl;
-    cout << "Mana:    " << p.MANA << "/" << p.MAX_MANA << endl;
-    cout << "Ataque:  " << p.ATTACK << endl;
-    cout << "Defensa: " << p.DEFENSE << endl;
-    cout << "Dinero:  " << p.MONEY << endl << endl;
+    cout << "Nivel:    " << p.Level << endl;
+    cout << "Vida:     " << p.HP << "/" << p.MAX_HP << endl;
+    cout << "Mana:     " << p.MANA << "/" << p.MAX_MANA << endl;
+    cout << "Ataque:   " << p.ATTACK << endl;
+    cout << "Defensa:  " << p.DEFENSE << endl;
+    cout << "Dinero:   " << p.MONEY << endl;
+    cout << "Arma:     " << p.WEAPON << endl; 
+    cout << "Armadura: " << p.ARMOR << endl;
 }

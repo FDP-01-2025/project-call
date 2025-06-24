@@ -7,6 +7,8 @@ src/Dialogues/Training/Training.cpp ^
 src/Battles/Tutorial/Tutorial.cpp ^
 src/Data/PlayerData/PlayerData.cpp ^
 src/Data/NaikaData/Naika.cpp ^
+src/Data/NaikaDummy/NaikaDummy.cpp ^
+src/Battles/NaikaDummy/NaBatlle.cpp ^
 -o Run.exe
 
 if %errorlevel% neq 0 (

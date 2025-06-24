@@ -1,10 +1,10 @@
-#ifndef PLAYERDATA_H
-#define PLAYERDATA_H
+#ifndef NAIKADUMMY_H
+#define NAIKADUMMY_H
 #include <string>
 using namespace std;
 
-struct Player {
-    string PlayerName;
+struct NaikaDummy{
+    string NaDummyName;
     int Level;
     int HP;
     int MAX_HP;
@@ -13,12 +13,11 @@ struct Player {
     int DEFENSE;
     int MANA;
     int MAX_MANA;
-    int MONEY;
     string WEAPON;
     string ARMOR;
 };
 
-Player Global_Data();
-void ShowStats(const Player& p);
+NaikaDummy Dummy_Data();
+void DummyShowStats(const NaikaDummy& Ndum);
 
 #endif
