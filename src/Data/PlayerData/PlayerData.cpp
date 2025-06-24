@@ -32,6 +32,9 @@ system("cls");
         p.MONEY = 100;
         p.WEAPON = "N/A";
         p.ARMOR = "Armadura de cuero";
+        p.MagicDefault = "Magia vendaval";
+        p.Magic1 = "Magia vendaval (costo: 30 \033[34mMANA\033[0m)";
+        p.Magic2 = "Magia curacion (costo: 50 \033[34mMANA\033[0m)";
         break;
     case 2:
     cout << "Elegiste algo desafiante, buena eleccion. Ahora tienes:\n1. 25% menos de vida.\n2. 50% menos de dano.\n3. 50% menos capacidad de mana.\ncomienzas sin un centavo.\nY sin armadura.\nBuena suerte!." << endl << endl;
@@ -41,10 +44,13 @@ system("cls");
         p.CRITICAL_ATTACK = p.ATTACK*2;
         p.DEFENSE = 0;
         p.MANA = 50;
-        p.MAX_MANA = 50; // 50% menos de mana
+        p.MAX_MANA = 50; // 50% menos capacidad de mana
         p.MONEY = 0; // inicias sin dinero
         p.WEAPON = "N/A";
         p.ARMOR = "N/A";
+        p.MagicDefault = "Magia vendaval";
+        p.Magic1 = "Magia vendaval";
+        p.Magic2 = "Magia curacion";
         break;
     case 3:
     cout << "Activaste el modo desarrollador" << endl;
@@ -59,6 +65,9 @@ system("cls");
         p.MONEY = 9999;
         p.WEAPON = "N/A";
         p.ARMOR = "N/A";
+        p.MagicDefault = "Magia vendaval";
+        p.Magic1 = "Magia vendaval";
+        p.Magic2 = "Magia curacion";
         break;
     default:
         cout << "Opcion invalida" << endl;
@@ -78,4 +87,5 @@ void ShowStats(const Player& p){
     cout << "Dinero:   " << p.MONEY << endl;
     cout << "Arma:     " << p.WEAPON << endl; 
     cout << "Armadura: " << p.ARMOR << endl;
+    cout << "Magia:    " << p.MagicDefault << endl;
 }

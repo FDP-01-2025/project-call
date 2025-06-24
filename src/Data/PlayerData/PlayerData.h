@@ -2,7 +2,7 @@
 #define PLAYERDATA_H
 #include <string>
 using namespace std;
-
+                                 
 struct Player {
     string PlayerName;
     int Level;
@@ -16,6 +16,9 @@ struct Player {
     int MONEY;
     string WEAPON;
     string ARMOR;
+    string MagicDefault;
+    string Magic1;
+    string Magic2;
 };
 
 Player Global_Data();
