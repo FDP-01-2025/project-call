@@ -1,7 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include <time.h>
-#include "Data/PlayerData/PlayerData.h" // 
+#include "Data/PlayerData/PlayerData.h" 
 #include "Data/NaikaDummy/NaikaDummy.h" // enlazar librerias para la batalla, jugador y Naika Dummy.
 using namespace std;
 //Muñeco con forma de Naika aparecio*
@@ -177,7 +177,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
 // end case 2
         case 3: // ACTION
             system("cls");
-            cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. BURLARTE\n5. HABLARLE 2\n6. PACIFICAR\n7. DEFEND\n8. RETURN\n";
+            cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. BURLARTE\n5. HABLARLE \n6. PACIFICAR\n7. DEFEND\n8. RETURN\n";
             cin >> option_action;
 
             switch (option_action){
@@ -238,7 +238,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 }
                 system("cls");
                 break;
-            case 4: // ACT 1
+            case 4: // BURLA
                 system("cls");
 
                 if (!RageDummy) {
@@ -267,10 +267,40 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 }
                 system("cls");
                 break;
-            case 5: // ACT 2
-                
+            case 5: // HABLAR
+                cout << "Intentas conectar con el muñeco de Naika..." << endl;
+                Sleep(1500);
+    
+                int dialogChance = rand() % 100;
+    
+                if (dialogChance < 15) {
+                    cout << "\"Fui creada para probar tu determinación!\"" << endl;
+                    cout << "\"Si fallas aquí, no sobrevivirás a lo que viene...\"" << endl;
+                } else if (dialogChance < 30) {
+                    cout << "\"Tu moriras!!\"" << endl;
+                } else if (dialogChance < 45) {
+                    cout << "\"Mi creador... debo protegerlo a toda costa!\"" << endl;
+                    cout << "\"Él me dio vida cuando nadie más lo haría...\"" << endl;
+                } else if (dialogChance < 60) {
+                    cout << "\"¿Por qué luchas? ¿Qué te impulsa realmente?\"" << endl;
+                    cout << "\"Todos tenemos nuestras razones para pelear...\"" << endl;
+                } else if (dialogChance < 75) {
+                    cout << "\"Al final... todos somos marionetas de alguien\"" << endl;
+                    cout << "\"¿Quién tira de tus hilos, " << p.PlayerName << "?\"" << endl;
+                } else if (dialogChance < 85) {
+                    cout << "\"El dolor es solo una señal de que sigues vivo\"" << endl;
+                    cout << "\"Aprende a abrazarlo o te destruirá...\"" << endl;
+                } else if (dialogChance < 90) {
+                    cout << "\"La oscuridad que combates vive dentro de ti\"" << endl;
+                    cout << "\"¿Podrás enfrentar tus propios demonios?\"" << endl;
+                }
+                 Sleep(2500);
+                // Naika ataque después del diálogo
+                cout << "\n¡El muñeco de Naika ataca repentinamente!" << endl;
+                Sleep(1000);
+                DummyAttackPlayer(p, Ndum);
                 break;
-            case 6: // ACT 3
+            case 6: // PACIFICAR
                 break;
             case 7: // DEFEND
                 break;
