@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <time.h>
 #include <algorithm> // sirve para usar min y max
-#include "Data/PlayerData/PlayerData.h" el lib de Player es obligatorio en cada batalla
+#include "Data/PlayerData/PlayerData.h" // el lib de Player es obligatorio en cada batalla
 #include "Data/NaikaDummy/NaikaDummy.h" // enlazar librerias para la batalla, jugador y Naika Dummy.
 using namespace std;
 //Muñeco con forma de Naika aparecio*
