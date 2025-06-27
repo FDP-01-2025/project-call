@@ -4,11 +4,11 @@ using namespace std;
 
 NaikaDummy Dummy_Data(){
     struct NaikaDummy Ndum;
-    Ndum.NaDummyName = "\033[31mMuneco de Naika\033[0m";
+    Ndum.NaDummyName = "\033[31mMuñeco de Naika\033[0m";
     Ndum.Level = 1;
-    Ndum.HP = 50;
-    Ndum.MAX_HP = 50;
-    Ndum.ATTACK = 10;
+    Ndum.HP = 100;
+    Ndum.MAX_HP = 100;
+    Ndum.ATTACK = 15;
     Ndum.CRITICAL_ATTACK = Ndum.ATTACK*2;
     Ndum.DEFENSE = 5;
     Ndum.MANA = 0;

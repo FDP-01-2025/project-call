@@ -11,6 +11,7 @@
 using namespace std;
 
 int main(){
+    SetConsoleOutputCP(CP_UTF8); // util para que en la terminar se usen caracteres especiales como ñ, tildes, etc...
     srand(time(NULL)); // generador de semilla RNG
     int x;
     system("cls");

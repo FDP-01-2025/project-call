@@ -2,7 +2,7 @@
 #define PLAYERDATA_H
 #include <string>
 using namespace std;
-                                 
+
 struct Player {
     string PlayerName;
     int Level;
@@ -19,6 +19,10 @@ struct Player {
     string MagicDefault;
     string Magic1;
     string Magic2;
+    int PotionsHP;
+    int PotionsMANA;
+    int PoEffectHP;
+    int PoEffectMANA;
 };
 
 Player Global_Data();

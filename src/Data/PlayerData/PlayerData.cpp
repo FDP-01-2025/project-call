@@ -32,12 +32,16 @@ system("cls");
         p.MONEY = 100;
         p.WEAPON = "N/A";
         p.ARMOR = "Armadura de cuero";
-        p.MagicDefault = "Magia vendaval";
+        p.MagicDefault = "Magia vendaval (costo: 30 \033[34mMANA\033[0m)";
         p.Magic1 = "Magia vendaval (costo: 30 \033[34mMANA\033[0m)";
         p.Magic2 = "Magia curacion (costo: 50 \033[34mMANA\033[0m)";
+        p.PotionsHP = 2;
+        p.PotionsMANA = 2;
+        p.PoEffectHP = 30;
+        p.PoEffectMANA = 30;
         break;
     case 2:
-    cout << "Elegiste algo desafiante, buena eleccion. Ahora tienes:\n1. 25% menos de vida.\n2. 50% menos de dano.\n3. 50% menos capacidad de mana.\ncomienzas sin un centavo.\nY sin armadura.\nBuena suerte!." << endl << endl;
+    cout << "Elegiste algo desafiante, buena eleccion. Ahora tienes:\n1. 25% menos de vida.\n2. 50% menos de dano.\n3. 50% menos capacidad de mana.\ncomienzas sin un centavo.\nY sin armadura.\nMenos cantidad de pociones\n50% menos de eficiencia en pociones\nBuena suerte!." << endl << endl;
         p.HP = 75; 
         p.MAX_HP = 75; // 25% menos de hp
         p.ATTACK = 10; // 50% menos de daño
@@ -51,6 +55,10 @@ system("cls");
         p.MagicDefault = "Magia vendaval";
         p.Magic1 = "Magia vendaval";
         p.Magic2 = "Magia curacion";
+        p.PotionsHP = 1;
+        p.PotionsMANA = 1;
+        p.PoEffectHP = 15;
+        p.PoEffectMANA = 15;
         break;
     case 3:
     cout << "Activaste el modo desarrollador" << endl;
@@ -68,6 +76,10 @@ system("cls");
         p.MagicDefault = "Magia vendaval";
         p.Magic1 = "Magia vendaval";
         p.Magic2 = "Magia curacion";
+        p.PotionsHP = 99;
+        p.PotionsMANA = 99;
+        p.PoEffectHP = 9999;
+        p.PoEffectMANA = 9999;
         break;
     default:
         cout << "Opcion invalida" << endl;
@@ -87,5 +99,5 @@ void ShowStats(const Player& p){
     cout << "Dinero:   " << p.MONEY << endl;
     cout << "Arma:     " << p.WEAPON << endl; 
     cout << "Armadura: " << p.ARMOR << endl;
-    cout << "Magia:    " << p.MagicDefault << endl;
+    cout << "Magia:    " << p.MagicDefault << endl << endl;
 }
