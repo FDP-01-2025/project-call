@@ -364,6 +364,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 break;
             default:
                 DefaultError();
+                RegMana = false;
                 break; // break de default
                 }
             break; // break de case 1
@@ -444,6 +445,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                     break;
                 default:
                     DefaultError();
+                    RegMana = false;
                     break;
                 }
                 break;
@@ -475,6 +477,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 cout << endl;
                 break;
             case 5: // HABLAR
+            system("cls");
                 cout << "Intentas hablar con " << Ndum.NaDummyName << endl;
                 Sleep(1500);
 
@@ -495,6 +498,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                     cout << TalkDummy[3] << endl;
                     cout << Ndum.NaDummyName << " Se enojo tanto que te lanzo una bomba molotov... auch" << endl;
                     cout << "Te restaran -5 HP durante los proximos 2 turnos" << endl;
+                    FireShifts += 2;
                 }
 
                 Sleep(2500);
@@ -557,7 +561,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                     cout << "Halagas su... cuerpo de madera a " << Ndum.NaDummyName << endl;
                     Sleep(1500);
                     if (RandomEvent <= 50){ // 50%
-                        cout << Ndum.NaDummyName << " se halaga... la haces sentir jove... apenas tiene 5 minutos de vida..." << endl;
+                        cout << Ndum.NaDummyName << " se halaga... la haces sentir joven... apenas tiene 5 minutos de vida..." << endl;
                         MercyPoints += 1;
                         cout << "Puntos de piedad actuales: " << MercyPoints << endl;
                     } else {
@@ -586,6 +590,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 break;
             default:
                 DefaultError();
+                RegMana = false;
                 break; // break de default
             }
             break; // break de case 3
@@ -607,6 +612,12 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
         default:
             DefaultError();
             break;
+        }
+
+        if (FireShifts > 0){
+            cout << p.PlayerName << " se quemo en este turno, pierde -5 HP" << endl;
+            p.HP -= 5;
+            FireShifts--;
         }
 
         if(p.HP <= 0){
@@ -631,6 +642,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 break;
             default:
                 DefaultError();
+                RegMana = false;
                 break;  // variable para continuar o no
                 }
             }
@@ -641,13 +653,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
             p.KILLS++;
             battleOver = true;
         }
-
-        // variable para a regeneracion de MANA en cada turno, SI no se ha usado magia
-        if (FireShifts > 0){
-            cout << p.PlayerName << " se quemo en este turno, pierde -5 HP" << endl;
-            cout << "";
-        }
-        if (RegMana){
+        if (RegMana){ // variable para a regeneracion de MANA en cada turno, SI no se ha usado magia
         p.MANA = min(p.MANA + 10, p.MAX_MANA);
         }
         if (Ndum.HP <= 20 || MercyPoints == 3){ // condicion pacifista
@@ -656,19 +662,3 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
 
     } while (!battleOver); // condicion para que termine la batalla
 }
-
-/*
-variable para el fuego simple:
-30% array
-bool fire = true
-if (bool fire == true){
-    i = 3
-    fire = false;
-}
-
-if (i > 0){
-HPPLAYER- 10
-} else {
-i--
-}
-*/
