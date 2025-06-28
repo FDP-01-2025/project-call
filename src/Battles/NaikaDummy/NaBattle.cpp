@@ -168,6 +168,7 @@ void PlayerMagic(Player& p, NaikaDummy& Ndum){
 
     switch (opcionPlayerMagic){
     case 1:
+    system("cls");
         if (p.MANA < 30){
             cout << "No cuentas con el \033[34mMANA\033[0m suficiente " << "\033[31m" << p.MANA << "\033[0m/" << p.MAX_MANA << endl;
             } else {
@@ -320,14 +321,13 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
     int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;  // variables de opciones dentro de switchs                              // variable para pausar el codigo y proceder cuando el usuario decida
     bool battleOver = false;  // bandera para terminar la batalla
     bool RageDummy = false;   // bandera para el modo rage del enemigo
-
     bool Mercy = false;       // bandera para victoria pacifista
 
     do{
         int dialogChance = rand() % 101; // prueba
         int RNGTalkDummy = rand() % 101; // variables RNG dentro del do para que se generen nuevos numeros
-        bool RegMana = true;      // bandera para regenerar MANA
         int RNGMercy = rand() % 101;
+        bool RegMana = true;      // bandera para regenerar MANA
         int RandomEvent = rand() % 101;
         cout << "Oponente: " << "\033[33m" << Ndum.NaDummyName << "\033[0m" << endl; // Codigo ANSI amarillo
         if (Mercy == false){
@@ -480,7 +480,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
             case 5: // HABLAR
                 cout << "Intentas conectar con el muñeco de Naika..." << endl;
                 Sleep(1500);
-        /*
+            /*
                 if (dialogChance < 15) {
                     cout << "\"Fui creada para probar tu determinación!\"" << endl;
                     cout << "\"Si fallas aquí, no sobrevivirás a lo que viene...\"" << endl;
@@ -503,11 +503,10 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                     cout << "\"¿Podrás enfrentar tus propios demonios?\"" << endl;
                 }
                 Sleep(2500);
-                // Naika ataque después del diálogo
                 cout << "\n¡El muñeco de Naika ataca repentinamente!" << endl;
                 Sleep(1000);
                 DummyAttackPlayer(p, Ndum);
-        */
+            */
                 break;
             case 6: // ACT 3 PIEDAD
                 system("cls");
@@ -644,6 +643,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
         if(Ndum.HP <= 0){
             cout << Ndum.NaDummyName << " ha sido derrotada!" << endl; // condicional si el enemigo ha sido derrotado
             p.KilledNaikaDummy = true;
+            p.KILLS++;
             battleOver = true;
         }
 
