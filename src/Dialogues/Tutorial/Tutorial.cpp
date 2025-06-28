@@ -439,4 +439,9 @@ system("cls");
     p.WEAPON = "Espada de madera";
     NaikaDummyBattle(p, Ndum);
     // void NaikaDummyBattle(Player p, NaikaDummy Ndum); no cometer esta estupidez de declarar en vez de llamar
+    if (p.KilledNaikaDummy == false){
+        cout << "RUTA PACIFISTA";
+    } else {
+        cout << "RUTA GENOCIDA";
+    }
 }

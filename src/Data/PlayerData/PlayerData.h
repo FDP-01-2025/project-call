@@ -14,15 +14,22 @@ struct Player {
     int MANA;
     int MAX_MANA;
     int MONEY;
+    int KILLS;
     string WEAPON;
     string ARMOR;
     string MagicDefault;
     string Magic1;
     string Magic2;
+    string Item1;
+    string Item2;
+    string Item3;
     int PotionsHP;
     int PotionsMANA;
+    int CantItem3;
     int PoEffectHP;
     int PoEffectMANA;
+    int EffectItem3;
+    bool KilledNaikaDummy;
 };
 
 Player Global_Data();

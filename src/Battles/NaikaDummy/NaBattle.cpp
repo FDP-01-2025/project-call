@@ -10,9 +10,111 @@ using namespace std;
 #include <iostream>
 using namespace std;
 
+void DefaultError(){
+    system("cls");
+        cout << "Opcion de comando invalida" << endl;
+        Sleep(1000); cout << endl;
+    system("cls");
+}
+
+void Items(Player& p, int option_item){
+        system("cls");
+            cout << "           -- INVENTARIO -- " << endl;
+            cout << "   ITEM        CANTIDAD      EFECTO" << endl;
+            cout << p.Item1 << ":        " << p.PotionsHP << "           +" << p.PoEffectHP << endl;
+            cout << p.Item2 << ":      " << p.PotionsMANA << "           +" << p.PoEffectMANA << endl;
+            cout << p.Item3 << ":           " << p.CantItem3 << "            " << "???" <<endl << endl;
+            cout << "Seleccione que ITEM usar:\n1. HP\n2. MANA\n3. BANANA\n4. RETURN" << endl;
+            cin >> option_item;
+
+        system("cls");
+            switch (option_item) {
+            case 1: { // Pocion HP
+                if (p.PotionsHP < 1) {
+                    cout << "Ya no te quedan pociones de HP" << endl;
+                } else {
+                    int HPbefore = p.HP;
+                    int HPtemp = p.HP + p.PoEffectHP;
+
+                    if (HPtemp > p.MAX_HP) {
+                        cout << "\033[31mDANGER:\033[0m Curarte ahora desperdiciará parte del efecto.\nProceder?\n1. Sí\n2. No\n";
+                        int opcion_heal;
+                        cin >> opcion_heal;
+                        system("cls");
+
+                        if (opcion_heal == 1) {
+                            p.HP = min(p.HP + p.PoEffectHP, p.MAX_HP);
+                            p.PotionsHP--;
+                            cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << (p.HP - HPbefore) << " HP." << endl << endl;
+                            } else {
+                        }
+                    } else {
+                        p.HP = min(p.HP + p.PoEffectHP, p.MAX_HP);
+                        p.PotionsHP--;
+                        cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << p.PoEffectHP << " HP." << endl << endl;
+                    }
+                }
+                break;
+            }
+            case 2: { // Pocion MANA
+                if (p.PotionsMANA < 1) {
+                    cout << "Ya no te quedan pociones de MANA" << endl;
+                } else {
+                    int MANAbefore = p.MANA;
+                    int MANAtemp = p.MANA + p.PoEffectMANA;
+
+                    if (MANAtemp > p.MAX_MANA) {
+                        cout << "\033[31mDANGER:\033[0m Recuperar MANA ahora desperdiciará parte del efecto.\nProceder?\n1. Sí\n2. No\n";
+                        int opcion_mana;
+                        cin >> opcion_mana;
+                        system("cls");
+
+                        if (opcion_mana == 1) {
+                            p.MANA = min(p.MANA + p.PoEffectMANA, p.MAX_MANA);
+                            p.PotionsMANA--;
+                            cout << "\033[34m" << p.PlayerName << "\033[0m recupero +" << (p.MANA - MANAbefore) << " \033[34mMANA\033[0m." << endl << endl;
+                        } else {
+                            system("cls");
+                        }
+                    } else {
+                        p.MANA = min(p.MANA + p.PoEffectMANA, p.MAX_MANA);
+                        p.PotionsMANA--;
+                        cout << "\033[34m" << p.PlayerName << "\033[0m recupero +" << p.PoEffectMANA << " \033[34mMANA\033[0m." << endl << endl;
+                    }
+                }
+                break;
+            }
+        case 3:
+        system("cls");
+            if (p.CantItem3 < 1){
+                cout << "Ya no tienes BANANAS... tu triste..." << endl << endl;
+            } else {
+                cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << " se comio la BANANA..." << endl;
+                cout << "POTACIO" << endl;
+                cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << " se siente poderoso... sus estadisticas aumentaron!" << endl;
+                cout << "+30 HP, +30 MANA, +5 Ataque y +5 Defensa" << endl;
+                p.ATTACK += 5;
+                p.DEFENSE += 5;
+                p.HP = min(p.HP + 30, p.MAX_HP);
+                p.MANA = min(p.MANA + 10, p.MAX_MANA);
+                p.CantItem3--;
+            }
+            break;
+        case 4:
+        system("cls");
+            break;
+        default:
+            DefaultError();
+        break;
+    }
+}
+
 void HpBar(Player& p) {
     int total_blocks = 10; // variable de la cantidad de bloques
     int filled_blocks = (p.HP * total_blocks) / p.MAX_HP; // calcula cuantos se deben llenar
+    if (p.HP > 0 && filled_blocks == 0) { // funcion que evita si el jugador tiene < 10 de vida ya no hayan barras
+    filled_blocks = 1;
+    }   
     int empty_blocks = total_blocks - filled_blocks; // calcula los bloques vacios
 
     string color = (p.HP > p.MAX_HP * 0.3) ? "\033[33m" : "\033[31m"; // Amarillo o rojo dependiendo de la vida
@@ -71,7 +173,6 @@ void PlayerMagic(Player& p, NaikaDummy& Ndum){
             } else {
             cout << "Usaste: " << p.MagicDefault << endl;
             Sleep(1000);
-            cout << endl;
             cout << "El viento dano emocionalmente a " << Ndum.NaDummyName << endl;
             p.MANA -= 30;
             Ndum.HP -= 20;
@@ -82,10 +183,7 @@ void PlayerMagic(Player& p, NaikaDummy& Ndum){
         system("cls");
         break;
     default:
-        system("cls");
-        cout << "Opcion de comando invalida" << endl;
-        Sleep(1000); cout << endl;
-        system("cls");
+        DefaultError();
         break;
         }
     } else if (p.MagicDefault == p.Magic2){ // si esta magia de curacion
@@ -183,7 +281,7 @@ void DummyAttackPlayer(Player& p, NaikaDummy& Ndum){
         } else {
             cout << Ndum.NaDummyName << " realizo un ataque critico!" << endl;
             p.HP -= Ndum.CRITICAL_ATTACK - p.DEFENSE;
-            cout << p.PlayerName << " Recibio: " << Ndum.CRITICAL_ATTACK - p.DEFENSE << " de dano critico!" << endl << endl;
+            cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << Ndum.CRITICAL_ATTACK - p.DEFENSE << " de dano critico!" << endl << endl;
         }
     } else {
         if (p.DEFENSE > Ndum.ATTACK){
@@ -191,7 +289,7 @@ void DummyAttackPlayer(Player& p, NaikaDummy& Ndum){
         } else {
             cout << Ndum.NaDummyName << " realizo un ataque exitoso" << endl;
             p.HP -= Ndum.ATTACK - p.DEFENSE;
-            cout << p.PlayerName << " Recibio: " << Ndum.ATTACK - p.DEFENSE << " de dano." << endl << endl;
+            cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << Ndum.ATTACK - p.DEFENSE << " de dano." << endl << endl;
         }
     }
 }
@@ -203,6 +301,7 @@ string TalkDummy[] = {
     "", // 3
     ""  // 4
 };
+
 string TalkMercyDummy[] = {
     "Abrazas al muñeco de Naika para reconciliarse", // 0
     "Intentas negociar con Naika con darle tus dinero", // 1
@@ -212,82 +311,90 @@ string TalkMercyDummy[] = {
 
 void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
 
-    int RNGTalkDummy = rand() % 101;
-    int RNGMercy = rand() % 101;
-    int RandomEvent = rand() % 101;
+    int TempDefense = p.DEFENSE; // guardamos una variable de defensa temporal, para evitar posibles conflictos futuros en caso de que se cambie
     int MercyPoints = 0; // puntos de piedad
     int PlayerHp = p.HP;
     int PlayerMana = p.MANA;
     int DummyHP = Ndum.HP;
     int DummyMana = Ndum.MANA;
-    int opcion, opcion_attack, option_action, option_GameOver, option_exmagic;  // variables de opciones dentro de switchs                              // variable para pausar el codigo y proceder cuando el usuario decida
-    bool battleOver = false;                   // bandera para terminar la batalla
-    bool RageDummy = false;
+    int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;  // variables de opciones dentro de switchs                              // variable para pausar el codigo y proceder cuando el usuario decida
+    bool battleOver = false;  // bandera para terminar la batalla
+    bool RageDummy = false;   // bandera para el modo rage del enemigo
+
+    bool Mercy = false;       // bandera para victoria pacifista
 
     do{
-        cout << "Oponente: " << "\033[33m" << Ndum.NaDummyName << "\033[0m" << endl << endl; // Codigo ANSI amarillo
+        int dialogChance = rand() % 101; // prueba
+        int RNGTalkDummy = rand() % 101; // variables RNG dentro del do para que se generen nuevos numeros
+        bool RegMana = true;      // bandera para regenerar MANA
+        int RNGMercy = rand() % 101;
+        int RandomEvent = rand() % 101;
+        cout << "Oponente: " << "\033[33m" << Ndum.NaDummyName << "\033[0m" << endl; // Codigo ANSI amarillo
+        if (Mercy == false){
+            cout << Ndum.NaDummyName << " Esta determinada" << endl << endl;
+        } else {
+            cout << Ndum.NaDummyName << " Parece agotada" << endl << endl;
+        }
         cout << "\033[34m" << p.PlayerName << "\033[0m" << endl;
 
         HpBar(p); // barra de vida dinamica
         ManaBar(p); // barra de mana dinamica
-        if (p.HP <= 30) cout << "\033[31mDANGER:\033[0m low life";
-        cout << endl;
+        cout << "Piedad: " << MercyPoints << endl << endl; // puntos de piedad
 
-        cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. MERCY\n";
-        cin >> opcion;
+        if (Mercy == false){
+            cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. MERCY\n";
+        } else {
+            cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. \033[33mMERCY\033[0m\n";
+        }
+        cin >> option;
 
     system("cls");
-        switch (opcion){ // switch general
+        switch (option){ // switch general
         case 1: // ATTACK
             cout << "1. " << Ndum.NaDummyName << " HP: " << Ndum.HP << "/" << Ndum.MAX_HP << endl;
             cout << "2. RETURN" << endl; 
-            cin >> opcion_attack;
+            cin >> option_attack;
 
-            switch (opcion_attack){ // switch de case 1
+            switch (option_attack){ // switch de case 1
             case 1: // ATTACK a Naika Dummy
-                if(opcion_attack == 1){
                     PlayerAttackDummy(p, Ndum); // atacas al enemigo // 25% de fallar // 25% de critico
                     cout << endl;
                     DummyAttackPlayer(p, Ndum); // el enemigo te ataca // 25% de fallar
-                }
                 break;
             case 2: // RETURN
+            RegMana = false;
                 system("cls");
                 break;
             default:
-                system("cls");
-                cout << "Opcion de comando invalida" << endl;
-                Sleep(1000); cout << endl;
-                system("cls");
-            break;
+                DefaultError();
                 break; // break de default
                 }
             break; // break de case 1
 // end case 1
         case 2: // MAGIC
+        RegMana = false;
             if (p.MagicDefault != p.Magic2){ // si te curas dummy no te atacara
                 system("cls");
                 PlayerMagic(p, Ndum);
                 cout << endl;
                 Sleep(500);
                 DummyAttackPlayer(p, Ndum);
-                cout << endl;
             } else {
                 system("cls");
                 PlayerMagic(p, Ndum);
                 cout << endl;
                 Sleep(500);
-                cout << endl;
             }
             break;
 // end case 2
         case 3: // ACTION
             system("cls");
-            cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. BURLARTE\n5. HABLARLE 2\n6. PACIFICAR\n7. DEFEND\n8. RETURN\n";
+            cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. BURLARTE\n5. PLATICAR\n6. PACIFICAR\n7. DEFEND\n8. RETURN\n";
             cin >> option_action;
         
             switch (option_action){
             case 1: // MY STATS
+            RegMana = false;
                 system("cls");
                 ShowStats(p); // llamar funcion
                 cin.ignore(); // es como un cin, para que el jugador decida cuando avanzar,  descarta el '\n' pendiente
@@ -296,6 +403,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 system("cls");
                 break;
             case 2: // ENEMY DESCRIPTION
+            RegMana = false;
                 system("cls");
                 DummyShowStats(Ndum); // llamar funcion
                 cout << endl;
@@ -304,6 +412,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 system("cls");
                 break;
             case 3: // EXCHANGE MAGIC
+            RegMana = false;
                 system("cls");
                 cout << "Intercambiar magia actual:\n";
                 cout << "1. Magia Vendaval\n2. Magia curacion\n3. RETURN\n\n";
@@ -333,13 +442,11 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                     cout << endl;
                     break;
                 case 3:
+                RegMana = false;
                     system("cls");
                     break;
                 default:
-                    system("cls");
-                    cout << "Opcion de comando invalida" << endl;
-                    Sleep(1000); cout << endl;
-                    system("cls");
+                    DefaultError();
                     break;
                 }
                 break;
@@ -350,7 +457,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                     cout << "Te burlaste de la patetica apariencia de " << Ndum.NaDummyName << endl;
                     cout << "...Provocaste al enemigo\n \n";
                     Sleep(1500);
-                    cout << "muñeco de Naika se enojo!\n";
+                    cout << Ndum.NaDummyName << " se enojo!\n";
                     cout << "Sus ojos se vuelven rojos! y desea tu muerte a toda costa...\n\n"; 
                     RageDummy = true;
                 
@@ -360,67 +467,73 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                     Ndum.MAX_HP += 25;
                     Ndum.HP = min(Ndum.HP + 25, Ndum.MAX_HP);
                     Sleep(1500);
-                    cout << "Muñeco de Naika incremento su vida!\n";
-                    cout << "Muñeco de Naika incremento su ataque!\n";
-                    cout << "La defensa de muñeco de Naika ha caido!\n";
+                    cout << Ndum.NaDummyName << " incremento su vida!\n";
+                    cout << Ndum.NaDummyName << " incremento su ataque!\n";
+                    cout << Ndum.NaDummyName << " La defensa de muñeco de Naika ha caido!\n";
                 } else {
-                    cout << "muñeco de Naika ya esta enojado\n";
-                    cout << "muñeco de Naika tiembla de furia!\n";
+                    RegMana = false;
+                    cout << Ndum.NaDummyName << " ya esta enojado\n";
+                    cout << Ndum.NaDummyName << " tiembla de furia!\n";
                 }
                 cout << endl;
-                break; // ACT 2 HABLARLE
-            case 5:
-                // agregar un dialogo en que se queme el dummy por un cigarro
-                // p.HP = min(p.HP + 10, p.MAX_HP); para agregar vida al usuario
-            if (RNGTalkDummy <= 20){ 
-                cout << TalkDummy[0] << endl;
-                p.HP -= 5;
-                cout << p.PlayerName << " recibio dano emocional..." << endl;
-                cin.ignore();
-                cin.get();
-                system("cls");
-            } else if (RNGTalkDummy > 20 && RNGTalkDummy <= 40){
-                cout << TalkDummy[1] << endl;
-                cout << "El Dummy no hace absolutamente nada. Ni parpadea. Ni puede." << endl;
-                cin.ignore();
-                cin.get();
-                system("cls");
-            } else if (RNGTalkDummy > 40 && RNGTalkDummy <= 60){
-                cout << TalkDummy[2] << endl;
-                cout << "El hablar con el Dummy te ayudo a sentirte mejor con tigo mismo\n" << endl;
-                p.HP = min(p.HP + 15, p.MAX_HP);
-                cout << " Has recuperado 15 de HP" << endl;
-                cin.ignore();
-                cin.get();
-                system("cls");
-            } else if (RNGTalkDummy > 60 && RNGTalkDummy <= 80){
-                cout << "";
-            } else {
-                cout << "";
-            }
+                break;
+            case 5: // HABLAR
+                cout << "Intentas conectar con el muñeco de Naika..." << endl;
+                Sleep(1500);
+        /*
+                if (dialogChance < 15) {
+                    cout << "\"Fui creada para probar tu determinación!\"" << endl;
+                    cout << "\"Si fallas aquí, no sobrevivirás a lo que viene...\"" << endl;
+                } else if (dialogChance < 30) {
+                    cout << "\"Tu moriras!!\"" << endl;
+                } else if (dialogChance < 45) {
+                    cout << "\"Mi creador... debo protegerlo a toda costa!\"" << endl;
+                    cout << "\"Él me dio vida cuando nadie más lo haría...\"" << endl;
+                } else if (dialogChance < 60) {
+                    cout << "\"¿Por qué luchas? ¿Qué te impulsa realmente?\"" << endl;
+                    cout << "\"Todos tenemos nuestras razones para pelear...\"" << endl;
+                } else if (dialogChance < 75) {
+                    cout << "\"Al final... todos somos marionetas de alguien\"" << endl;
+                    cout << "\"¿Quién tira de tus hilos, " << p.PlayerName << "?\"" << endl;
+                } else if (dialogChance < 85) {
+                    cout << "\"El dolor es solo una señal de que sigues vivo\"" << endl;
+                    cout << "\"Aprende a abrazarlo o te destruirá...\"" << endl;
+                } else if (dialogChance < 90) {
+                    cout << "\"La oscuridad que combates vive dentro de ti\"" << endl;
+                    cout << "\"¿Podrás enfrentar tus propios demonios?\"" << endl;
+                }
+                Sleep(2500);
+                // Naika ataque después del diálogo
+                cout << "\n¡El muñeco de Naika ataca repentinamente!" << endl;
+                Sleep(1000);
+                DummyAttackPlayer(p, Ndum);
+        */
                 break;
             case 6: // ACT 3 PIEDAD
-                if (RNGMercy <= 25){
+                system("cls");
+                if (RNGMercy <= 25){ // 25 % de que aparezca el arreglo
                     cout << TalkMercyDummy[0] << endl;
                     string RealNaika= "Hey! Estas peleando! no abrazando!... y ya tienes a la real... olvidalo sigue o yo misma te rompere cada hueso!";
                     cout << "\033[31mNaika\033[0m: ";
-                    for (char c : RealNaika){
-                        cout << c << endl;
-                        Sleep(30);
-                    }
-                    if (RandomEvent < 50){ // 50%
-                        cout << Ndum.NaDummyName << " ha aceptado tu abrazo :3" << endl;
-                        MercyPoints++;
-                        cout << "Puntos de piedad actuales: " << MercyPoints << endl;
-                    } else {
-                        cout << "No acepto tu abrazo >:(" << endl;
+                    for (char c : RealNaika) {
+                        cout << c;
+                        Sleep(30); }
+                        cout << endl;
+                        if (RandomEvent < 50){ // 50%
+                            cout << Ndum.NaDummyName << " ha aceptado tu abrazo :3" << endl;
+                            MercyPoints++;
+                            cout << "Puntos de piedad actuales: " << MercyPoints << endl;
+                        } else {
+                        cout << Ndum.NaDummyName <<" No acepto tu abrazo >:(" << endl;
                         DummyAttackPlayer(p, Ndum);
                     }
-                } else if (RNGMercy <= 50){
+
+                } else if (RNGMercy > 25 && RNGMercy <= 50){ // 25%  de que aparezca el arreglo
                     cout << TalkMercyDummy[1] << endl;
-                    if (RandomEvent < 25){ // 25%
+                    if (RandomEvent <= 25){ // 25%
                         cout << Ndum.NaDummyName << " ha aceptado tu perdon... por tu dinero... yey!" << endl;
                         MercyPoints += 3;
+                        cout << "Puntos de piedad actuales: " << MercyPoints << endl;
                         p.MONEY = 0;
                         cout << "Te quedaste con los bolsillos vacios..." << endl;
                     } else {
@@ -429,40 +542,76 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                         cout << Ndum.NaDummyName << "Se enojo tanto que incremento su ataque en +5..." << endl;
                         Ndum.ATTACK += 5;
                     }
-                } else if (RNGMercy <= 75){
-                    cout << "";
-                } else {
-                    cout << "";
+
+                } else if (RNGMercy <= 75){ // 25% de que aparezca el arreglo
+                    cout << TalkMercyDummy[2] << endl;
+                    cout << Ndum.NaDummyName << " se ha sometido a un exorcismo..." << endl;
+                    Sleep(1500);
+                    if (RandomEvent <= 15){ // 15%
+                        cout << Ndum.NaDummyName << " esta siendo exorcisada... lo estas logrando..." << endl;
+                        MercyPoints += 2;
+                        cout << "Puntos de piedad actuales: " << MercyPoints << endl;
+                    Sleep(1500);
+                    } else {
+                        cout << "El exorcismo esta fallando... el demonio se apodera de ella..." << endl;
+                        cout << Ndum.NaDummyName << " incremento su ataque +5 por el exorcismo fallido..." << endl;
+                        Ndum.ATTACK += 5;
+                    }
+
+                } else { // otro 25% de que aparezca el arreglo
+                    cout << TalkMercyDummy[3] << endl;
+                    cout << "Halagas su... cuerpo de madera a " << Ndum.NaDummyName << endl;
+                    Sleep(1500);
+                    if (RandomEvent <= 50){ // 50%
+                        cout << Ndum.NaDummyName << " se halaga... la haces sentir jove... apenas tiene 5 minutos de vida..." << endl;
+                        MercyPoints += 1;
+                        cout << "Puntos de piedad actuales: " << MercyPoints << endl;
+                    } else {
+                        cout << "Te abofeteo... eso fue sexista... deberias sentirte culpable" << endl;
+                        cout << Ndum.NaDummyName << " Se prepara para darte una leccion..." << endl;
+                        DummyAttackPlayer(p, Ndum);
+                    }
                 }
-                cin.ignore();
-                cin.get();
-                system("cls");
+                cout << endl;
+                Sleep(1000);
                 break;
             case 7: // DEFEND
+            RegMana = false;
+            system("cls");
+                cout << "Te defiendes del proximo ataque de " << Ndum.NaDummyName << endl;
+                cout << "Tu defensa de multiplico x2 este turno." << endl;
+                cout << "Recuperas +20 \033[34mMANA\033[0m" << endl << endl;
+                p.MANA = min(p.MANA + 20, p.MAX_MANA);
+                p.DEFENSE = TempDefense * 2;
+                DummyAttackPlayer(p, Ndum);
+                p.DEFENSE = TempDefense;
                 break;
             case 8: // RETURN
+            RegMana = false;
                 system("cls");
                 break;
             default:
-                system("cls");
-                cout << "Opcion de comando invalida" << endl;
-                Sleep(1000); cout << endl;
-                system("cls");
+                DefaultError();
                 break; // break de default
             }
             break; // break de case 3
 // end case 3
         case 4: // ITEM
-            
-            break;
+        RegMana = false;
+            Items(p, option_item);
+        break;
 // end case 4
         case 5: // MERCY
-            
+            if (Mercy == false){
+                cout << Ndum.NaDummyName << " No acepta tu piedad..." << endl;
+                DummyAttackPlayer(p, Ndum);
+            } else {
+                cout << Ndum.NaDummyName << " Acepto tu perdon... VICTORIA!" << endl;
+                battleOver = true;
+            }
             break;
         default:
-            cout << "Opcion de comando invalida" << endl;
-            Sleep(1000); cout << endl;
-            system("cls");
+            DefaultError();
             break;
         }
 
@@ -487,25 +636,28 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 exit(0); // termina el programa 
                 break;
             default:
-                system("cls");
-                cout << "Opcion de comando invalida" << endl;
-                Sleep(1000); cout << endl;
-                system("cls");
+                DefaultError();
                 break;  // variable para continuar o no
                 }
             }
 
         if(Ndum.HP <= 0){
             cout << Ndum.NaDummyName << " ha sido derrotada!" << endl; // condicional si el enemigo ha sido derrotado
+            p.KilledNaikaDummy = true;
             battleOver = true;
         }
 
-        if (opcion != 2 || option_action != 1 || option_action != 2 || option_action != 3){ // variable para a regeneracion de MANA en cada turno, SI no se ha usado magia
-            p.MANA = min(p.MANA + 10, p.MAX_MANA);
+        // variable para a regeneracion de MANA en cada turno, SI no se ha usado magia
+        if (RegMana){
+        p.MANA = min(p.MANA + 10, p.MAX_MANA);
+        }
+        if (Ndum.HP <= 20 || MercyPoints == 3){ // condicion pacifista
+            Mercy = true;
         }
 
     } while (!battleOver); // condicion para que termine la batalla
 }
+
 /*
 variable para el fuego simple:
 30% array
