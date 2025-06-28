@@ -6,8 +6,8 @@ NaikaDummy Dummy_Data(){
     struct NaikaDummy Ndum;
     Ndum.NaDummyName = "\033[31mMuñeco de Naika\033[0m";
     Ndum.Level = 1;
-    Ndum.HP = 100;
-    Ndum.MAX_HP = 100;
+    Ndum.HP = 75;
+    Ndum.MAX_HP = 75;
     Ndum.ATTACK = 10;
     Ndum.CRITICAL_ATTACK = Ndum.ATTACK*2;
     Ndum.DEFENSE = 5;

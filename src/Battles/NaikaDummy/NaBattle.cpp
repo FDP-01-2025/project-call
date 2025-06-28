@@ -7,9 +7,6 @@
 using namespace std;
 //Muñeco con forma de Naika aparecio*
 
-#include <iostream>
-using namespace std;
-
 void DefaultError(){
     system("cls");
         cout << "Opcion de comando invalida" << endl;
@@ -296,11 +293,11 @@ void DummyAttackPlayer(Player& p, NaikaDummy& Ndum){
 }
 
 string TalkDummy[] = {
-    "Le hablas al muñeco de Naika... te ignora...", // 0
+    "El muñeco... te ignora...", // 0
     "Intentas asustar al muñeco de Naika...", // 1 
-    "Hablas de tus problemas con el muñeco de Naika...", // 2
-    "", // 3
-    ""  // 4
+    "Hablas de tus problemas con el muñeco...", // 2
+    "Hablas mal de \033[31mNaika\033[0m...", // 3
+    "El muñeco te dice algo sobre una profecia..."  // 4
 };
 
 string TalkMercyDummy[] = {
@@ -322,9 +319,9 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
     bool battleOver = false;  // bandera para terminar la batalla
     bool RageDummy = false;   // bandera para el modo rage del enemigo
     bool Mercy = false;       // bandera para victoria pacifista
+    int FireShifts = 0;       // la cantidad de turnos por las que se quemara el jugador
 
     do{
-        int dialogChance = rand() % 101; // prueba
         int RNGTalkDummy = rand() % 101; // variables RNG dentro del do para que se generen nuevos numeros
         int RNGMercy = rand() % 101;
         bool RegMana = true;      // bandera para regenerar MANA
@@ -478,36 +475,34 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 cout << endl;
                 break;
             case 5: // HABLAR
-                cout << "Intentas conectar con el muñeco de Naika..." << endl;
+                cout << "Intentas hablar con " << Ndum.NaDummyName << endl;
                 Sleep(1500);
-            /*
-                if (dialogChance < 15) {
-                    cout << "\"Fui creada para probar tu determinación!\"" << endl;
-                    cout << "\"Si fallas aquí, no sobrevivirás a lo que viene...\"" << endl;
-                } else if (dialogChance < 30) {
-                    cout << "\"Tu moriras!!\"" << endl;
-                } else if (dialogChance < 45) {
-                    cout << "\"Mi creador... debo protegerlo a toda costa!\"" << endl;
-                    cout << "\"Él me dio vida cuando nadie más lo haría...\"" << endl;
-                } else if (dialogChance < 60) {
-                    cout << "\"¿Por qué luchas? ¿Qué te impulsa realmente?\"" << endl;
-                    cout << "\"Todos tenemos nuestras razones para pelear...\"" << endl;
-                } else if (dialogChance < 75) {
-                    cout << "\"Al final... todos somos marionetas de alguien\"" << endl;
-                    cout << "\"¿Quién tira de tus hilos, " << p.PlayerName << "?\"" << endl;
-                } else if (dialogChance < 85) {
-                    cout << "\"El dolor es solo una señal de que sigues vivo\"" << endl;
-                    cout << "\"Aprende a abrazarlo o te destruirá...\"" << endl;
-                } else if (dialogChance < 90) {
-                    cout << "\"La oscuridad que combates vive dentro de ti\"" << endl;
-                    cout << "\"¿Podrás enfrentar tus propios demonios?\"" << endl;
+
+                if (RNGTalkDummy <= 20){
+                    cout << TalkDummy[0] << endl;
+                    cout << "-10 de daño emocional... " << endl;
+                    p.HP -= 10;
+                } else if (RNGTalkDummy > 20 && RNGTalkDummy <= 40){
+                    cout << TalkDummy[1] << endl;
+                    cout << "Pero no reacciona... no hace nada... no parpadea... ni puede" << endl;
+                    RegMana = false;
+                } else if (RNGTalkDummy > 40 && RNGTalkDummy <= 60){
+                    cout << TalkDummy[2] << endl;
+                    cout << "Te entiende y trata de sanarte con sana sana colita de rana...?" << endl;
+                    cout << "Funciono... eso crees... te curas +5 HP" << endl;
+                    p.HP = min(p.HP += 5, p.MAX_HP);
+                } else if (RNGTalkDummy > 60 && RNGTalkDummy <= 80){
+                    cout << TalkDummy[3] << endl;
+                    cout << Ndum.NaDummyName << " Se enojo tanto que te lanzo una bomba molotov... auch" << endl;
+                    cout << "Te restaran -5 HP durante los proximos 2 turnos" << endl;
                 }
+
                 Sleep(2500);
                 cout << "\n¡El muñeco de Naika ataca repentinamente!" << endl;
                 Sleep(1000);
                 DummyAttackPlayer(p, Ndum);
-            */
                 break;
+
             case 6: // ACT 3 PIEDAD
                 system("cls");
                 if (RNGMercy <= 25){ // 25 % de que aparezca el arreglo
@@ -648,6 +643,10 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
         }
 
         // variable para a regeneracion de MANA en cada turno, SI no se ha usado magia
+        if (FireShifts > 0){
+            cout << p.PlayerName << " se quemo en este turno, pierde -5 HP" << endl;
+            cout << "";
+        }
         if (RegMana){
         p.MANA = min(p.MANA + 10, p.MAX_MANA);
         }
