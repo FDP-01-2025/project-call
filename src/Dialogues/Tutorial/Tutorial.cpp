@@ -4,6 +4,7 @@
 #include "Data/PlayerData/PlayerData.h"
 #include "Data/NaikaData/Naika.h"
 #include "Battles/NaikaDummy/NaBattle.h"
+
 using namespace std;
 
 void PrintWithPause_Tu(const string& Text, int Pause){
