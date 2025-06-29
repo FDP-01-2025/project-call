@@ -15,6 +15,7 @@ struct Player {
     int MAX_MANA;
     int MONEY;
     int KILLS;
+    int PacifistPoints;
     string WEAPON;
     string ARMOR;
     string MagicDefault;

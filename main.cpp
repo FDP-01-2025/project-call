@@ -21,7 +21,6 @@ int main(){
     ShowStats(p);             // funcion para mostrar las estadisticas
     cout << "Tienes un momento para ver tus estadisticas iniciales";
     Naika Na = Naika_Data();
-
     NaikaDummy Ndum = Dummy_Data();
 
     cout << endl;

@@ -106,6 +106,29 @@ void Items(Player& p, int option_item){
     }
 }
 
+void EnemyHpBar(NaikaDummy& Ndum){
+    int total_blocks = 10;
+    int filled_blocks = (Ndum.HP * total_blocks) / Ndum.MAX_HP;
+    if (Ndum.HP > 0 && filled_blocks == 0) {
+    filled_blocks = 1;
+    }   
+    int empty_blocks = total_blocks - filled_blocks;
+
+    string color = (Ndum.HP > Ndum.MAX_HP * 0.3) ? "\033[33m" : "\033[31m";
+    cout << "HP:   " << color;
+
+    for (int i = 0; i < filled_blocks; ++i){
+        cout << "█";
+    }
+
+    cout << "\033[30m";
+    for (int i = 0; i < empty_blocks; ++i){
+        cout << "█";
+    }
+
+    cout << "\033[0m " << Ndum.HP << "/" << Ndum.MAX_HP << endl << endl;
+}
+
 void HpBar(Player& p) {
     int total_blocks = 10; // variable de la cantidad de bloques
     int filled_blocks = (p.HP * total_blocks) / p.MAX_HP; // calcula cuantos se deben llenar
@@ -327,6 +350,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
         bool RegMana = true;      // bandera para regenerar MANA
         int RandomEvent = rand() % 101;
         cout << "Oponente: " << "\033[33m" << Ndum.NaDummyName << "\033[0m" << endl; // Codigo ANSI amarillo
+        EnemyHpBar(Ndum);
         if (Mercy == false){
             cout << Ndum.NaDummyName << " Esta determinada" << endl << endl;
         } else {
@@ -382,6 +406,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 PlayerMagic(p, Ndum);
                 cout << endl;
                 Sleep(500);
+                DummyAttackPlayer(p, Ndum);
             }
             break;
 // end case 2
@@ -598,6 +623,8 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
         case 4: // ITEM
         RegMana = false;
             Items(p, option_item);
+            cout << endl;
+            DummyAttackPlayer(p, Ndum);
         break;
 // end case 4
         case 5: // MERCY
@@ -606,6 +633,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 DummyAttackPlayer(p, Ndum);
             } else {
                 cout << Ndum.NaDummyName << " Acepto tu perdon... VICTORIA!" << endl;
+                p.PacifistPoints++;
                 battleOver = true;
             }
             break;

@@ -15,6 +15,7 @@ void PrintWithPause_Tu(const string& Text, int Pause){
 void LongPause_Tu(int MiliSeconds){
     Sleep(0); // 0 para lectura rapida.  // "MiliSeconds" to normal
 }
+
 void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
     string x;
     string Tutorial[] = {
@@ -38,7 +39,7 @@ void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
     "De madera.", //17
     "Hechas por mi!.", //18
     "\033[31mNaika\033[0m te entrega: \033[33mEspada de madera\033[0m", //19
-    "\033[3mArma de entrenamiento muy rigida, hecha de madera muy robusta hecha unicamente para aporrear munecos de prueba.\nFue hecha por una carpintera (profesional?)...\nEsas astillas te doleran mas a ti que al enemigo...\033[0m", //20
+    "\033[3mArma de entrenamiento muy rigida, hecha de madera muy robusta fabricada unicamente para aporrear munecos de prueba.\nFue hecha por una carpintera (profesional?)...\nEsas astillas te doleran mas a ti que al enemigo...\033[0m", //20
     "Bien pruebalo.", //21
     "Independientemente de lo que hayas hecho la espada de madera ya se ha roto casi de inmediato.", //22
     "Pones cara de asco.", //23
@@ -107,10 +108,10 @@ void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
     "Muneco con forma de Neika aparecio", //86
     };
 
+    bool BadRelation = false;
     bool Disobey = false;
     bool Disobey2 = false;
-    srand(time(NULL));
-    int Option;
+    int Option, option_kill;
 
     string Conditionals[] = {
         "No te hagas el listo, usa las \033[31mOPCIONES\033[0m que te muestra el menu!.", // 0
@@ -127,6 +128,37 @@ void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
         "No tienes nada que ver... es solo un apestoso muneco.", // 11
         "Por alguna razon tiene consciencia. Le caes mal...", //12
         "Luego tenemos \033[33mDEFEND\033[0m, hace que recibas menos dano y recargues mas \033[34mMANA\033[0m, si deseas usar mayormente magia claro." // 13
+    };
+
+    string Pacifist[] = {
+        "Muñeco de Naika te hace una reverencia en tu honor por brindarle tal batalla.", // 0
+        "Oye vienes a pelear, no perdonar... bueno, no estoy decepcionada, lo dejaré pasar por esta vez.", // 1
+        "Ha sido un deleite para mi vista esta pelea.", // 2
+        "Tienes potencial muchacho.", // 3
+        "Qué dices, vamos con tus compañeros por banquete y vino?", // 4
+        "Eres menor? no me importa! JAJA, yo invito" // 5
+    };
+    string Genocide[] = {
+        "Ves lo que queda del muñeco... apenas puede levantarse pero hace una reverencia en tu honor por brindarle tal batalla... lista para lo que prosigue.", // 0
+        // POSE DE VICTORIA
+        "¡Felicidades, pasaste el entrenamiento, y con estilo!", // 1
+        "Lo abraza", // 2
+        "Ejem* lo siento, soy muy expresiva.", // 3
+        "Ha sido un deleite para mi vista esta pelea.", // 4
+        "Tienes mucho potencial muchacho." // 5
+        // DESTRUIR
+        "Sueltas tu espada y te abalanzas con el muñeco", // 6
+        "Con tus puños empiezas a destruir al muñeco con un odio incandescente", // 7
+        "El pobre muñeco, sin alma ni voz, no puede siquiera expresar su agonía.", // 8
+        "\033[31mNaika\033[0m te aparta", // 9
+        "hey chico para! para! el muñeco no te hizo nada más.", // 10
+        "Somos griegos... no monstruos.", // 11
+        "Hice con amor este muñeco...", // 12
+        "...", // 13
+        "Haces como si me odiaras... o es asi?", // 14
+        "...", // 15
+        "Bien, pasaste la prueba...", // 16
+        "Pero lárgate, tus compañeros deben estar esperándote... no?", // 17
     };
 
     /*
@@ -310,7 +342,6 @@ system("cls");
         }
     }
 
-
     do{
         cout << "Opcion: " << endl;
         cout << "1. ATTACK\n2. MAGIC\n\033[33m3. ACTION\033[0m\n4. ITEM\n5. MERCY\n";
@@ -436,12 +467,71 @@ system("cls");
         }
     }
     */
-    p.WEAPON = "Espada de madera";
-    NaikaDummyBattle(p, Ndum);
-    // void NaikaDummyBattle(Player p, NaikaDummy Ndum); no cometer esta estupidez de declarar en vez de llamar
-    if (p.KilledNaikaDummy == false){
-        cout << "RUTA PACIFISTA";
-    } else {
-        cout << "RUTA GENOCIDA";
+
+    p.WEAPON = "Espada de madera"; // void NaikaDummyBattle(Player p, NaikaDummy Ndum); no cometer esta estupidez de declarar en vez de llamar
+    NaikaDummyBattle(p, Ndum); // funcion de batalla
+    Sleep(2000);
+    system("cls");
+    if (!p.KilledNaikaDummy){ // ruta pacifista
+        for (int i = 0; i < 6; i++){
+            if (i != 0){
+                cout << "\033[31mNaika: \033[0m";}
+            PrintWithPause_Tu(Pacifist[i], 30);
+            LongPause_Tu(1000); cout << endl;
+            cin >> x;
+            system("cls");
+            }
+
+    } else { // ruta neutral/genocida
+        for (int i = 0; i < 1; i++){
+            cout << "\033[3m";
+            PrintWithPause_Tu(Genocide[i], 30);
+            LongPause_Tu(1000); cout << endl;
+            cin >> x;
+            system("cls");
+            cout << "\033[0m";
+        }
+
+        cout << "Que prosigue?\n1. Pose de victoria\n2. Destruir" << endl;
+        cin >> option_kill;
+
+    system("cls");
+        switch (option_kill){
+        case 1:
+            for (int i = 1; i < 6; i++){
+                cout << (i != 2 ? "\033[31mNaika: \033[0m":"\033[3m");
+            PrintWithPause_Tu(Genocide[i], 30);
+            LongPause_Tu(1000); cout << endl;
+            cin >> x;
+            system("cls");
+            cout << "\033[0m";
+                }
+            for (int i = 4; i < 6; i++){
+                cout << "\033[31mNaika: \033[0m";
+                PrintWithPause_Tu(Pacifist[i], 30);
+                LongPause_Tu(1000); cout << endl;
+                cin >> x;
+                system("cls");
+                cout << "\033[0m";
+            }
+            break;
+        case 2:
+        BadRelation = true;
+            for (int i = 6; i < 17; i++){
+                cout << (i > 8 ? "\033[31mNaika: \033[0m":"\033[3m");
+            PrintWithPause_Tu(Genocide[i], 30);
+            LongPause_Tu(1000); cout << endl;
+            cin >> x;
+            system("cls");
+            cout << "\033[0m";
+                }
+            break;
+        default:
+        system("cls");
+            cout << "Opcion no valida";
+            Sleep(1000);
+        system("cls");
+            break;
+        }
     }
 }
