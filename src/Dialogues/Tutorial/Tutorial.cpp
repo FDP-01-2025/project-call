@@ -145,7 +145,7 @@ void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
         "Lo abraza", // 2
         "Ejem* lo siento, soy muy expresiva.", // 3
         "Ha sido un deleite para mi vista esta pelea.", // 4
-        "Tienes mucho potencial muchacho." // 5
+        "Tienes mucho potencial muchacho.", // 5
         // DESTRUIR
         "Sueltas tu espada y te abalanzas con el muñeco", // 6
         "Con tus puños empiezas a destruir al muñeco con un odio incandescente", // 7
@@ -518,7 +518,7 @@ system("cls");
         case 2:
         BadRelation = true;
             for (int i = 6; i < 17; i++){
-                cout << (i > 8 ? "\033[31mNaika: \033[0m":"\033[3m");
+                cout << (i > 9 ? "\033[31mNaika: \033[0m":"\033[3m");
             PrintWithPause_Tu(Genocide[i], 30);
             LongPause_Tu(1000); cout << endl;
             cin >> x;
