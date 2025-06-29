@@ -25,7 +25,7 @@ int main(){
 
     cout << endl;
     cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
-    Sleep(5000);
+    Sleep(6000);
 
 system("cls");
     // Prologue();
