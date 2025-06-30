@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void DefaultError() {
+void DefaultError(){
     system("cls");
     cout << "Opcion de comando invalida" << endl;
     Sleep(1000); cout << endl;

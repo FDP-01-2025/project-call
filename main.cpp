@@ -33,8 +33,8 @@ int main(){
 system("cls");
     // Prologue();
     // Training(p);
-    // Tutorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
+    Tutorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
 
-    TrollBattle(p, Tr); // batalla futura
+    // TrollBattle(p, Tr); // batalla futura
     return 0;
 }
