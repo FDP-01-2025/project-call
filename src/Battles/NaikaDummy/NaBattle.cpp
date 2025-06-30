@@ -551,6 +551,8 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
         }
         if (Ndum.HP <= 20 || MercyPoints == 3){ // condicion pacifista
             Mercy = true;
+        } else {
+            Mercy = false;
         }
 
     } while (!battleOver); // condicion para que termine la batalla

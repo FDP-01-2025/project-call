@@ -8,7 +8,7 @@ Troll Troll_Data(){
     Tr.Level = 15;
     Tr.HP = 250;
     Tr.MAX_HP = 250;
-    Tr.ATTACK = 25;
+    Tr.ATTACK = 20;
     Tr.CRITICAL_ATTACK = Tr.ATTACK*2;
     Tr.DEFENSE = 10;
     Tr.MANA = 100;

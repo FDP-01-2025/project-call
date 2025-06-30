@@ -84,14 +84,14 @@ void Items(Player& p, int option_item){
             if (p.CantItem3 < 1){
                 cout << "Ya no tienes BANANAS... tu triste..." << endl << endl;
             } else {
-                cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << " se comio la BANANA..." << endl;
+                cout << "\033[34m" << p.PlayerName << "\033[0m se comio la BANANA..." << endl;
                 cout << "POTACIO" << endl;
-                cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << " se siente poderoso... sus estadisticas aumentaron!" << endl;
+                cout << "\033[34m" << p.PlayerName << "\033[0m se siente poderoso... sus estadisticas aumentaron!" << endl;
                 cout << "+30 HP, +30 MANA, +5 Ataque y +5 Defensa" << endl;
                 p.ATTACK += 5;
                 p.DEFENSE += 5;
                 p.HP = min(p.HP + 30, p.MAX_HP);
-                p.MANA = min(p.MANA + 10, p.MAX_MANA);
+                p.MANA = min(p.MANA + 30, p.MAX_MANA);
                 p.CantItem3--;
             }
             break;
@@ -130,6 +130,9 @@ void HpBar(Player& p) {
 void ManaBar(Player& p){
     int total_blocks = 10;
     int filled_blocks = (p.MANA * total_blocks) / p.MAX_MANA;
+    if (p.MANA > 0 && filled_blocks == 0){
+    filled_blocks = 1;
+    }
     int empty_blocks = total_blocks - filled_blocks;
 
     string color = (p.MANA > p.MAX_MANA * 0.3) ? "\033[34m" : "\033[35m"; // Amarillo o rojo dependiendo de la vida
