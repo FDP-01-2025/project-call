@@ -6,8 +6,8 @@ Troll Troll_Data(){
     struct Troll Tr;
     Tr.TrollName = "\033[31mTroll de mana\033[0m";
     Tr.Level = 15;
-    Tr.HP = 350;
-    Tr.MAX_HP = 350;
+    Tr.HP = 250;
+    Tr.MAX_HP = 250;
     Tr.ATTACK = 25;
     Tr.CRITICAL_ATTACK = Tr.ATTACK*2;
     Tr.DEFENSE = 10;

@@ -33,8 +33,17 @@ int main(){
 system("cls");
     // Prologue();
     // Training(p);
-    Tutorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
+    // Tutorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
 
-    // TrollBattle(p, Tr); // batalla futura
+    p.Level = 5;
+    p.MAX_HP += 50;
+    p.HP+= 50;
+    p.DEFENSE += 5;
+    p.MAX_MANA += 25;
+    p.MANA += 25;
+    p.MONEY += 25;
+    p.PotionsHP += 1;
+    p.PotionsMANA+= 1; // datas temporales
+    TrollBattle(p, Tr); // batalla futura
     return 0;
 }

@@ -890,6 +890,15 @@ string NaikaPostBattle[] = {
 
     p.WEAPON = "Espada de madera"; // void NaikaDummyBattle(Player p, NaikaDummy Ndum); no cometer esta estupidez de declarar en vez de llamar
     NaikaDummyBattle(p, Ndum); // funcion de batalla
+    p.Level = 5;
+    p.MAX_HP += 50;
+    p.HP+= 50;
+    p.DEFENSE += 5;
+    p.MAX_MANA += 25;
+    p.MANA += 25;
+    p.MONEY += 25;
+    p.PotionsHP += 1;
+    p.PotionsMANA+= 1;
     Sleep(2000);
 system("cls");
     if (!p.KilledNaikaDummy){ // ruta pacifista

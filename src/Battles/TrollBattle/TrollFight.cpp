@@ -39,7 +39,7 @@ void EnemyHpBar(Troll& troll) {
     cout << "\033[0m " << troll.HP << "/" << troll.MAX_HP << endl << endl;
 }
 
-void PlayerMagic(Player& p, Troll& troll) {
+void PlayerMagic(Player& p, Troll& troll, bool& Return) {
     int opcionPlayerMagic;
     if (p.MagicDefault == p.Magic1) { // si magia es vendaval
         cout << "1. " << troll.TrollName << " HP: " << troll.HP << "/" << troll.MAX_HP << endl;
@@ -62,6 +62,7 @@ void PlayerMagic(Player& p, Troll& troll) {
             }
             break;
         case 2:
+        Return = true;
             system("cls");
             break;
         default:
@@ -126,13 +127,6 @@ void PlayerMagic(Player& p, Troll& troll) {
     }
 }
 
-void TrollShowStats(Troll& troll) {
-    cout << "Nombre: " << troll.TrollName << endl;
-    cout << "HP: " << troll.HP << "/" << troll.MAX_HP << endl;
-    cout << "MANA: " << troll.MANA << "/" << troll.MAX_MANA << endl;
-    cout << "ATK: " << troll.ATTACK << " | DEF: " << troll.DEFENSE << endl;
-}
-
 void PlayerAttackTroll(Player& p, Troll& troll) {
     int RNG = rand() % 101;
     if (RNG < 25) {
@@ -154,16 +148,16 @@ void PlayerAttackTroll(Player& p, Troll& troll) {
 
 void TrollAttackPlayer(Player& p, Troll& troll) {
     int RNG = rand() % 101;
-    if (RNG < 25) {
+    if (RNG < 20) { // 20% de fallar
         cout << troll.TrollName << " levanta su enorme brazo, pero tropieza torpemente." << endl;
         cout << "¡El ataque falla!" << endl;
-    } else if (RNG < 50) {
+    } else if (RNG < 40) { // 20% de critico
         cout << troll.TrollName << " ruge con furia y lanza un demoledor golpe..." << endl;
         cout << "¡Es un impacto crítico!" << endl;
         int damage = max(0, troll.CRITICAL_ATTACK - p.DEFENSE);
         p.HP -= damage;
         cout << p.PlayerName << " recibe " << damage << " de daño crítico, tambaleándose por la fuerza del golpe." << endl;
-    } else {
+    } else { // 60% de ataque normal
         cout << troll.TrollName << " balancea su garrote con fuerza bruta..." << endl;
         int damage = max(0, troll.ATTACK - p.DEFENSE);
         p.HP -= damage;
@@ -171,8 +165,9 @@ void TrollAttackPlayer(Player& p, Troll& troll) {
     }
 
     // MECÁNICA ESPECIAL: El troll te quita 10 de mana
+    cout << endl;
     if (p.MANA >= 10) {
-        p.MANA -= 10;
+        p.MANA -= 20;
         troll.MANA = min(troll.MANA + 10, troll.MAX_MANA);
         cout << troll.TrollName << " extiende su mano rúnica y drena 10 de tu \033[34mMANA\033[0m, absorbiéndolo para fortalecerse." << endl;
     } else {
@@ -191,6 +186,7 @@ void TrollBattle(Player& p, Troll& Tr){
     bool battleOver = false;
     bool RageTroll = false;
     bool Mercy = false;
+    bool Return = false;
 
     do {
         int RNGTalk = rand() % 101;
@@ -216,18 +212,20 @@ void TrollBattle(Player& p, Troll& Tr){
             cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. \033[33mMERCY\033[0m\n";
         }
         cin >> option;
-        system("cls");
 
+    system("cls");
         switch (option) {
             case 1: // ATTACK
                 cout << "1. " << Tr.TrollName << " HP: " << Tr.HP << "/" << Tr.MAX_HP << endl;
                 cout << "2. RETURN" << endl;
                 cin >> option_attack;
-                switch (option_attack) {
+                switch (option_attack){
                     case 1:
+                    system("cls");
                         PlayerAttackTroll(p, Tr);
                         cout << endl;
                         TrollAttackPlayer(p, Tr);
+                        cout << endl;
                         break;
                     case 2:
                         RegMana = false;
@@ -241,12 +239,22 @@ void TrollBattle(Player& p, Troll& Tr){
                 break;
 
             case 2: // MAGIC
-                RegMana = false;
-                PlayerMagic(p, Tr);
+        RegMana = false;
+            if (p.MagicDefault != p.Magic2){ // si te curas dummy no te atacara
+                system("cls");
+                PlayerMagic(p, Tr, Return);
                 cout << endl;
-                Sleep(500);
-                TrollAttackPlayer(p, Tr);
-                break;
+                if (!Return) {
+                    TrollAttackPlayer(p, Tr);
+                    cout << endl;
+                    Return = false;
+                }
+            } else {
+                system("cls");
+                PlayerMagic(p, Tr, Return);
+                cout << endl;
+            }
+            break;
 
             case 3: // ACTION
                 system("cls");
@@ -264,7 +272,7 @@ void TrollBattle(Player& p, Troll& Tr){
                     case 2:
                         RegMana = false;
                         system("cls");
-                        TrollShowStats(Tr);
+                        ShowStatsTroll(Tr);
                         cin.ignore();
                         cin.get();
                         system("cls");
@@ -345,13 +353,15 @@ void TrollBattle(Player& p, Troll& Tr){
                             cout << "Te ignora... permanece impasible." << endl;
                             RegMana = false;
                         } else if (RNGTalk <= 60) {
-                            cout << "Su mirada se suaviza... Tal vez entiende tu oferta de paz." << endl;
+                            cout << "Su mirada se suaviza... Tal vez entiende tu oferta de paz... y su defensa baja!" << endl;
                             p.HP = min(p.HP + 5, p.MAX_HP);
-                            cout << "Recuperas +5 HP" << endl;
+                            Tr.DEFENSE -= 10;
+                            cout << "Y recuperas +5 HP" << endl;
                         } else {
                             cout << "El troll se molesta y te arroja un pedrusco... cuidado!" << endl;
                             TrollAttackPlayer(p, Tr);
                         }
+                        cout << endl;
                         break;
 
                     case 6: // PACIFICAR
@@ -372,9 +382,9 @@ void TrollBattle(Player& p, Troll& Tr){
                         RegMana = false;
                         system("cls");
                         cout << "Te defiendes del próximo ataque..." << endl;
-                        cout << "Tu defensa se multiplica x2 y recuperas +20 de MANA" << endl << endl;
-                        p.MANA = min(p.MANA + 20, p.MAX_MANA);
-                        p.DEFENSE = TempDefense * 2;
+                        cout << "Tu defensa se multiplica x3 y recuperas +30 de MANA" << endl << endl;
+                        p.MANA = min(p.MANA + 30, p.MAX_MANA);
+                        p.DEFENSE = TempDefense * 3;
                         TrollAttackPlayer(p, Tr);
                         p.DEFENSE = TempDefense;
                         break;
@@ -395,7 +405,6 @@ void TrollBattle(Player& p, Troll& Tr){
                 RegMana = false;
                 Items(p, option_item);
                 cout << endl;
-                TrollAttackPlayer(p, Tr);
                 break;
 
             case 5: // MERCY
@@ -452,5 +461,4 @@ void TrollBattle(Player& p, Troll& Tr){
             Mercy = true;
         }
     } while (!battleOver);
-
 }

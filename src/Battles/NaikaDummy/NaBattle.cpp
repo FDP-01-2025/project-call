@@ -38,7 +38,7 @@ void Checkpoint(Player& p, NaikaDummy& Ndum, int PlayerHP, int PlayerMana, int D
     Ndum.MANA = DummyMana;
 } // funcion local
 
-void PlayerMagic(Player& p, NaikaDummy& Ndum){
+void PlayerMagic(Player& p, NaikaDummy& Ndum, bool& Return){
     int opcionPlayerMagic;
     if (p.MagicDefault == p.Magic1){ // si magia es vendaval
     cout << "1. " << Ndum.NaDummyName << " HP: " << Ndum.HP << "/" << Ndum.MAX_HP << endl;
@@ -60,6 +60,7 @@ void PlayerMagic(Player& p, NaikaDummy& Ndum){
             }
         break;
     case 2:
+    Return = true;
         system("cls");
         break;
     default:
@@ -92,6 +93,8 @@ void PlayerMagic(Player& p, NaikaDummy& Ndum){
                         p.HP = min(p.HP + 20, p.MAX_HP);
                         p.MANA -= 50;
                         cout << "\033[34m" << p.PlayerName << "\033[0m" << " se curo: +" << p.HP - HPbefore << " HP";
+                        Sleep(1000);
+                        cout << endl;
                         break;
                     case 2: // RETURN
                         system("cls");
@@ -107,6 +110,8 @@ void PlayerMagic(Player& p, NaikaDummy& Ndum){
                     p.HP += 20;
                     p.MANA -= 50;
                     cout << "\033[34m" << p.PlayerName << "\033[0m" << " se curo, +20 HP";
+                    Sleep(1000);
+                    cout << endl;
                 }
             }
             break;
@@ -201,6 +206,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
     bool battleOver = false;  // bandera para terminar la batalla
     bool RageDummy = false;   // bandera para el modo rage del enemigo
     bool Mercy = false;       // bandera para victoria pacifista
+    bool Return = false;
     int FireShifts = 0;       // la cantidad de turnos por las que se quemara el jugador
 
     do{
@@ -256,16 +262,16 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
         RegMana = false;
             if (p.MagicDefault != p.Magic2){ // si te curas dummy no te atacara
                 system("cls");
-                PlayerMagic(p, Ndum);
+                PlayerMagic(p, Ndum, Return);
                 cout << endl;
-                Sleep(500);
-                DummyAttackPlayer(p, Ndum);
+                if (!Return) {
+                    DummyAttackPlayer(p, Ndum);
+                    Return = false;
+                }
             } else {
                 system("cls");
-                PlayerMagic(p, Ndum);
+                PlayerMagic(p, Ndum, Return);
                 cout << endl;
-                Sleep(500);
-                DummyAttackPlayer(p, Ndum);
             }
             break;
 // end case 2
