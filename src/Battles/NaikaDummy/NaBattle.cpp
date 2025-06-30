@@ -68,7 +68,7 @@ void PlayerMagic(Player& p, NaikaDummy& Ndum, bool& Return){
         break;
         }
     } else if (p.MagicDefault == p.Magic2){ // si esta magia de curacion
-        cout << "1. " << p.PlayerName << " HP: " << p.HP << "/" << p.MAX_HP << endl;
+        cout << "1. " << "\033[34m" << p.PlayerName << "\033[0m" << " HP: " << p.HP << "/" << p.MAX_HP << endl;
         cout << "2. RETURN" << endl;
         cin >> opcionPlayerMagic;
 

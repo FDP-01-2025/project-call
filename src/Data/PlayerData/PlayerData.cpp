@@ -101,6 +101,8 @@ system("cls");
         p.PoEffectHP = 9999;
         p.PoEffectMANA = 9999;
         p.KilledNaikaDummy = false;
+        p.KilledEliteSlime = false;
+        p.KilledTroll = false;
         break;
     default:
         cout << "Opcion invalida" << endl;

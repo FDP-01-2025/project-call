@@ -146,7 +146,7 @@ void PlayerAttackTroll(Player& p, Troll& troll) {
     }
 }
 
-void TrollAttackPlayer(Player& p, Troll& Tr) {
+void TrollAttackPlayer(Player& p, Troll& Tr){
     int RNG = rand() % 101;
 
     if (RNG < 25){

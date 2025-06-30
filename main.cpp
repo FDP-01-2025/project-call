@@ -7,6 +7,8 @@
 #include "src/Data/PlayerData/PlayerData.h"
 #include "src/Data/NaikaData/Naika.h"
 #include "src/Battles/NaikaDummy/NaBattle.h"
+#include "src/Data/EliteSData/EliteSlime.h"
+#include "src/Battles/SlimeBattle/Sbattle.h"
 #include "src/Data/TrollData/Troll.h"
 #include "src/Battles/TrollBattle/TrollFight.h"
 
@@ -25,6 +27,7 @@ int main(){
     Naika Na = Naika_Data();
     NaikaDummy Ndum = Dummy_Data();
     Troll Tr = Troll_Data();
+    EliteS S = EliteS_Data();
 
     cout << endl;
     cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
@@ -33,8 +36,9 @@ int main(){
 system("cls");
     // Prologue();
     // Training(p);
-    // Tutorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
+    // utorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
 
-    TrollBattle(p, Tr); // batalla futura
+    EliteSBattle(p, S);
+    // TrollBattle(p, Tr); // batalla futura
     return 0;
 }

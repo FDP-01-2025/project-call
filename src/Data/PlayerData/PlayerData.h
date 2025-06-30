@@ -31,6 +31,8 @@ struct Player {
     int PoEffectMANA;
     int EffectItem3;
     bool KilledNaikaDummy;
+    bool KilledEliteSlime;
+    bool KilledTroll;
 };
 
 Player Global_Data();

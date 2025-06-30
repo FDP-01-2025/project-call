@@ -141,6 +141,7 @@ void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
         "Qué dices, vamos con tus compañeros por banquete y vino?", // 4
         "Eres menor? no me importa! JAJA, yo invito" // 5
     };
+
     string Genocide[] = {
         "Ves lo que queda del muñeco... apenas puede levantarse pero hace una reverencia en tu honor por brindarle tal batalla... lista para lo que prosigue.", // 0
         // POSE DE VICTORIA
@@ -567,23 +568,23 @@ string NaikaPostBattle[] = {
     "Lamento que me veas en este estado tan deplorado...", //82
     "Se que no es nada profesional...", //83
     "Nadie me ha visto llorar... ni siquiera ellos...", //84
-    "He estado sola en esta situación...", //85
-    "Y por eso aprecio mucho tu gesto {name}", //86
+    "He estado sola en esta situación...", //85    /////
+    "Y por eso aprecio mucho tu gesto ", //86
     "Me haces recordar mucho a un viejo amigo.", //87
     "Recuerdo que cuando comenzamos nuestro entrenamiento no teníamos ni los 14 cumplidos.", //88
     "No tenía experiencia en nada.", //89
-    "Yo era una niña que perdió a sus padres en la guerra de sucesión.", //90
+    "Yo era una niña que perdió a sus padres al inicio de la guerra de sucesión.", //90
     "Y tenía 2 opciones, o ir a un orfanato... o ser reclutada en el ejército.", //91
     "Opte por la segunda opción...", //92
-    "Si tenía que morir... que sea evitando que otros niños tengan mi mismo destino.", //93
+    "Si tenía que morir... que sea luchando y evitando que otros niños tengan mi mismo destino.", //93
     "Y si moría... Al menos podría ver a mis padres.", //94
     "Y bueno, en mi entrenamiento fue cuando lo conocí.", //95
     "Se llamaba Leo.", //96
-    "Y mejor no le quedaba.", //97
+    "Y mejor nombre no le quedaba.", //97
     "Era fuerte, valiente y empático, era una persona increíble.", //98
     "Cuando coincidimos en un ejercicio en conjunto me contó que también perdió a sus padres.", //99
     "Y fue ahí donde comenzó nuestra fuerte amistad.", //100
-    "No éramos solo camaradas. Éramos hermanos.", //101
+    "No éramos solo camaradas. Éramos amigos muy cercanos.", //101
     "Nos apoyamos incondicionalmente", //102
     "Hasta que de un momento a otro nos dieron una fuerte noticia...", //103
     "Todos nosotros...", //104
@@ -594,11 +595,11 @@ string NaikaPostBattle[] = {
     "Si no fuera por él... Ya habría muerto.", //109
     "Me salvó la vida innumerables veces.", //110
     "Pero de él aprendí mucho.", //111
-    "Se tomaba la molestia de ser mi profesor.", //112
+    "Se tomaba la molestia de ser mi instructor.", //112
     "En horas de paz nos enfrentamos uno contra uno y me enseñaba cómo pelear.", //113
     "Note un progreso, me sentía cada vez más útil.", //114
     "Pero para ese momento no sabía usar nada de magia... como tú. ", //115
-    "Y es una piedra en el zapato si estás en la guerra.", //116
+    "Y es una roca en el zapato si estás en la guerra.", //116
     "Pero él enseñó técnicas novedosas para ese momento.", //117
     "Era un estratega nato.", //118
     "Y un día de estos durante nuestra práctica...", //119
@@ -607,14 +608,14 @@ string NaikaPostBattle[] = {
     "Hicieron una evacuación a gran escala. ",  // 122
     "Llamaron a cada soldado...",  //123 
     "Leo y yo salimos disparados hacia la entrada de la capital...", //124
-    "No iban a tardar en derribar las muralla...", //125
-    "Y traían nuevas armas de asedio, jamás vistas...", //126
-    "Se especula que trabajaron en conjunto con los persas para fabricar tales armas...", //127 
-    "Se les acusó pero ellos lo niegan... Por eso actualmente se rompieron relaciones diplomáticas con ellos. Bueno prosiguiendo...", //128
+    "No iban a tardar en derribar las murallas...", //125
+    "Porque traían nuevas armas de asedio, jamás vistas...", //126
+    "Se especula que trabajaron en conjunto con los persas y espartanos para fabricar tales armas...", //127 
+    "a estos últimos se les acusó... pero ellos lo niegan... Por eso actualmente se rompieron relaciones diplomáticas los espartanos...", //128
     "La situación era muy crítica... y estaba en nuestra contra...", //129
     "Allí se iba a decidir qué bando ganaría... todos dieron todo de sí... incluyendome...", //130
     "Estábamos acorralados... pero no teníamos miedo... era todo o nada.", //131
-    "Cuando las murallas cayeron... se abrieron varios frentes en la ciudad...", //132
+    "Y entre las murallas lograron romper algunas puertas... y se abrieron varios frentes en la ciudad...", //132
     "Leo era del primer batallón... y yo del segundo...", //133
     "Tenía un nudo en la garganta... Íbamos a pelear en diferentes zonas...", //134
     "Pero antes de partir...", //135
@@ -638,15 +639,15 @@ string NaikaPostBattle[] = {
     "Derrame lágrimas... No por morir... si no porque no volveré a ver a mi prometido...", //153
     "Romperé la promesa...", //154
     "Solo cerré los ojos... vi pasar mi vida... todo iba a cámara lenta...", //155
-    "Pero justo cuando sentía el filo de la espada en el cuello", //156
-    "Escuche su voz… y lo ví", //157
+    "Pero justo cuando sentía el filo de la espada en el cuello.", //156
+    "Escuche su voz... y lo ví.", //157
     "Estaba muy herido y con sangre... agotado como yo...", //158
     "Gritó mi nombre y con arrojó su arma contra mi agresor...", //159
     "Logro desarmarlo y lo noqueo...", //160 
     "Hizo lo imposible por salvarme...", //161
     "Me abrazó con todas sus fuerzas", //162
     "Y me dijo que si yo hubiese muerto...", //163
-    "No se lo perdonaría...", //164
+    "Él no se hubiera perdonado...", //164
     "Pero al vernos nos llenamos de determinación y no nos detendremos hasta acabar con esto... muriendo o salvando nuestro reino...", //165
     "Tomamos nuestras armas y volvimos al frente...", //166
     "Solo vi que peleamos codo a codo...", //167
@@ -654,10 +655,10 @@ string NaikaPostBattle[] = {
     "Pero...", //169
     "Los rebeldes viéndose frenados...", //170
     "Comenzaron a hacer uso de sus nuevos juguetes...", //171
-    "Y para peor escuche que batallones de personas se dirigen aquí para sumarse al asedio.", //172
+    "Y para peor escuchamos que batallones de personas se dirigen aquí para sumarse al asedio.", //172
     "Pero estaban siendo frenados por un reino aliado...", //173
     "Pero más temprano que tarde llegarán...", //174
-    "Se nos agotaba el tiempo y los recursos...", //175
+    "Se nos agotaba el tiempo y los recursos de poco en poco...", //175
     "No nos dieron otra orden más que pelear...", //176
     "La retirada no era posible... estábamos en una península rodeados de mar...", //177
     "No contábamos con muchos barcos para escapar...", //178
@@ -677,7 +678,7 @@ string NaikaPostBattle[] = {
     "Yo estuve a punto de estallar en lágrimas... balbuceando que moriríamos...", //192
     "Pero Leo solo se calmó... y me besó.", //193
     "Fue mágico...", //194
-    "Logró calmarme y me dijo que era una ateniense... la muerte no nos visitará hoy...", //195
+    "Logró calmarme y me dijo que era una ateniense... que Thanatos no nos visitara hoy...", //195
     "La sangre de Magnus corre por nuestras venas de guerreros...", //196
     "Y nuevamente me levante... me secó las lágrimas... y yo asenté con la cabeza...", //197
     "De nuevo tenía ganas de volver al frente...", //198
@@ -703,178 +704,178 @@ string NaikaPostBattle[] = {
     "Rápidamente tanto nosotros como el bando contrario formamos un solo ejército...", //218
     "Sus líderes acordaron una alianza temporal...", //219
     "pero... aún así no igualamos ni numérica ni tecnológicamente a los persas...", //220
-    "Ya estaba amaneciendo... la moral estaba muy baja por el desgaste", //221
+    "Ya estaba amaneciendo... la moral estaba muy baja por el desgaste.", //221
     "Pase junto a Leo con una fogata apenas... hablando que no teníamos ya a donde ir... podíamos huir... pero nuestros líderes...", //222
-    "necios dijeron que no podían perder Atenas...", //223
-    "Era parte de nosotros... y era nuestro deber protegerla a toda costa...", //224
+    "Necios... dijeron que no podían perder Atenas... Nuestra capital.", //223
+    "Que formaba parte de nosotros... y era nuestro deber protegerla a toda costa...", //224
     "Abandonar la ciudad era considerado traición... y sentencia de muerte...", //225
-    "Algunos hicieron el intento... murieron...", // 236
-    "Y otros nadaron... Para peor el mar estaba violento ese día...", // 237
+    "Algunos hicieron el intento... los ejecutaron...", // 236
+    "Y otros nadaron... Para peor el mar estaba violento esa semana...", // 237
     "Y como te imaginaras... se ahogaron...", // 238
     "No habíamos dormido... Y el sol ya comenzaba a salir... cuando...", // 239
-    "Una gran sombra sobrevoló Atenas... esperamos lo peor… y así sucedió...", // 230
+    "Una gran sombra sobrevoló Atenas... esperamos lo peor... y así sucedió...", // 230
     "Una enorme piedra del tamaño de una casa cayó cerca del templo de la reina... destrozando la mitad de este... fallaron por suerte...", // 231
     "Y eso solo significaba una cosa...", // 232
     "Los persas...... estaban aquí...", // 233
     "En el horizonte... miles de persas estaban llegando del horizonte...", // 234
-    "No solo vimos sus innumerables filas… ", // 235
-    "Traían consigo un Trabuquete del tamaño de una montaña…", // 236
-    "Un arma tan poderosa… que hizo añicos la mitad del gran Templo de la reina…", // 237
-    "Que se decía que era muy resistente…", // 238
-    "Todos tragaron saliva… tuvimos piel de gallina… nuestro miedo se apoderó de nosotros…", // 239
-    "Llegó la batalla decisiva…", // 240
-    "Los persas estaban recargando el trabuquete… esperando las órdenes de iniciar el asedio… ", // 241
-    "Nosotros también cargamos nuestras armas de asedio… gracias a los rebeldes.", // 242
-    "Pero no era suficiente…", // 243
-    "y… a las 7 de la mañana…", // 244
-    "Comenzó el infierno…", // 245
-    "Con las murallas rotas.. los persas tenían vía libre para ir al centro de la capital… barriendo edificios con su juguete…", // 246
-    "Apenas montamos defensas provisionales…", // 247
-    "Ellos iban a acabar con nosotros…", // 248
-    "De un momento a otro ya estábamos peleando con persas…", // 249
-    "Y estábamos en medio de una lluvia de piedras…", // 250
-    "Intercambiamos fuego cada segundo…", // 251
-    "Pero…", // 252
-    "Su trabuquete tenía tal potencia que podía disparar a 1km de distancia…", // 253
-    "No podemos alcanzarla y destruirla por medios convencionales…", // 254
-    "Y nadie tenía tal magia para lanzarle algo o potenciar alguna máquina…", // 255
-    "Solo nos quedaba ver y resistir… mientras su trabuquete destruía de poco en poco nuestras armas de asedio…", // 256
-    "Ya no había esperanzas…", // 257
-    "Y habían pasado ya 3 días de asedio seguido…", // 258
-    "Atenas ya estaba en las últimas…", // 259
-    "Dormimos apenas 2 horas.. o lo intentábamos… Había mucho ruido con el asedio y gritos… sin mencionar el potente olor a sangre…", // 259
-    "Pero un día después… Leo y yo embarcamos a los persas que lograron entrar… Logramos derrotarlos…", // 260
-    "Pero en ese momento justo cuando íbamos a festejar esa pequeña victoria…", // 261
-    "Comenzó una nueva oleada de fuego enemigo", // 262
-    "Nos resguardamos… ya era normal a esas alturas…", // 263
-    "pero… algo no…", // 264
-    "Leo presintió algo…", // 265
-    "Y cuando volteo…", // 266
-    "Había 2 niñas pequeñas escapando del miedo…", // 267
-    "No sabíamos donde estaban sus padres…", // 268
-    "Pero de un momento a otro una piedra derrumbó un edificio cercano…", // 269
-    "Estaban por caerle grandes escombros…", // 270
-    "Y de ahí Leo salió corriendo tras ellas…", // 271
-    "Logró agarrarlas y me las lanzó… las atrape…", // 272
-    "Pero tras ese enorme esfuerzo… y el desgaste", // 273
-    "Vi que su pierna se partió en 2…", // 274
-    "…", // 275
-    "Se cayó al suelo…", // 276
-    "Grite su nombre y trate de alcanzarlo…", // 277
-    "Solo vi su dolor… me miro a los ojos con lágrimas… y me dijo perdóname…", // 278
-    "y solo llegue a ver…", // 279
-    "Como el escombro lo aplastó totalmente…", // 280
-    "Me quede congelada…", // 281
-    "Como pude haber permitido eso me dije varias veces…", // 282
-    "Explote nuevamente en lágrimas…", // 283
-    "Las niñas trataron de calmarme", // 284
-    "No las escuche…", // 285
-    "Mi enojo era tal que apreté a una de ellas…", // 286
-    "Yo… no… no era mi intención…", // 287
-    "La rabia… me cegó… mi odio… crece…", // 288
-    "En ese momento vi la vida de las niñas apagarse…", // 289
-    "Y me quede helada… que estoy haciendo…?", // 290
-    "Ellas no tienen que pagar mis errores…", // 291
-    "ba a terminar con las vidas que mi prometido salvó…", // 292
-    "ba a ser en vano sacrificio…", // 293
-    "En ese momento no lo había notado…", // 294
-    "Pero descubrí una nueva forma de magia…", // 295
-    "El arrebatamiento del alma…", // 296
-    "Solo unos pocos usuarios son capaces de arrebatar el alma de un ser y potencial su magia misma…", // 297
-    "Tal magia se potencia con los sentimientos… si tienes muchos… su poder es exponencial…", // 298
-    " si la persona tiene pocos o es incapaz de sentir… ya no será capaz de usar magia…", // 299
-    "Y pasó lo primero…", // 300
-    "Estallé y libera una enorme energía… saque a volar todo lo que estaba a mi alrededor…", // 301
-    "Experimente un poder… tan fuerte que quemaba mis venas… absorbí el alma de esas 2 niñas…", // 302
-    "Mi armadura… arma… apariencia… ojos… cambiaron… todo…", // 303
+    "No solo vimos sus innumerables filas... ", // 235
+    "Traían consigo un Trabuquete del tamaño de una montaña...", // 236
+    "Un arma tan poderosa... que hizo añicos la mitad del gran Templo de la reina...", // 237
+    "Que se decía que era muy resistente...", // 238
+    "Todos tragaron saliva… tuvimos piel de gallina… nuestro miedo se apoderó de nosotros...", // 239
+    "Llegó la batalla decisiva...", // 240
+    "Los persas estaban recargando el trabuquete… esperando las órdenes de iniciar el asedio...", // 241
+    "Nosotros también cargamos nuestras armas de asedio... gracias a los rebeldes.", // 242
+    "Pero no era suficiente...", // 243
+    "y... a las 7 de la mañana...", // 244
+    "Comenzó el infierno...", // 245
+    "Con las murallas rotas.. los persas tenían vía libre para ir al centro de la capital... barriendo edificios con su juguete...", // 246
+    "Apenas montamos defensas provisionales...", // 247
+    "Ellos iban a acabar con nosotros...", // 248
+    "De un momento a otro ya estábamos peleando con persas...", // 249
+    "Y estábamos en medio de una lluvia de piedras...", // 250
+    "Intercambiamos fuego cada segundo...", // 251
+    "Pero...", // 252
+    "Su trabuquete tenía tal potencia que podía disparar a 1km de distancia...", // 253
+    "No podemos alcanzarla y destruirla por medios convencionales...", // 254
+    "Y nadie tenía tal magia para lanzarle algo o potenciar alguna máquina…...", // 255
+    "Solo nos quedaba ver y resistir... mientras su trabuquete destruía de poco en poco nuestras armas de asedio...", // 256
+    "Ya no había esperanzas...", // 257
+    "Y habían pasado ya 3 días de asedio seguido...", // 258
+    "Atenas ya estaba en las últimas...", // 259
+    "Dormimos apenas 2 horas.. o lo intentábamos… Había mucho ruido con el asedio y gritos... sin mencionar el potente olor a sangre...", // 259
+    "Pero un día después… Leo y yo embarcamos a los persas que lograron entrar… Logramos derrotarlos...", // 260
+    "Pero en ese momento justo cuando íbamos a festejar esa pequeña victoria...", // 261
+    "Comenzó una nueva oleada de fuego enemigo.", // 262
+    "Nos resguardamos... ya era normal a esas alturas...", // 263
+    "pero... algo no...", // 264
+    "Leo tvo un mal presagio...", // 265
+    "Y cuando volteo...", // 266
+    "Había 2 niñas pequeñas escapando del miedo...", // 267
+    "No sabíamos donde estaban sus padres...", // 268
+    "Pero de un momento a otro una piedra derrumbó un edificio cercano...", // 269
+    "Estaban por caerle grandes escombros...", // 270
+    "Y de ahí Leo salió corriendo tras ellas...", // 271
+    "Logró agarrarlas y me las lanzó… las atrape...", // 272
+    "Pero tras ese enorme esfuerzo… y el desgaste.", // 273
+    "Vi que su pierna... se partió en 2...", // 274
+    ".....", // 275
+    "Se cayó al suelo...", // 276
+    "Grite su nombre y trate de alcanzarlo...", // 277
+    "Solo vi su dolor... me miro a los ojos con lágrimas... y me dijo perdóname...", // 278
+    "y solo llegue a ver...", // 279
+    "Como el escombro lo aplastó totalmente...", // 280
+    "Me quede congelada...", // 281
+    "Como pude haber permitido eso me dije varias veces...", // 282
+    "Explote nuevamente en lágrimas...", // 283
+    "Las niñas trataron de calmarme.", // 284
+    "No las escuche...", // 285
+    "Mi enojo era tal que apreté a una de ellas...", // 286
+    "Yo... no... no era mi intención...", // 287
+    "La rabia... me cegó… mi odio… crece...", // 288
+    "En ese momento vi la vida de las niñas apagarse...", // 289
+    "Y me quede helada… que estoy haciendo...?", // 290
+    "Ellas no tienen que pagar mis errores...", // 291
+    "Iba a terminar con las vidas que mi prometido salvó...", // 292
+    "Su... su sacrificio iba a ser en vano...", // 293
+    "En ese momento no lo había notado...", // 294
+    "Pero descubrí una nueva forma de magia...", // 295
+    "El arrebatamiento del alma.", // 296
+    "Solo unos pocos usuarios son capaces de arrebatar el alma de un ser y potencial su propia magia.", // 297
+    "Tal magia se potencia con los sentimientos... si tienes muchos… su poder es exponencial...", // 298
+    "Si la persona tiene pocos o es incapaz de sentir... ya no será capaz de usar magia...", // 299
+    "Y pasó lo primero...", // 300
+    "Estallé y libera una enorme energía… saque a volar todo lo que estaba a mi alrededor...", // 301
+    "Experimente un poder... tan fuerte que quemaba mis venas... absorbí el alma de esas 2 niñas...", // 302
+    "Mi armadura... arma... apariencia... ojos... cambiaron... todo...", // 303
     "Con esa nueva transformación.", // 304
-    "Me entró una idea…", // 305
-    "No sabía que pasaba pero lo intente…", // 306
-    "Me dirigí a las niñas… no respiraban…", // 307
-    "Así que me concentre y rece a Zeus para ver si mi idea funcionaba…", // 308
-    "Si puedo arrebatarme el alma… ¿Puedo hacer lo contrario? me dije…", // 309
-    "Así que me tomo varios minutos concentrandome…", // 310
-    "No podía llorar por la muerte de mi prometido ahora…", // 311
-    "Pasaron varios minutos hasta que… ", // 312
-    "Tosieron… estaban débiles… pero con vida…", // 313
-    "Apenas podían moverse…", // 314
-    "Así que tomé una decisión difícil…", // 315
+    "Me entró una idea...", // 305
+    "No sabía que pasaba pero lo intente...", // 306
+    "Me dirigí a las niñas… no respiraban...", // 307
+    "Así que me concentre y rece a Zeus para ver si mi idea funcionaba...", // 308
+    "Si puedo arrebatarme el alma… ¿Puedo hacer lo contrario? me dije...", // 309
+    "Así que me tomo varios minutos concentrandome...", // 310
+    "No podía llorar por la muerte de mi prometido ahora...", // 311
+    "Pasaron varios minutos hasta que...", // 312
+    "Tosieron… estaban débiles… pero con vida...", // 313
+    "Apenas podían moverse...", // 314
+    "Así que tomé una decisión difícil...", // 315
     "Tomar prestadas sus almas.", // 316
-    "Tenía poder pero… a costa de otras vidas…", // 317
-    "Así que empuñe el arma y no perdí el tiempo", // 318
-    "Estaba en contrarreloj…", // 319
-    "Terminaré esta guerra de una vez por todas…", // 320
-    "Ya no estaba agotada… me sentía liviana… experimente…", // 321
-    "Volvieron a caer piedras… pero use mi magia… con un enorme esfuerzo logré redirigirlas… acabando con medio batallón a la lejanía.", // 322
+    "Tenía poder pero… a costa de otras vidas...", // 317
+    "Así que empuñe el arma y no perdí el tiempo.", // 318
+    "Estaba en contrarreloj...", // 319
+    "Terminaré esta guerra de una vez por todas...", // 320
+    "Ya no estaba agotada... me sentía liviana… experimente...", // 321
+    "Volvieron a caer piedras... pero use mi magia… con un enorme esfuerzo logré redirigirlas... acabando con medio batallón a la lejanía.", // 322
     "Era un progreso.", // 323
-    "No perdí el tiempo y fui directo al frente de la guerra…", // 324
+    "No perdí el tiempo y fui directo al frente de la guerra...", // 324
     "Yo cambie el rumbo de la guerra.", // 325
-    "En cuestión de horas frene su avance… empezaron a retroceder…", // 326
-    "Lidere las tropas y logre subir su moral…", // 327
-    "Nadie sabía quién era… pero estaban felices de estar en su bando… y los persas… aterrados…", // 328
-    "La gota que derramó el vaso fue cuando concentré todo mi mana en una roca del trabuquete que tomó la decisión de apuntarme…", // 329
-    "Grave error…", // 330
-    "para ellos…", // 331
-    "Con odio les redirige la piedra… y logre atinarle a su juguete…", // 332
-    "Se me grabó su cara de horror cuando vieron que su arma estrella estaba en ruinas…", // 333
-    "La retirada fue pronta…", // 334
-    "Ganamos…", // 335
-    "Llegue a ver el atardecer con sangre en mis manos… feliz de poner fin a esto…", // 336
-    "pero… estaba vacía…", // 337
-    "Mientras me idolatraban…", // 338
-    "Yo solo caí de espaldas… me desplome y llore… alce mi reino a la victoria.. pero con una promesa rota…", // 339
-    "No era tiempo para llorar… tenía asuntos pendientes…", // 340
-    "Fui directo donde magnus… y lo asesiné a sangre fría…", // 341
-    "Evite que continuara la guerra… pero fue una pésima decisión como heroína…", // 342
-    "En un solo día entre en los libros de historia… interferí en 2 eventos históricos que tuvieron que terminar de maneras diferentes…", // 343
-    "Fui declarada Héroe de guerra de esa forma… pese a que no sabían quién era… y hasta el momento nadie sabe de mi paradero… claro en esa forma.", // 344
-    "Atenas siguió soberana y con la Dinastia Aira vencedora…", // 345
+    "En cuestión de horas frene su avance... empezaron a retroceder...", // 326
+    "Lidere las tropas y logre subir su moral...", // 327
+    "Nadie sabía quién era… pero estaban felices de estar en su bando... y los persas… aterrados...", // 328
+    "La gota que derramó el vaso fue cuando concentré todo mi mana en una roca del trabuquete que tomó la decisión de apuntarme...", // 329
+    "Grave error...", // 330
+    "para ellos...", // 331
+    "Con odio les redirige la piedra… y logre atinarle a su juguete...", // 332
+    "Se me grabó su cara de horror cuando vieron que su arma estrella estaba en ruinas...", // 333
+    "La retirada fue pronta...", // 334
+    "Ganamos...", // 335
+    "Llegue a ver el atardecer con sangre en mis manos... feliz de poner fin a esto...", // 336
+    "pero… estaba vacía...", // 337
+    "Mientras me idolatraban...", // 338
+    "Yo solo caí de espaldas... me desplome y llore... alce mi reino a la victoria... pero con una promesa rota...", // 339
+    "No era tiempo para llorar... tenía asuntos pendientes...", // 340
+    "Fui directo donde magnus... y lo asesiné a sangre fría...", // 341
+    "Evite que continuara la guerra… pero fue una pésima decisión como heroína...", // 342
+    "En un solo día entre en los libros de historia... interferí en 2 eventos históricos que tuvieron que terminar de maneras diferentes.", // 343
+    "Fui declarada Héroe de guerra de esa forma... pese a que no sabían quién era... y hasta el momento nadie sabe de mi paradero... claro en esa forma.", // 344
+    "Atenas siguió soberana y con la Dinastia Aira vencedora...", // 345
     "La reina y otros pocos compañeros que sobrevivieron tomamos puestos importantes en el ejército.", // 346
-    "De hecho tú actual general es un veterano también. ", // 347
+    "De hecho tú actual general es un veterano también.", // 347
     "Pero tiene un puesto más alto que él mío al ser cercano a la familia real.", // 348
-    "Pero al final solo me importa una cosa…", // 349
-    "Regrese con las niñas… con hambre… frío… y sed…", // 350
-    "Les regrese la totalidad de sus almas… o eso creía…", // 351
-    "Perdí mi transformación… pero es lo de menos…", // 352
-    "Les di abrigo… comida y agua… iba a llevarlas para que las sanarán…", // 353
-    "Pero una de ellas… estaba más débil que la otra…", // 354
-    "No controle bien mi poder… y gaste más el alma de una que de la otra…", // 355
-    "El precio que pagué fue caro…", // 356
-    "La abrace y entre lágrimas le implore perdón…", // 357
-    "El sacrificio de Leo… fue en vano…", // 358
-    "Ella… solo miro… y me llamó madre…", // 359
-    "Están agradecidas por ser la única que se preocupó por ellas…", // 360
-    "Ambas me calmaron… la hermana mayor no tuvo ningún rencor conmigo…", // 361
-    "Era muy madura… sabía que estábamos en una situación crítica…", // 362
-    "Pero no contuvo las lágrimas de ver la vida de su hermana menor apagándose…", // 363
-    "Se dieron un último abrazo… ", // 364
-    "Y… falleció… entre los brazos de su hermana…", // 365
-    "…", // 366
-    "Esa misma noche la enterramos afuera de Atenas…", // 367
-    "Se me acercó y me dijo…", // 368
-    "Madre… no te preocupes… diste tu mejor esfuerzo… te amo....", // 369
-    "No contuve las lágrimas y la abrace… es como… si fuese la hija que Leo me dejó…", // 370
-    "También en ese momento me entregó algo…", // 371
-    "Era una pequeña fracción del alma de su hermana…", // 372
-    "Me mencionó que antes de fallecer… su hermana le dijo que cuando muera no dejen ir su alma… que desearía estar con ellos.", // 373
-    "Me menciono que si se desata nuevamente una crisis similar…", // 374
-    "Que hiciera uso de su alma… y que otros niños no pasen por lo que ellas y yo pasaron…", // 375
-    "Acepte…", // 376
-    "Y bueno…", // 377
-    "*abre su puño y le muestra su alma*", // 378
-    "Tengo acceso nuevamente a tal poder… pero… no quisiera usarlo nunca…", // 379
-    "Sería como usar a mi hija como arma…", // 380
-    "*cierra el puño*", // 381
-    "Así que para mí… aún es como si la mantuviese con vida…", // 382
-    "Y en cambio su hermana… la lleve a un orfanato… No permití que viviera lo mismo que yo…", // 383
-    "Y actualmente dirige su propio orfanato… y es una gran madre para muchos niños…", // 384
-    "Incluso aprendió a hornear deliciosa comida…", // 385
+    "Pero al final solo me importa una cosa...", // 349
+    "Regrese con las niñas... con hambre... frío... y sed...", // 350
+    "Les regrese la totalidad de sus almas... o eso creía...", // 351
+    "Perdí mi transformación... pero es lo de menos...", // 352
+    "Les di abrigo... comida y agua... iba a llevarlas para que las sanarán...", // 353
+    "Pero una de ellas... estaba más débil que la otra...", // 354
+    "No controle bien mi poder... y gaste más el alma de una que de la otra...", // 355
+    "El precio que pagué fue caro...", // 356
+    "La abrace y entre lágrimas le implore perdón...", // 357
+    "El sacrificio de Leo... fue en vano...", // 358
+    "Ella… solo miro... y me llamó madre...", // 359
+    "Están agradecidas por ser la única que se preocupó por ellas...", // 360
+    "Ambas me calmaron… la hermana mayor no tuvo ningún rencor conmigo...", // 361
+    "Era muy madura... sabía que estábamos en una situación crítica...", // 362
+    "Pero no contuvo las lágrimas de ver la vida de su hermana menor apagándose...", // 363
+    "Se dieron un último abrazo...", // 364
+    "Y... falleció... entre los brazos de su hermana...", // 365
+    ".....", // 366
+    "Esa misma noche la enterramos afuera de Atenas...", // 367
+    "Se me acercó y me dijo...", // 368
+    "Madre... no te preocupes... diste tu mejor esfuerzo… te amo...", // 369
+    "No contuve las lágrimas y la abrace... es com... si fuese la hija que Leo me dejó...", // 370
+    "También en ese momento me entregó algo...", // 371
+    "Era una pequeña fracción del alma de su hermana...", // 372
+    "Me mencionó que antes de fallecer su hermana... le dijo que cuando muera no dejen ir su alma... que desearía estar con ellos.", // 373
+    "Y que si se desata nuevamente una crisis similar...", // 374
+    "Que almenos ella me acompañaria... indirectamente me presto un poder devastador... y yo... podre evitar que otros niños pasen por algo similar a lo que vivimos...", // 375
+    "Acepte...", // 376
+    "Y bueno...", // 377
+    "abre su puño y le muestra su alma", // 378
+    "Tengo acceso nuevamente a tal poder... pero... no quisiera usarlo nunca...", // 379
+    "Sería como usar a mi hija como arma...", // 380
+    "Cierra el puño", // 381
+    "Así que para mí... aún es como si la mantuviese con vida...", // 382
+    "Y en cambio su hermana... la lleve a un orfanato… No permití que viviera lo mismo que yo...", // 383
+    "Y actualmente dirige su propio orfanato... y es una gran madre para muchos niños...", // 384
+    "Incluso aprendió a hornear deliciosa comida...", // 385
     "Te digo que la comida que estabas comiendo tú y ellos.", // 386
     "La preparó ella para ustedes, hecha con todo su amor.", // 387
-    "Así que no la desperdicies si no quieres quedarte sin cabeza eh…", // 388
-    "*se seca las lágrimas*", // 389
-    "Te agradezco mucho que me haya desahogado contigo…", // 390
-    "Enserio gracias…", // 391
+    "Así que no la desperdicies si no quieres quedarte sin cabeza he...", // 388
+    "se seca las lágrimas", // 389
+    "Te agradezco mucho que me haya desahogado contigo...", // 390
+    "Enserio gracias...", // 391
     "Y dime...", // 392
     "¿Te gustó mi historia?", // 393
     "Lo siento si te hice perder el tiempo...", // 394
@@ -921,8 +922,13 @@ system("cls");
             cout << "\033[0m";
         }
 
-        cout << "Que prosigue?\n1. Pose de victoria\n2. Destruir" << endl;
-        cin >> option_kill;
+            while (option_kill != 1 && option_kill != 2){
+                cout << "Que prosigue?\n1. Pose de victoria\n2. Destruir" << endl;
+                cin >> option_kill;
+            if (option_kill < 1 || option_kill > 2){
+                DefaultError();
+            }
+        }
 
     system("cls");
         switch (option_kill){
@@ -991,8 +997,13 @@ system("cls");
             system("cls");
         cout << "\033[0m";
 
-        cout << "Vas ir a verla?\n1. Si\n2. No\n";
-        cin >> option_view;
+        while (option_view != 1 && option_view != 2){
+            cout << "Vas ir a verla?\n1. Si\n2. No\n";
+            cin >> option_view;
+            if (option_view < 1 || option_view > 2){
+                DefaultError();
+            }
+        }
 
         switch (option_view){
         case 1:
@@ -1020,8 +1031,13 @@ system("cls");
         }
 
         if (!CancelDialogue){
+            while (option_Naika != 1 && option_Naika != 2){
             cout << "1. Nada\n2. ¿Sucede algo?\n";
             cin >> option_Naika;
+            if (option_Naika < 1 || option_Naika > 2){
+                DefaultError();
+            }
+        }
 
         system("cls");
             switch (option_Naika){
@@ -1051,8 +1067,14 @@ system("cls");
                 cin >> x;
             system("cls");
             }
+            
+            while (option_consolation != 1 && option_consolation != 2){
             cout << "Consolarla?\n1. Si\n2. No\n";
             cin >> option_consolation;
+            if (option_consolation < 1 || option_consolation > 2){
+                DefaultError();
+            }
+        }
 
         system("cls");
             switch (option_consolation){
@@ -1060,6 +1082,7 @@ system("cls");
                 for (int i = 75; i < 398; i++){
                 cout << ( i < 78 ? "\033[3m":"\033[31mNaika: \033[0m");
                 PrintWithPause_Tu(NaikaPostBattle[i], 30);
+                    if (i == 86) cout << "\033[34m" << p.PlayerName << "\033[0m";
                 LongPause_Tu(1000);
                 cout << endl;
                 cin >> x;
