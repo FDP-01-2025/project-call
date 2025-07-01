@@ -6,13 +6,13 @@ EliteS EliteS_Data(){
     struct EliteS S;
     S.EliteSName = "\033[31mElite Slime\033[0m";
     S.Level = 5;
-    S.HP = 100;
-    S.MAX_HP = 100;
+    S.HP = 120;
+    S.MAX_HP = 120;
     S.ATTACK = 15;
     S.CRITICAL_ATTACK = S.ATTACK*2;
     S.DEFENSE = 0;
-    S.MANA = 50;
-    S.MAX_MANA = 50;
+    S.MANA = 100;
+    S.MAX_MANA = 100;
     S.WEAPON = "Espada de Baba";
     S.ARMOR = "Cuerpo de Baba";
     return S;

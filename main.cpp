@@ -11,6 +11,8 @@
 #include "src/Battles/SlimeBattle/Sbattle.h"
 #include "src/Data/TrollData/Troll.h"
 #include "src/Battles/TrollBattle/TrollFight.h"
+#include "src/Data/GolemData/Golem.h"
+#include "src/Battles/GolemBattle/GolemFight.h"
 
 using namespace std;
 
@@ -26,8 +28,9 @@ int main(){
     cout << "Tienes un momento para ver tus estadisticas iniciales";
     Naika Na = Naika_Data();
     NaikaDummy Ndum = Dummy_Data();
-    Troll Tr = Troll_Data();
     EliteS S = EliteS_Data();
+    Troll Tr = Troll_Data();
+    Golem Gol = Golem_Data();
 
     cout << endl;
     cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
@@ -36,9 +39,11 @@ int main(){
 system("cls");
     // Prologue();
     // Training(p);
-    // utorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
+    // Tutorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
 
     EliteSBattle(p, S);
     // TrollBattle(p, Tr); // batalla futura
+    // GolemBattle(p, Gol);
+
     return 0;
 }

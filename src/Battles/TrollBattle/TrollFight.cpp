@@ -48,22 +48,22 @@ void PlayerMagic(Player& p, Troll& troll, bool& Return) {
 
         switch (opcionPlayerMagic) {
         case 1:
-            system("cls");
-            if (p.MANA < 30) {
+            Clear();
+            if (p.MANA < p.MANACOST_AT) {
                 cout << "No cuentas con el \033[34mMANA\033[0m suficiente "
                     << "\033[31m" << p.MANA << "\033[0m/" << p.MAX_MANA << endl;
             } else {
                 cout << "Usaste: " << p.MagicDefault << endl;
                 Sleep(1000);
                 cout << "El viento daño emocionalmente a " << troll.TrollName << endl;
-                p.MANA -= 30;
-                troll.HP -= 20;
-                cout << troll.TrollName << " recibió 20 de daño!" << endl;
+                p.MANA -= p.MANACOST_AT;
+                troll.HP -= p.MAGIC_ATTACK;
+                cout << troll.TrollName << " recibió " << p.MAGIC_ATTACK << " de daño!" << endl;
             }
             break;
         case 2:
         Return = true;
-            system("cls");
+            Clear();
             break;
         default:
             DefaultError();
@@ -75,53 +75,53 @@ void PlayerMagic(Player& p, Troll& troll, bool& Return) {
         cout << "2. RETURN" << endl;
         cin >> opcionPlayerMagic;
 
-        system("cls");
+        Clear();
         switch (opcionPlayerMagic) {
         case 1:
-            if (p.MANA < 50) {
+            if (p.MANA < p.MANACOST_HE) {
                 cout << "No cuentas con el \033[34mMANA\033[0m suficiente "
                     << "\033[31m" << p.MANA << "\033[0m/" << p.MAX_MANA << endl;
             } else {
                 int HPbefore = p.HP; // para calcular solo la vida curada
                 int opcion_heal;
-                int HPtemp = p.HP + 20;
+                int HPtemp = p.HP + p.HEALTH_MAGIC;
 
                 if (HPtemp > p.MAX_HP) {
                     cout << "\033[31mDANGER:\033[0m Si te curas ahora desperdicias parte o la totalidad del hechizo.\nProceder?\n1. Si\n2. No\n";
                     cin >> opcion_heal;
 
-                    system("cls");
+                    Clear();
                     switch (opcion_heal) {
                     case 1:
-                        p.HP = min(p.HP + 20, p.MAX_HP);
-                        p.MANA -= 50;
+                        p.HP = min(p.HP + p.HEALTH_MAGIC, p.MAX_HP);
+                        p.MANA -= p.MANACOST_HE;
                         cout << "\033[34m" << p.PlayerName << "\033[0m" << " se curó: +" << p.HP - HPbefore << " HP" << endl;
                         break;
                     case 2:
-                        system("cls");
+                        Clear();
                         break;
                     default:
-                        system("cls");
+                        Clear();
                         cout << "Opción de comando inválida" << endl;
                         Sleep(1000); cout << endl;
-                        system("cls");
+                        Clear();
                         break;
                     }
                 } else {
-                    p.HP += 20;
-                    p.MANA -= 50;
-                    cout << "\033[34m" << p.PlayerName << "\033[0m" << " se curó, ++" << p.HP - HPbefore << " HP" << endl;
+                    p.HP += p.HEALTH_MAGIC;
+                    p.MANA -= p.MANACOST_HE;
+                    cout << "\033[34m" << p.PlayerName << "\033[0m" << " se curó, +" << p.HP - HPbefore << " HP" << endl;
+                    }
                 }
-            }
             break;
         case 2:
-            system("cls");
+            Clear();
             break;
         default:
-            system("cls");
+            Clear();
             cout << "Opción de comando inválida" << endl;
             Sleep(1000); cout << endl;
-            system("cls");
+            Clear();
             break;
         }
     }
@@ -225,7 +225,7 @@ void TrollBattle(Player& p, Troll& Tr){
         }
         cin >> option;
 
-    system("cls");
+    Clear();
         switch (option) {
             case 1: // ATTACK
                 cout << "1. " << Tr.TrollName << " HP: " << Tr.HP << "/" << Tr.MAX_HP << endl;
@@ -233,7 +233,7 @@ void TrollBattle(Player& p, Troll& Tr){
                 cin >> option_attack;
                 switch (option_attack){
                     case 1:
-                    system("cls");
+                    Clear();
                         PlayerAttackTroll(p, Tr);
                         cout << endl;
                         TrollAttackPlayer(p, Tr);
@@ -241,7 +241,7 @@ void TrollBattle(Player& p, Troll& Tr){
                         break;
                     case 2:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         break;
                     default:
                         DefaultError();
@@ -253,7 +253,7 @@ void TrollBattle(Player& p, Troll& Tr){
             case 2: // MAGIC
         RegMana = false;
             if (p.MagicDefault != p.Magic2){ // si te curas no te atacara
-                system("cls");
+                Clear();
                 PlayerMagic(p, Tr, Return);
                 cout << endl;
                 if (!Return) {
@@ -262,42 +262,42 @@ void TrollBattle(Player& p, Troll& Tr){
                     Return = false;
                 }
             } else {
-                system("cls");
+                Clear();
                 PlayerMagic(p, Tr, Return);
                 cout << endl;
             }
             break;
 
             case 3: // ACTION
-                system("cls");
+                Clear();
                 cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. PROVOCAR\n5. PLATICAR\n6. PACIFICAR\n7. DEFEND\n8. RETURN\n";
                 cin >> option_action;
                 switch (option_action) {
                     case 1:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         ShowStats(p);
                         cin.ignore();
                         cin.get();
-                        system("cls");
+                        Clear();
                         break;
                     case 2:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         ShowStatsTroll(Tr);
                         cin.ignore();
                         cin.get();
-                        system("cls");
+                        Clear();
                         break;
                     case 3:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         cout << "Intercambiar magia actual:\n";
                         cout << "1. Magia Vendaval\n2. Magia curacion\n3. RETURN\n\n";
                         cin >> option_exmagic;
                         switch (option_exmagic) {
                             case 1:
-                                system("cls");
+                                Clear();
                                 if (p.MagicDefault == p.Magic1) {
                                     cout << "Ya tienes equipada esta magia" << endl;
                                 } else {
@@ -308,7 +308,7 @@ void TrollBattle(Player& p, Troll& Tr){
                                 cout << endl;
                                 break;
                             case 2:
-                                system("cls");
+                                Clear();
                                 if (p.MagicDefault == p.Magic2) {
                                     cout << "Ya tienes equipada esta magia" << endl;
                                 } else {
@@ -320,7 +320,7 @@ void TrollBattle(Player& p, Troll& Tr){
                                 break;
                             case 3:
                                 RegMana = false;
-                                system("cls");
+                                Clear();
                                 break;
                             default:
                                 DefaultError();
@@ -330,7 +330,7 @@ void TrollBattle(Player& p, Troll& Tr){
                         break;
 
                     case 4: // PROVOCAR / RAGE
-                        system("cls");
+                        Clear();
                         if (!RageTroll) {
                             cout << "Te burlaste de la patética apariencia de " << Tr.TrollName << endl;
                             cout << "...Provocaste al enemigo\n \n";
@@ -355,7 +355,7 @@ void TrollBattle(Player& p, Troll& Tr){
                         break;
 
                     case 5: // HABLAR
-                        system("cls");
+                        Clear();
                         cout << "Intentas hablar con El " << Tr.TrollName << endl;
                         Sleep(1500);
                         if (RNGTalk <= 20) {
@@ -377,7 +377,7 @@ void TrollBattle(Player& p, Troll& Tr){
                         break;
 
                     case 6: // PACIFICAR
-                        system("cls");
+                        Clear();
                         cout << "Intentas pacificar a " << Tr.TrollName << "..." << endl;
                         Sleep(1000);
 
@@ -411,7 +411,7 @@ void TrollBattle(Player& p, Troll& Tr){
 
                     case 7: // DEFEND
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         cout << "Te defiendes del próximo ataque..." << endl;
                         cout << "Tu defensa se multiplica x3 y recuperas +30 de MANA" << endl << endl;
                         p.MANA = min(p.MANA + 30, p.MAX_MANA);
@@ -422,7 +422,7 @@ void TrollBattle(Player& p, Troll& Tr){
 
                     case 8:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         break;
 
                     default:
@@ -461,11 +461,11 @@ void TrollBattle(Player& p, Troll& Tr){
             cin >> option_GameOver;
             switch (option_GameOver) {
                 case 1:
-                    system("cls");
+                    Clear();
                     cout << "Retornando al último checkpoint...\n" << endl;
                     Sleep(1000);
                     Checkpoint(p, Tr, PlayerHp, PlayerMana, TrollHp, TrollMana);
-                    system("cls");
+                    Clear();
                     break;
                 case 2:
                     cout << "Adiós... " << p.PlayerName << " ...idiota" << endl;

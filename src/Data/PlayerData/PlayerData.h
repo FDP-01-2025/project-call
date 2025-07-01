@@ -10,6 +10,10 @@ struct Player {
     int MAX_HP;
     int ATTACK;
     int CRITICAL_ATTACK;
+    int MAGIC_ATTACK;
+    int HEALTH_MAGIC;
+    int MANACOST_AT;
+    int MANACOST_HE;
     int DEFENSE;
     int MANA;
     int MAX_MANA;

@@ -1,14 +1,32 @@
 #include <iostream>
 #include <windows.h>
 #include <algorithm>
+#include <chrono>
+#include <thread>
 #include "BattleUtils.h"
 
 using namespace std;
 
+void SleepMS(int milliseconds){
+#ifdef _WIN32
+    Sleep(milliseconds); // detecta si es windows o Linux/Mac 
+#else
+    std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+#endif
+}
+
+void Clear(){
+#ifdef _WIN32 // detecta si es windows o Linux/Mac
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
 void DefaultError(){
     system("cls");
     cout << "Opcion de comando invalida" << endl;
-    Sleep(1000); cout << endl;
+    Sleep(1500); cout << endl;
     system("cls");
 }
 

@@ -5,6 +5,7 @@
 #include "Data/PlayerData/PlayerData.h"
 #include "Data/EliteSData/EliteSlime.h"
 #include "BattleUtils/BattleUtils.h"
+#include "Sbattle.h"
 
 using namespace std;
 
@@ -47,20 +48,20 @@ void PlayerMagic(Player& p, EliteS& S){
 
     switch (opcionPlayerMagic){
     case 1:
-    system("cls");
-        if (p.MANA < 30){
+    Clear();
+        if (p.MANA < p.MANACOST_AT){
             cout << "No cuentas con el \033[34mMANA\033[0m suficiente " << "\033[31m" << p.MANA << "\033[0m/" << p.MAX_MANA << endl;
             } else {
             cout << "Usaste: " << p.MagicDefault << endl;
             Sleep(1000);
             cout << "El viento dano emocionalmente a " << S.EliteSName << endl;
-            p.MANA -= 30;
-            S.HP -= 20;
-            cout << S.EliteSName << " Recibio 20 de dano!" << endl;
+            p.MANA -= p.MANACOST_AT;
+            S.HP -= p.MAGIC_ATTACK;
+            cout << S.EliteSName << " Recibio " << p.MAGIC_ATTACK << " de daño magico!" << endl;
             }
         break;
     case 2:
-        system("cls");
+        Clear();
         break;
     default:
         DefaultError();
@@ -71,53 +72,52 @@ void PlayerMagic(Player& p, EliteS& S){
         cout << "2. RETURN" << endl;
         cin >> opcionPlayerMagic;
 
-    system("cls");
+    Clear();
         switch (opcionPlayerMagic){
         case 1:
-            if (p.MANA < 50){
+            if (p.MANA < p.MANACOST_HE){
                 cout << "No cuentas con el \033[34mMANA\033[0m suficiente " << "\033[31m" << p.MANA << "\033[0m/" << p.MAX_MANA << endl;
             } else {
-                int HPbefore = p.HP; // variable para calcular solo la vida curada, no el exceso
+                int HPbefore = p.HP; // variables temporales
                 int opcion_heal;
-                int HPtemp = p.HP; // variable temporal para saber si la vida sobrepasa la vida maxima
-                HPtemp += 20;
+                int HPtemp = p.HP + p.HEALTH_MAGIC;
 
                 if (HPtemp > p.MAX_HP){
                     cout << "\033[31mDANGER:\033[0m Si te curas ahora desperdicias parte o la totalidad del hechizo.\nProceder?\n1. Si\n2. No\n";
                     cin >> opcion_heal;
 
-                system("cls");
+                Clear();
                     switch (opcion_heal){
                     case 1:
-                        p.HP = min(p.HP + 20, p.MAX_HP);
-                        p.MANA -= 50;
-                        cout << "\033[34m" << p.PlayerName << "\033[0m" << " se curo: +" << p.HP - HPbefore << " HP";
+                        p.HP = min(p.HP + p.HEALTH_MAGIC, p.MAX_HP);
+                        p.MANA -= p.MANACOST_HE;
+                        cout << "\033[34m" << p.PlayerName << "\033[0m" << " se curo: +" << p.HP - HPbefore << " HP" << endl;
                         break;
                     case 2: // RETURN
-                        system("cls");
+                        Clear();
                         break;
                     default:
-                        system("cls");
+                        Clear();
                         cout << "Opcion de comando invalida" << endl;
                         Sleep(1000); cout << endl;
-                        system("cls");
+                        Clear();
                         break;
                     }
                 } else {
-                    p.HP += 20;
-                    p.MANA -= 50;
-                    cout << "\033[34m" << p.PlayerName << "\033[0m" << " se curo, +20 HP";
+                    p.HP += p.HEALTH_MAGIC;
+                    p.MANA -= p.MANACOST_HE;
+                    cout << "\033[34m" << p.PlayerName << "\033[0m" << " se curo +" << p.HEALTH_MAGIC << " HP" << endl;
                 }
             }
             break;
         case 2:
-            system("cls");
+            Clear();
             break;
         default:
-            system("cls");
+            Clear();
             cout << "Opcion de comando invalida" << endl;
             Sleep(1000); cout << endl;
-            system("cls");
+            Clear();
             break;
         }
     }
@@ -127,10 +127,10 @@ void PlayerAttackEliteS(Player& p, EliteS& S){
     int RNGPlayer = rand() % 101; // RNG 0-100 (se le agregua el 101 porque si es 100, seria 0-99)
 
     if (RNGPlayer < 25){
-        system("cls");
+        Clear();
         cout << "Fallaste el ataque!" << endl;
     } else if (RNGPlayer < 50){
-        system("cls");
+        Clear();
         if (S.DEFENSE > p.CRITICAL_ATTACK){
             cout << "No lograste penetrar la defensa enemiga!" << endl;
         } else {
@@ -139,7 +139,7 @@ void PlayerAttackEliteS(Player& p, EliteS& S){
         }
         cout << S.EliteSName << " Recibio: " << p.CRITICAL_ATTACK - S.DEFENSE << " de dano critico!" << endl;
     } else {
-        system("cls");
+        Clear();
         cout << "Ataque exitoso" << endl;
         if (S.DEFENSE > p.ATTACK){
             cout << "No lograste penetrar la defensa enemiga!" << endl;
@@ -150,7 +150,7 @@ void PlayerAttackEliteS(Player& p, EliteS& S){
     }
 }
 
-void EliteSAttackPlayer(Player& p, EliteS& S){
+void SlimeAttack(Player& p, EliteS& S){
     int RNGEliteS = rand() % 101; // RNG 0-100 (se le agregua el 101 porque si es 100, seria 0-99)
 
     if (RNGEliteS < 25){
@@ -174,19 +174,40 @@ void EliteSAttackPlayer(Player& p, EliteS& S){
     }
 }
 
+void EliteSAttackPlayer(Player& p, EliteS& S){
+    int RNGHealthAttack = rand() % 101;
+
+    if (S.HP <= S.MAX_HP * 0.75){ // se curara si tiene un 75% de vida o menos
+        if (RNGHealthAttack <= 25){ // probabilidad del 25 % de curarse
+            if (S.MANA != 0){ // si el mana queda a 0 atacar es del 100%
+                cout << S.EliteSName << " vio su HP bajar, y opto por regenerarse en este turno." << endl;
+                cout << S.EliteSName << " Se curo +20 Hp" << endl;
+                S.MANA -= S.MANA * 0.25;
+                S.HP = min(S.HP += 20, S.MAX_HP);
+            } else { // sin mana
+                SlimeAttack(p, S);
+            }
+        } else { // 75% de atacar
+            SlimeAttack(p, S);
+        }
+    } else {
+        SlimeAttack(p, S);
+    }
+}
+
 string TalkEliteS[] = { // agregar conversacion con el slime de elite
-    "Intentas sacarle platica al slime de Elite", // 0
-    "\033[31mSlime de Elite\033[0m te tira babade su baba", // 1 
-    "Intenta huir del \033[31mSlime de Elite\033[0m", // 2
+    "Intentas sacarle platica al slime de Elite...", // 0
+    "\033[31mSlime de Elite\033[0m te tira su baba...", // 1 
+    "Intenta huir del \033[31mSlime de Elite\033[0m...", // 2
     "Intentaste pegarle al slime...", // 3
-    ""  // 4
+    "Intentas acariciar al slime..."  // 4
 };
 
 string TalkMercyEliteS[] = { // agregar dialogos de perdon
-    "Abrazas al muñeco de Naika para reconciliarse", // 0
-    "Intentas negociar con Naika con darle tus dinero", // 1
-    "Intentas purificar al muñeco endemoniado", // 3
-    "Le tiras un halago al muñeco de Naika... (La verdadera \033[31mNaika\033[0m se sonroja)" // 4
+    "Abrazas al Sliem de Elite...", // 0
+    "Le sonríes al slime en señal de paz...", // 1
+    "Decides no atacar...", // 3
+    "Le ofreces paz..." // 4
 };
 
 void EliteSBattle(Player& p, EliteS& S){
@@ -228,7 +249,7 @@ void EliteSBattle(Player& p, EliteS& S){
         }
         cin >> option;
 
-    system("cls");
+    Clear();
         switch (option){ // switch general
         case 1: // ATTACK
             cout << "1. " << S.EliteSName << " HP: " << S.HP << "/" << S.MAX_HP << endl;
@@ -244,7 +265,7 @@ void EliteSBattle(Player& p, EliteS& S){
                 break;
             case 2: // RETURN
             RegMana = false;
-                system("cls");
+                Clear();
                 break;
             default:
                 DefaultError();
@@ -255,13 +276,13 @@ void EliteSBattle(Player& p, EliteS& S){
         case 2: // MAGIC
         RegMana = false;
             if (p.MagicDefault != p.Magic2){ // si te curas dummy no te atacara
-                system("cls");
+                Clear();
                 PlayerMagic(p, S);
                 cout << endl;
                 Sleep(500);
                 EliteSAttackPlayer(p, S);
             } else {
-                system("cls");
+                Clear();
                 PlayerMagic(p, S);
                 cout << endl;
                 Sleep(500);
@@ -269,39 +290,39 @@ void EliteSBattle(Player& p, EliteS& S){
             break;
 // end case 2
         case 3: // ACTION
-            system("cls");
+            Clear();
             cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. BURLARTE\n5. PLATICAR\n6. PACIFICAR\n7. DEFEND\n8. RETURN\n";
             cin >> option_action;
         
             switch (option_action){
             case 1: // MY STATS
             RegMana = false;
-                system("cls");
+                Clear();
                 ShowStats(p); // llamar funcion
                 cin.ignore(); // es como un cin, para que el jugador decida cuando avanzar,  descarta el '\n' pendiente
                 cin.get();    // esto es util porque switch solo acepta numeros, si se ingresa una letra colapsa,  ahora sí espera a que el usuario presione Enter
                 cout << endl;
-                system("cls");
+                Clear();
                 break;
             case 2: // ENEMY DESCRIPTION
             RegMana = false;
-                system("cls");
+                Clear();
                 //EliteSlimeShowStats(S); // llamar funcion
                 cout << endl;
                 cin.ignore();
                 cin.get();
-                system("cls");
+                Clear();
                 break;
             case 3: // EXCHANGE MAGIC
             RegMana = false;
-                system("cls");
+                Clear();
                 cout << "Intercambiar magia actual:\n";
                 cout << "1. Magia Vendaval\n2. Magia curacion\n3. RETURN\n\n";
                 cin >> option_exmagic;
             
                 switch (option_exmagic){
                 case 1:
-                    system("cls");
+                    Clear();
                     if (p.MagicDefault == p.Magic1){
                         cout << "Ya tienes equipada esta magia" << endl;
                     } else {
@@ -312,7 +333,7 @@ void EliteSBattle(Player& p, EliteS& S){
                     cout << endl;
                     break;
                 case 2:
-                    system("cls");
+                    Clear();
                     if (p.MagicDefault == p.Magic2){
                         cout << "Ya tienes equipada esta magia" << endl;
                     } else {
@@ -324,7 +345,7 @@ void EliteSBattle(Player& p, EliteS& S){
                     break;
                 case 3:
                 RegMana = false;
-                    system("cls");
+                    Clear();
                     break;
                 default:
                     DefaultError();
@@ -332,7 +353,7 @@ void EliteSBattle(Player& p, EliteS& S){
                 }
                 break;
             case 4: // ACT 1 - RAGE MODE
-                system("cls");
+                Clear();
             
                 if (!RageEliteS) {
                     cout << "Te burlaste de la patetica apariencia de " << S.EliteSName << endl;
@@ -384,6 +405,7 @@ void EliteSBattle(Player& p, EliteS& S){
 
                 } else if (RNGTalkEliteS > 80 && RNGTalkEliteS <= 100){
                     cout << TalkEliteS[4] << endl;
+                    cout << "¡Cuidado! Soy más resbaloso que tu promedio de matemáticas.\n";
                 }
 
                 Sleep(2500);
@@ -393,17 +415,17 @@ void EliteSBattle(Player& p, EliteS& S){
                 break;
 
             case 6: // ACT 3 PIEDAD
-                system("cls");
+                Clear();
                 if (RNGMercy <= 25){ // 25 % de que aparezca el arreglo
                     cout << TalkMercyEliteS[0] << endl;
-                    string RealNaika= "Hey! Estas peleando! no abrazando!... y ya tienes a la real... olvidalo sigue o yo misma te rompere cada hueso!";
-                    cout << "\033[31mNaika\033[0m: ";
-                    for (char c : RealNaika) {
+                    string RealELiteS= "Hey! Estas peleando! no abrazando!...";
+                    cout << "\033[31mSlime de Elite\033[0m: ";
+                    for (char c : RealELiteS) {
                         cout << c;
                         Sleep(30); }
                         cout << endl;
                         if (RandomEvent < 50){ // 50%
-                            cout << S.EliteSName << " ha aceptado tu abrazo :3" << endl;
+                            cout << S.EliteSName << ": ¿Me perdonas? ¡Eso es pegajosamente amable! " << endl;
                             MercyPoints++;
                             cout << "Puntos de piedad actuales: " << MercyPoints << endl;
                         } else {
@@ -414,15 +436,12 @@ void EliteSBattle(Player& p, EliteS& S){
                 } else if (RNGMercy > 25 && RNGMercy <= 50){ // 25%  de que aparezca el arreglo
                     cout << TalkMercyEliteS[1] << endl;
                     if (RandomEvent <= 25){ // 25%
-                        cout << S.EliteSName << " ha aceptado tu perdon... por tu dinero... yey!" << endl;
+                        cout << S.EliteSName << ": ¿Eso fue una sonrisa? ¡Cuidado, puedo derretirme de ternura!" << endl;
                         MercyPoints += 3;
                         cout << "Puntos de piedad actuales: " << MercyPoints << endl;
-                        p.MONEY = 0;
-                        cout << "Te quedaste con los bolsillos vacios..." << endl;
+                        
                     } else {
-                        cout << "Le ofreciste tu dinero a " << S.EliteSName << endl;
-                        cout << S.EliteSName << "Se ofendio... penso que la querias comprar..." << endl;
-                        cout << S.EliteSName << "Se enojo tanto que incremento su ataque en +5..." << endl;
+                        cout  << S.EliteSName << " no le importo tu gesto de paz"<< endl;
                         S.ATTACK += 5;
                     }
 
@@ -443,10 +462,9 @@ void EliteSBattle(Player& p, EliteS& S){
 
                 } else { // otro 25% de que aparezca el arreglo
                     cout << TalkMercyEliteS[3] << endl;
-                    cout << "Halagas su... cuerpo de madera a " << S.EliteSName << endl;
                     Sleep(1500);
                     if (RandomEvent <= 50){ // 50%
-                        cout << S.EliteSName << " se halaga... la haces sentir jove... apenas tiene 5 minutos de vida..." << endl;
+                        cout << S.EliteSName << " se relaja y empieza a hacer burbujas de alegría...." << endl;
                         MercyPoints += 1;
                         cout << "Puntos de piedad actuales: " << MercyPoints << endl;
                     } else {
@@ -460,7 +478,7 @@ void EliteSBattle(Player& p, EliteS& S){
                 break;
             case 7: // DEFEND
             RegMana = false;
-            system("cls");
+            Clear();
                 cout << "Te defiendes del proximo ataque de " << S.EliteSName << endl;
                 cout << "Tu defensa de multiplico x2 este turno." << endl;
                 cout << "Recuperas +20 \033[34mMANA\033[0m" << endl << endl;
@@ -471,7 +489,7 @@ void EliteSBattle(Player& p, EliteS& S){
                 break;
             case 8: // RETURN
             RegMana = false;
-                system("cls");
+                Clear();
                 break;
             default:
                 DefaultError();
@@ -506,12 +524,12 @@ void EliteSBattle(Player& p, EliteS& S){
 
             switch (option_GameOver){ // switch de case 1 - gameover
             case 1:
-                system("cls");
+                Clear();
                 cout << "Retornando con valor..." << endl;
                 cout << "Volviendo al último checkpoint...\n" << endl;
                 Sleep(1000);
                 Checkpoint(p, S, PlayerHp, PlayerMana, EliteSHP, EliteSMana);
-                system("cls");
+                Clear();
                 break;
             case 2:
                 cout << "Adios... " << p.PlayerName << endl;
@@ -545,28 +563,3 @@ void EliteSBattle(Player& p, EliteS& S){
 
     } while (!battleOver); // condicion para que termine la batalla
 }
-
-
-
-
-/* //porcentaje de cura de EliteS
-void EliteSHealChance(EliteS& S) {
-    int RNGheal = rand() % 101; 
-
-    // Si tiene 25% de vida o menos
-    if (S.HP <= S.MAX_HP /4) {
-        if (RNGheal < 50) { // 50% de probabilidad
-            S.Heal(); // Asume que existe un método Heal() en EliteS
-            cout << S.EliteSName << " se ha curado en estado crítico!" << endl;
-        }
-    }
-    // Si tiene menos del 50% pero más del 25%
-    else if (S.HP <= S.MAX_HP / 2) {
-        if (RNGheal < 25) { // 25% de probabilidad
-            S.Heal();
-            cout << S.EliteSName << " se ha curado!" << endl;
-        }
-    }
-    // Si tiene más del 50%, no se cura
-}
-    */

@@ -39,14 +39,14 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
         switch (opcionPlayerMagic) {
             case 1:
                 system("cls");
-                if (p.MANA < 30) {
+                if (p.MANA < p.MANACOST_AT) {
                     cout << "No cuentas con el \033[34mMANA\033[0m suficiente "
                         << "\033[31m" << p.MANA << "\033[0m/" << p.MAX_MANA << endl;
                 } else {
                     cout << "Invocas tu magia y lanzas un hechizo contra el golem..." << endl;
-                    p.MANA -= 30;
-                    Gol.HP -= 20;
-                    cout << Gol.GolemName << " recibió 20 de daño mágico!" << endl;
+                    p.MANA -= p.MANACOST_AT;
+                    Gol.HP -= p.MAGIC_ATTACK;
+                    cout << Gol.GolemName << " recibió " << p.MAGIC_ATTACK << " de daño mágico!" << endl;
                 }
                 break;
             case 2:
@@ -66,22 +66,22 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
         system("cls");
         switch (opcionPlayerMagic) {
             case 1:
-                if (p.MANA < 50) {
+                if (p.MANA < p.MANACOST_HE) {
                     cout << "No cuentas con el \033[34mMANA\033[0m suficiente "
                         << "\033[31m" << p.MANA << "\033[0m/" << p.MAX_MANA << endl;
                 } else {
                     int HPbefore = p.HP;
                     int opcion_heal;
-                    int HPtemp = p.HP + 20;
+                    int HPtemp = p.HP + p.HEALTH_MAGIC;
                     if (HPtemp > p.MAX_HP) {
                         cout << "\033[31mDANGER:\033[0m Si te curas ahora desperdicias parte del hechizo. ¿Proceder?\n1. Si\n2. No\n";
                         cin >> opcion_heal;
                         system("cls");
                         switch (opcion_heal) {
                             case 1:
-                                p.HP = min(p.HP + 20, p.MAX_HP);
-                                p.MANA -= 50;
-                                cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << p.HP - HPbefore << " HP" << endl;
+                                p.HP = min(p.HP + p.HEALTH_MAGIC, p.MAX_HP);
+                                p.MANA -= p.MANACOST_HE;
+                                cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << p.HEALTH_MAGIC << " HP." << endl;
                                 break;
                             case 2:
                                 system("cls");
@@ -93,9 +93,9 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
                                 break;
                         }
                     } else {
-                        p.HP += 20;
-                        p.MANA -= 50;
-                        cout << "\033[34m" << p.PlayerName << "\033[0m se curó +20 HP" << endl;
+                        p.HP += p.HEALTH_MAGIC;
+                        p.MANA -= p.MANACOST_HE;
+                        cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << p.HEALTH_MAGIC << " HP." << endl;
                     }
                 }
                 break;
@@ -113,22 +113,32 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
 
 void PlayerAttackGolem(Player& p, Golem& Gol) {
     cout << "Intentas atacar al golem con tus armas..." << endl;
-    cout << "Pero su defensa es tan alta que el golpe no tiene efecto." << endl;
+    cout << "Pero su defensa es tan alta que el golpe no tiene efecto." << endl << endl;
 }
 
 void GolemAttackPlayer(Player& p, Golem& Gol) {
-    int RNG = rand() % 101;
-    int damage = (RNG < 50) ? Gol.ATTACK : Gol.CRITICAL_ATTACK;
+    int RNGolem = rand() % 101;
+    int damage = (RNGolem < 50) ? Gol.ATTACK : Gol.CRITICAL_ATTACK;
 
-    cout << Gol.GolemName << " levanta sus pesados brazos de piedra y golpea..." << endl;
-    if (p.DEFENSE > damage) {
-        cout << "¡Bloqueaste el golpe gracias a tu defensa!" << endl;
+    cout << Gol.GolemName << " levanta sus pesados brazos de piedra y golpea..." << endl << endl;
+    if (RNGolem < 10){
+        cout << Gol.GolemName << " Pese a su abrumador tamaño, logras esquivar su ataque!" << endl << endl;
+    } else if (RNGolem < 30){
+        if (p.DEFENSE > Gol.CRITICAL_ATTACK){
+            cout << "El Golem es incapaz de penetrar tu gloriosa defensa" << endl;
+        } else {
+            cout << Gol.GolemName << " Te acesto un golpe crítico! Te mando a volar al otro lado de la cueva!" << endl;
+            p.HP -= Gol.CRITICAL_ATTACK - p.DEFENSE;
+            cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << Gol.CRITICAL_ATTACK - p.DEFENSE << " de daño critico y contundente! auch..." << endl << endl;
+        }
     } else {
-        int final_damage = damage - p.DEFENSE;
-        p.HP -= final_damage;
-        if (damage == Gol.CRITICAL_ATTACK)
-            cout << "¡Golpe crítico! ";
-        cout << p.PlayerName << " recibe " << final_damage << " de daño." << endl;
+        if (p.DEFENSE > Gol.ATTACK){
+            cout << "El Golem es incapaz de penetrar tu gloriosa defensa" << endl;
+        } else {
+            cout << Gol.GolemName << " Te demolio exitosamente! tus huesos sufren..." << endl;
+            p.HP -= Gol.ATTACK - p.DEFENSE;
+            cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << Gol.ATTACK - p.DEFENSE << " de daño." << endl << endl;
+        }
     }
 }
 
@@ -148,6 +158,8 @@ void GolemBattle(Player& p, Golem& Gol) {
 
         cout << "Oponente: \033[33m" << Gol.GolemName << "\033[0m" << endl;
         EnemyHpBar(Gol);
+            cout << Gol.GolemName << " con su corazón de frío te pone a prueba!" << endl << endl;
+
         cout << "\033[34m" << p.PlayerName << "\033[0m" << endl;
         HpBar(p);
         ManaBar(p);

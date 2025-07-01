@@ -26,6 +26,10 @@ system("cls");
         p.MAX_HP = 100;
         p.ATTACK = 20;
         p.CRITICAL_ATTACK = p.ATTACK*2;
+        p.MAGIC_ATTACK = 20;
+        p.HEALTH_MAGIC = 20;
+        p.MANACOST_AT = 30;
+        p.MANACOST_HE = 50;
         p.DEFENSE = 5;
         p.MANA = 100;
         p.MAX_MANA = 100;
@@ -53,6 +57,10 @@ system("cls");
         p.MAX_HP = 75; // 25% menos de hp
         p.ATTACK = 10; // 50% menos de daño
         p.CRITICAL_ATTACK = p.ATTACK*2;
+        p.MAGIC_ATTACK = 20;
+        p.HEALTH_MAGIC = 20;
+        p.MANACOST_AT = 30;
+        p.MANACOST_HE = 50;
         p.DEFENSE = 0;
         p.MANA = 50;
         p.MAX_MANA = 50; // 50% menos capacidad de mana
@@ -81,6 +89,10 @@ system("cls");
         p.MAX_HP = 9999;
         p.ATTACK = 9999;
         p.CRITICAL_ATTACK = p.ATTACK*2;
+        p.MAGIC_ATTACK = 9999;
+        p.HEALTH_MAGIC = 9999;
+        p.MANACOST_AT = 30;
+        p.MANACOST_HE = 50;
         p.DEFENSE = 9999;
         p.MANA = 9999;
         p.MAX_MANA = 9999;
@@ -90,8 +102,8 @@ system("cls");
         p.WEAPON = "Arma de desarrollador";
         p.ARMOR = "Armadura de desarrollador";
         p.MagicDefault = "Magia vendaval";
-        p.Magic1 = "Magia vendaval (costo: 30 \033[34mMANA\033[0m)";
-        p.Magic2 = "Magia curacion (costo: 50 \033[34mMANA\033[0m)";
+        p.Magic1 = "Magia vendaval (costo: 30 \033[34mMANA\033[0m)"; // magia ciclon
+        p.Magic2 = "Magia curacion (costo: 50 \033[34mMANA\033[0m)"; // magia curacion S
         p.Item1 = "Pocion HP";
         p.Item2 = "Pocion MANA";
         p.Item3 = "Banana";
