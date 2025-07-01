@@ -252,7 +252,7 @@ void TrollBattle(Player& p, Troll& Tr){
 
             case 2: // MAGIC
         RegMana = false;
-            if (p.MagicDefault != p.Magic2){ // si te curas dummy no te atacara
+            if (p.MagicDefault != p.Magic2){ // si te curas no te atacara
                 system("cls");
                 PlayerMagic(p, Tr, Return);
                 cout << endl;
@@ -349,14 +349,14 @@ void TrollBattle(Player& p, Troll& Tr){
                         } else {
                             RegMana = false;
                             cout << Tr.TrollName << " ya está enojado\n";
-                            cout << Tr.TrollName << " tiembla de furia!\n";
+                            cout << "El" << Tr.TrollName << " tiembla de furia!\n";
                         }
                         cout << endl;
                         break;
 
                     case 5: // HABLAR
                         system("cls");
-                        cout << "Intentas hablar con " << Tr.TrollName << endl;
+                        cout << "Intentas hablar con El " << Tr.TrollName << endl;
                         Sleep(1500);
                         if (RNGTalk <= 20) {
                             cout << "El troll gruñe con desprecio... Te hiere emocionalmente (-10 HP)" << endl;
@@ -378,17 +378,36 @@ void TrollBattle(Player& p, Troll& Tr){
 
                     case 6: // PACIFICAR
                         system("cls");
-                        cout << "Intentas pacificar al troll..." << endl;
-                        if (RNGMercy <= 25) {
-                            cout << Tr.TrollName << " se calma un poco. (+1 piedad)" << endl;
-                            MercyPoints++;
-                        } else {
-                            cout << Tr.TrollName << " rechaza tu intento... te ataca!" << endl;
-                            TrollAttackPlayer(p, Tr);
-                        }
+                        cout << "Intentas pacificar a " << Tr.TrollName << "..." << endl;
+                        Sleep(1000);
+
+                    if (RNGMercy <= 15) { // 15% chance
+                        cout << Tr.TrollName << " baja su enorme maza, te observa fijamente..." << endl;
+                        Sleep(1500);
+                        cout << "Y decide escucharte, aunque sea por un momento. (+1 piedad)" << endl;
+                        MercyPoints++;
+                    } else if (RNGMercy > 15 && RNGMercy <= 30) { // otro 15%
+                        cout << "Sorprendentemente, " << Tr.TrollName << " suelta un gruñido extraño..." << endl;
+                        Sleep(1500);
+                        cout << "¡Parece conmovido por tus palabras! (+2 piedad)" << endl;
+                        MercyPoints += 2;
+                    } else if (RNGMercy > 30 && RNGMercy <= 60) { // 30%
+                        cout << "El troll gruñe, dudoso..." << endl;
+                        Sleep(1000);
+                        cout << "Pero al final sacude la cabeza con fuerza y rechaza tu piedad." << endl;
+                        Sleep(1000);
+                        cout << "¡Te ataca en respuesta!" << endl;
+                        TrollAttackPlayer(p, Tr);
+                    } else { // 40%
+                        cout << "Tus palabras rebotan en la dura mente del troll." << endl;
+                        Sleep(1000);
+                        cout << Tr.TrollName << " parece incluso más enfurecido... ¡se prepara para atacarte!" << endl;
+                        TrollAttackPlayer(p, Tr);
+                    }
                         cout << endl;
                         Sleep(1000);
                         break;
+
 
                     case 7: // DEFEND
                         RegMana = false;
