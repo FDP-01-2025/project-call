@@ -468,7 +468,7 @@ void TrollBattle(Player& p, Troll& Tr){
                     system("cls");
                     break;
                 case 2:
-                    cout << "Adiós... " << p.PlayerName << endl;
+                    cout << "Adiós... " << p.PlayerName << " ...idiota" << endl;
                     Sleep(2000);
                     exit(0);
                     break;
