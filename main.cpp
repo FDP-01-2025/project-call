@@ -41,9 +41,9 @@ system("cls");
     // Training(p);
     // Tutorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
 
-    EliteSBattle(p, S);
+    // EliteSBattle(p, S);
     // TrollBattle(p, Tr); // batalla futura
-    // GolemBattle(p, Gol);
+    GolemBattle(p, Gol);
 
     return 0;
 }

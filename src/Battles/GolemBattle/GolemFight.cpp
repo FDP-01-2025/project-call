@@ -31,6 +31,7 @@ void EnemyHpBar(Golem& Gol) {
 
 void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
     int opcionPlayerMagic;
+    static bool UniqueMessage = false; // bandera para mostrar el mensaje de vulenrabildiad una sola vez
     if (p.MagicDefault == p.Magic1) { // magia ofensiva
         cout << "1. " << Gol.GolemName << " HP: " << Gol.HP << "/" << Gol.MAX_HP << endl;
         cout << "2. RETURN" << endl;
@@ -45,8 +46,10 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
                 } else {
                     cout << "Invocas tu magia y lanzas un hechizo contra el golem..." << endl;
                     p.MANA -= p.MANACOST_AT;
-                    Gol.HP -= p.MAGIC_ATTACK;
-                    cout << Gol.GolemName << " recibió " << p.MAGIC_ATTACK << " de daño mágico!" << endl;
+                    Gol.HP -= p.MAGIC_ATTACK * 2;
+                    cout << Gol.GolemName << " recibió " << p.MAGIC_ATTACK * 2 << " de daño mágico!" << endl << endl;
+                    if (!UniqueMessage) cout << "\033[33mEso fue super efectivo!. Te das cuenta que\033[0m " << Gol.GolemName << " \033[33mes vulnerable a la magia!\033[0m" << endl << endl;
+                    UniqueMessage = true;
                 }
                 break;
             case 2:
@@ -257,7 +260,7 @@ void GolemBattle(Player& p, Golem& Gol) {
                     case 4: // PROVOCAR
                         RegMana = false;
                         system("cls");
-                        cout << "Intentas provocar al golem, pero permanece imperturbable como una roca..." << endl;
+                        cout << "Intentas provocar al golem, pero permanece imperturbable como una roca..." << endl << endl;
                         break;
                     case 5: // DEFEND
                         RegMana = false;
@@ -282,7 +285,6 @@ void GolemBattle(Player& p, Golem& Gol) {
             case 4: // ITEM
                 RegMana = false;
                 Items(p, option_item);
-                GolemAttackPlayer(p, Gol);
                 break;
 
             case 5: // HABLAR
@@ -307,10 +309,22 @@ void GolemBattle(Player& p, Golem& Gol) {
                 break;
         }
 
-        if (p.HP <= 0) {
-            cout << Gol.GolemName << " ha derrotado a \033[34m" << p.PlayerName << "\033[0m" << endl;
+    bool ManaDepleted = (p.MANA <= 10);
+        if (p.HP <= 0 || ManaDepleted) {
+            if (!ManaDepleted){
+                cout << Gol.GolemName << " ha derrotado a \033[34m" << p.PlayerName << "\033[0m" << endl;
+            } else {
+                cout << Gol.GolemName << " Aplasto a \033[34m" << p.PlayerName << "\033[0m En la oscuridad..." << endl;
+            }
+
+            while (option_GameOver != 1 && option_GameOver != 2){
             cout << "\033[31mGAME OVER\033[0m\n1. YES\n2. NO\n";
             cin >> option_GameOver;
+            if (option_GameOver < 1 || option_GameOver > 2){
+                DefaultError();
+            }
+        }
+
             switch (option_GameOver) {
                 case 1:
                     system("cls");
@@ -326,9 +340,11 @@ void GolemBattle(Player& p, Golem& Gol) {
             }
         }
 
-        if (Gol.HP <= 150) { // mitad de vida
-            cout << Gol.GolemName << " se detiene... y asiente lentamente." << endl;
-            cout << "¡Has pasado la prueba!" << endl;
+        if (Gol.HP <= Gol.MAX_HP * 0.5) { // mitad de vida
+            cout << Gol.GolemName << " se detiene... y asiente lentamente. Baja los puños y sus ojos se volvieron pacificos..." << endl;
+            Sleep(5000);
+            Clear();
+            cout << "¡Has pasado la prueba!...??" << endl;
             battleOver = true;
         }
 

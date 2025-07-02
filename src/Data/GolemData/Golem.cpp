@@ -8,7 +8,7 @@ Golem Golem_Data(){
     Gol.Level = 20;
     Gol.HP = 300;
     Gol.MAX_HP = 300;
-    Gol.ATTACK = 25;
+    Gol.ATTACK = 20;
     Gol.CRITICAL_ATTACK = Gol.ATTACK * 3;
     Gol.DEFENSE = 100;
     Gol.MANA = 0;

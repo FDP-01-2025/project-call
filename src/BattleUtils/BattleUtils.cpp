@@ -36,7 +36,7 @@ void Items(Player& p, int option_item){
             cout << "   ITEM        CANTIDAD      EFECTO" << endl;
             cout << p.Item1 << ":        " << p.PotionsHP << "           +" << p.PoEffectHP << endl;
             cout << p.Item2 << ":      " << p.PotionsMANA << "           +" << p.PoEffectMANA << endl;
-            cout << p.Item3 << ":           " << p.CantItem3 << "            " << "???" <<endl << endl;
+            cout << p.Item3 << ":           " << p.CantItem3 << "           " << "???" <<endl << endl;
             cout << "Seleccione que ITEM usar:\n1. HP\n2. MANA\n3. BANANA\n4. RETURN" << endl;
             cin >> option_item;
 

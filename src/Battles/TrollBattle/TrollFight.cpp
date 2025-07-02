@@ -176,7 +176,7 @@ void TrollAttackPlayer(Player& p, Troll& Tr){
     if (p.MANA >= 10) {
         p.MANA -= 20;
         Tr.MANA = min(Tr.MANA + 10, Tr.MAX_MANA);
-        cout << Tr.TrollName << " extiende su mano rúnica y drena 10 tu \033[34mMANA\033[0m, absorbiéndolo para fortalecerse." << endl;
+        cout << Tr.TrollName << " extiende su mano rúnica y drena -10 de tu \033[34mMANA\033[0m, absorbiéndolo para fortalecerse." << endl;
     } else {
         cout << Tr.TrollName << " intenta absorber tu \033[34mMANA\033[0m, pero descubre que no tienes suficiente..." << endl;
     }
@@ -345,7 +345,7 @@ void TrollBattle(Player& p, Troll& Tr){
                             Sleep(1500);
                             cout << Tr.TrollName << " incrementó su vida!\n";
                             cout << Tr.TrollName << " incrementó su ataque!\n";
-                            cout << Tr.TrollName << " La defensa ha caído!\n";
+                            cout << Tr.TrollName << " La defensa ha caido a 0!\n";
                         } else {
                             RegMana = false;
                             cout << Tr.TrollName << " ya está enojado\n";
