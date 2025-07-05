@@ -13,6 +13,8 @@
 #include "src/Battles/TrollBattle/TrollFight.h"
 #include "src/Data/GolemData/Golem.h"
 #include "src/Battles/GolemBattle/GolemFight.h"
+#include "src/Data/NihilusData/Nihilus.h"
+#include "src/Battles/NihilusBattle/NihilusFight.h"
 
 using namespace std;
 
@@ -23,14 +25,15 @@ int main(){
     system("cls");
 
     cout << "Bienvenido a Ashes of Olympus" << endl;
-    Player p = Global_Data(); // funcion para declarar el parametro
+    Player p = Global_Data(); // funcion para declarar el parametro de Player
     ShowStats(p);             // funcion para mostrar las estadisticas
     cout << "Tienes un momento para ver tus estadisticas iniciales";
-    Naika Na = Naika_Data();
+    Naika Na = Naika_Data(); // funciones para declarar parametros de Naika y enemigos
     NaikaDummy Ndum = Dummy_Data();
     EliteS S = EliteS_Data();
     Troll Tr = Troll_Data();
     Golem Gol = Golem_Data();
+    Nihilus Nihi = Nihilus_Data();
 
     cout << endl;
     cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
@@ -43,7 +46,8 @@ system("cls");
 
     // EliteSBattle(p, S);
     // TrollBattle(p, Tr); // batalla futura
-    GolemBattle(p, Gol);
+    // GolemBattle(p, Gol);
+    NihilusBattle(p, Nihi);
 
     return 0;
 }

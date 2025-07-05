@@ -8,12 +8,13 @@
 
 using namespace std;
 
-void Checkpoint(Player& p, Troll& troll, int PlayerHP, int PlayerMana, int TrollHp, int TrollMana) { 
+void Checkpoint(Player& p, Troll& troll, int PlayerHP, int PlayerMana, int TrollHp, int TrollMana, int TrollMaxHp) { 
     // Guardar las variables localmente para poder usar checkpoint
     p.HP = PlayerHP;
     p.MANA = PlayerMana;
     troll.HP = TrollHp;
     troll.MANA = TrollMana;
+    troll.MAX_HP = troll.MAX_HP;
 } // función local
 
 void EnemyHpBar(Troll& troll) {
@@ -187,6 +188,7 @@ void TrollBattle(Player& p, Troll& Tr){
     int MercyPoints = 0;
     int PlayerHp = p.HP;
     int PlayerMana = p.MANA;
+    int TrollMaxHp = Tr.MAX_HP;
     int TrollHp = Tr.HP;
     int TrollMana = Tr.MANA;
     int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;
@@ -464,7 +466,7 @@ void TrollBattle(Player& p, Troll& Tr){
                     Clear();
                     cout << "Retornando al último checkpoint...\n" << endl;
                     Sleep(1000);
-                    Checkpoint(p, Tr, PlayerHp, PlayerMana, TrollHp, TrollMana);
+                    Checkpoint(p, Tr, PlayerHp, PlayerMana, TrollHp, TrollMana, TrollMaxHp);
                     Clear();
                     break;
                 case 2:

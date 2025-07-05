@@ -49,7 +49,10 @@ system("cls");
         p.CantItem3 = 1;
         p.PoEffectHP = 30;
         p.PoEffectMANA = 30;
-        p.KilledNaikaDummy = false;
+        p.BadRelationNaika = false; // relacion con Naika
+        p.KilledNaikaDummy = false; // si mataste al dummy de Naika
+        p.KilledEliteSlime = false; // si mataste al slime
+        p.KilledTroll = false; // si mataste al troll
         break;
     case 2:
     cout << "Elegiste algo desafiante, buena eleccion. Ahora tienes:\n1. 25% menos de vida.\n2. 50% menos de dano.\n3. 50% menos capacidad de mana.\ncomienzas sin un centavo.\nY sin armadura.\nMenos cantidad de pociones\n50% menos de eficiencia en pociones\nBuena suerte!." << endl << endl;
@@ -80,7 +83,10 @@ system("cls");
         p.CantItem3 = 0;
         p.PoEffectHP = 15;
         p.PoEffectMANA = 15;
-        p.KilledNaikaDummy = false;
+        p.BadRelationNaika = false; // relacion con Naika
+        p.KilledNaikaDummy = false; // si mataste al dummy de Naika
+        p.KilledEliteSlime = false; // si mataste al slime
+        p.KilledTroll = false; // si mataste al troll
         break;
     case 3:
     cout << "Activaste el modo desarrollador" << endl;
@@ -112,9 +118,10 @@ system("cls");
         p.CantItem3 = 9999;
         p.PoEffectHP = 9999;
         p.PoEffectMANA = 9999;
-        p.KilledNaikaDummy = false;
-        p.KilledEliteSlime = false;
-        p.KilledTroll = false;
+        p.BadRelationNaika = false; // relacion con Naika
+        p.KilledNaikaDummy = false; // si mataste al dummy de Naika
+        p.KilledEliteSlime = false; // si mataste al slime
+        p.KilledTroll = false; // si mataste al troll
         break;
     default:
         cout << "Opcion invalida" << endl;

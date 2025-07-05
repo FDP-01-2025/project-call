@@ -31,11 +31,12 @@ void EnemyHpBar(NaikaDummy& Ndum){
     cout << "\033[0m " << Ndum.HP << "/" << Ndum.MAX_HP << endl << endl;
 }
 
-void Checkpoint(Player& p, NaikaDummy& Ndum, int PlayerHP, int PlayerMana, int DummyHp, int DummyMana){ // guardar las variables localmente para poder usar checkpoint
+void Checkpoint(Player& p, NaikaDummy& Ndum, int PlayerHP, int PlayerMana, int DummyHp, int DummyMana, int DummyMaxHp){ // guardar las variables localmente para poder usar checkpoint
     p.HP = PlayerHP;
     p.MANA = PlayerMana;
     Ndum.HP = DummyHp;
     Ndum.MANA = DummyMana;
+    Ndum.MAX_HP = DummyMaxHp;
 } // funcion local
 
 void PlayerMagic(Player& p, NaikaDummy& Ndum, bool& Return){
@@ -197,8 +198,9 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
 
     int TempDefense = p.DEFENSE; // guardamos una variable de defensa temporal, para evitar posibles conflictos futuros en caso de que se cambie
     int MercyPoints = 0; // puntos de piedad
-    int PlayerHp = p.HP;
+    int PlayerHp = p.HP; // variables para guardar los datos del Player y Enemy en una funcion checkpoint
     int PlayerMana = p.MANA;
+    int DummyMaxHp = Ndum.MAX_HP;
     int DummyHP = Ndum.HP;
     int DummyMana = Ndum.MANA;
     int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;  // variables de opciones dentro de switchs                              // variable para pausar el codigo y proceder cuando el usuario decida
@@ -357,7 +359,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                     Sleep(1500);
                     cout << Ndum.NaDummyName << " incremento su vida!\n";
                     cout << Ndum.NaDummyName << " incremento su ataque!\n";
-                    cout << Ndum.NaDummyName << " La defensa de muñeco de Naika ha caido!\n";
+                    cout << Ndum.NaDummyName << " su defensa cayo a 0!\n";
                 } else {
                     RegMana = false;
                     cout << Ndum.NaDummyName << " ya esta enojado\n";
@@ -488,7 +490,6 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
         RegMana = false;
             Items(p, option_item);
             cout << endl;
-            DummyAttackPlayer(p, Ndum);
         break;
 // end case 4
         case 5: // MERCY
@@ -524,7 +525,7 @@ void NaikaDummyBattle(Player& p, NaikaDummy& Ndum){
                 cout << "Retornando con valor..." << endl;
                 cout << "Volviendo al último checkpoint...\n" << endl;
                 Sleep(1000);
-                Checkpoint(p, Ndum, PlayerHp, PlayerMana, DummyHP, DummyMana);
+                Checkpoint(p, Ndum, PlayerHp, PlayerMana, DummyHP, DummyMana, DummyMaxHp); // llamar funcion de checkpoint
                 Clear();
                 break;
             case 2:

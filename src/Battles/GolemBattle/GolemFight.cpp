@@ -8,11 +8,12 @@
 
 using namespace std;
 
-void Checkpoint(Player& p, Golem& Gol, int PlayerHP, int PlayerMana, int GolemHp, int GolemMana) {
+void Checkpoint(Player& p, Golem& Gol, int PlayerHP, int PlayerMana, int GolemHp, int GolemMana, int GolemMaxHp) {
     p.HP = PlayerHP;
     p.MANA = PlayerMana;
     Gol.HP = GolemHp;
     Gol.MANA = GolemMana;
+    Gol.MAX_HP = GolemMaxHp;
 }
 
 void EnemyHpBar(Golem& Gol) {
@@ -149,6 +150,7 @@ void GolemBattle(Player& p, Golem& Gol) {
     int TempDefense = p.DEFENSE;
     int PlayerHp = p.HP;
     int PlayerMana = p.MANA;
+    int GolemMaxHp = Gol.MAX_HP;
     int GolemHp = Gol.HP;
     int GolemMana = Gol.MANA;
     int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;
@@ -328,7 +330,7 @@ void GolemBattle(Player& p, Golem& Gol) {
             switch (option_GameOver) {
                 case 1:
                     system("cls");
-                    Checkpoint(p, Gol, PlayerHp, PlayerMana, GolemHp, GolemMana);
+                    Checkpoint(p, Gol, PlayerHp, PlayerMana, GolemHp, GolemMana, GolemMaxHp);
                     break;
                 case 2:
                     cout << "Adiós, " << p.PlayerName << endl;

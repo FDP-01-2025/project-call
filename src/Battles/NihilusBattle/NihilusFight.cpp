@@ -24,11 +24,12 @@ void EnemyHpBar(Nihilus& Nihi){
 }
 
 // Función local: restaurar checkpoint
-void Checkpoint(Player& p, Nihilus& Nihi, int PlayerHP, int PlayerMana, int NihiHp, int NihiMana){
+void Checkpoint(Player& p, Nihilus& Nihi, int PlayerHP, int PlayerMana, int NihiHp, int NihiMana, int NihiMaxHp){
     p.HP = PlayerHP;
     p.MANA = PlayerMana;
     Nihi.HP = NihiHp;
     Nihi.MANA = NihiMana;
+    Nihi.MAX_HP = NihiMaxHp;
 }
 
 // Función para magia del jugador
@@ -165,6 +166,7 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
     int MercyPoints = 0;
     int PlayerHp = p.HP;
     int PlayerMana = p.MANA;
+    int NihiMaxHp = Nihi.MAX_HP;
     int NihiHP = Nihi.HP;
     int NihiMana = Nihi.MANA;
     int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;
@@ -287,7 +289,7 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
             case 4: // activa Rage
                 Clear();
                 if (!RageMode){
-                    cout << "Te burlas del vacío... y Nihilus ruge en silencio." << endl;
+                    cout << "Te burlas del vacío... pero es muy orgulloso y no lo provocas... pero siente que no lo ven como un desafío." << endl;
                     Sleep(1500);
                     cout << "\033[31mRAGE MODE ACTIVADO!\033[0m" << endl;
                     Nihi.ATTACK += 20;
@@ -336,9 +338,11 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
                 } else if(RNGMercy <= 50){
                     cout << "Ofreces tu oro como tributo..." << endl;
                     if(RandomEvent < 25){
-                        cout << "Nihilus acepta. +2 piedad." << endl;
-                        MercyPoints += 2;
-                        p.MONEY = 0;
+                        cout << "Nihilus acepta. +1 piedad." << endl;
+                        MercyPoints++;
+                        p.MONEY = max(0, p.MONEY - 50);
+                        cout << "Perdiste 50 de oro." << endl;
+                        Sleep(1000);
                     } else {
                         cout << "Nihilus lo rechaza y su furia crece. +5 ATTACK." << endl;
                         Nihi.ATTACK += 5;
@@ -355,7 +359,7 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
                 } else {
                     cout << "Murmuras alabanzas al vacío..." << endl;
                     if(RandomEvent < 50){
-                        cout << "El vacío escucha... +1 piedad." << endl;
+                        cout << "El vacío escucha tus plegarias... +1 punto de piedad." << endl;
                         MercyPoints++;
                     } else {
                         cout << "Te consume la culpa. Nihilus ataca!" << endl;
@@ -396,7 +400,7 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
                 cout << Nihi.NihilusName << " ignora tu compasión..." << endl;
                 NihilusAttackOrSteal(p, Nihi, turnCount);
             } else {
-                cout << Nihi.NihilusName << " cede ante tu piedad... ¡VICTORIA!" << endl;
+                cout << Nihi.NihilusName << " el vacio cede ante tu piedad... ¡VICTORIA!" << endl;
                 p.PacifistPoints++;
                 battleOver = true;
             }
@@ -408,7 +412,7 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
         }
 
         if(p.HP <= 0){
-            cout << Nihi.NihilusName << " ha derrotado a " << p.PlayerName << endl;
+            cout << Nihi.NihilusName << " ha derrotado a " << p.PlayerName << " y lo llevo al vacío..." << endl;
             cout << "\033[31mGAME OVER\033[0m\n\033[33mContinue?\033[0m\n1. YES\n2. NO\n";
             cin >> option_GameOver;
             switch(option_GameOver){
@@ -416,7 +420,7 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
                 Clear();
                 cout << "Retornando al último checkpoint..." << endl;
                 Sleep(1000);
-                Checkpoint(p, Nihi, PlayerHp, PlayerMana, NihiHP, NihiMana);
+                Checkpoint(p, Nihi, PlayerHp, PlayerMana, NihiHP, NihiMana, NihiMaxHp);
                 Clear();
                 break;
             case 2:

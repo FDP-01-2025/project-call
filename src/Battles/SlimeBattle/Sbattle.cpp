@@ -32,11 +32,12 @@ void EnemyHpBar(EliteS& S){
     cout << "\033[0m " << S.HP << "/" << S.MAX_HP << endl << endl;
 }
 
-void Checkpoint(Player& p, EliteS& S, int PlayerHP, int PlayerMana, int EliteSHp, int EliteSMana){ // guardar las variables localmente para poder usar checkpoint
+void Checkpoint(Player& p, EliteS& S, int PlayerHP, int PlayerMana, int EliteSHp, int EliteSMana, int MaxELiteSHP){ // guardar las variables localmente para poder usar checkpoint
     p.HP = PlayerHP;
     p.MANA = PlayerMana;
     S.HP = EliteSHp;
     S.MANA = EliteSMana;
+    S.MAX_HP = MaxELiteSHP;
 } // funcion local
 
 void PlayerMagic(Player& p, EliteS& S){
@@ -204,7 +205,7 @@ string TalkEliteS[] = { // agregar conversacion con el slime de elite
 };
 
 string TalkMercyEliteS[] = { // agregar dialogos de perdon
-    "Abrazas al Sliem de Elite...", // 0
+    "Abrazas al Slime de Elite...", // 0
     "Le sonríes al slime en señal de paz...", // 1
     "Decides no atacar...", // 3
     "Le ofreces paz..." // 4
@@ -216,6 +217,7 @@ void EliteSBattle(Player& p, EliteS& S){
     int MercyPoints = 0; // puntos de piedad
     int PlayerHp = p.HP;
     int PlayerMana = p.MANA;
+    int MaxELiteSHP = S.MAX_HP;
     int EliteSHP = S.HP;
     int EliteSMana = S.MANA;
     int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;  // variables de opciones dentro de switchs                              // variable para pausar el codigo y proceder cuando el usuario decida
@@ -232,9 +234,9 @@ void EliteSBattle(Player& p, EliteS& S){
         cout << "Oponente: " << "\033[33m" << S.EliteSName << "\033[0m" << endl; // Codigo ANSI amarillo
         EnemyHpBar(S);
         if (Mercy == false){
-            cout << S.EliteSName << " Esta determinado" << endl << endl;
+            cout << S.EliteSName << " Esta pegajosinado" << endl << endl;
         } else {
-            cout << S.EliteSName << " Parece agotado" << endl << endl;
+            cout << S.EliteSName << " Parece agotado... quizas comio muchas enchiladas..." << endl << endl;
         }
         cout << "\033[34m" << p.PlayerName << "\033[0m" << endl;
 
@@ -356,10 +358,11 @@ void EliteSBattle(Player& p, EliteS& S){
                 Clear();
             
                 if (!RageEliteS) {
-                    cout << "Te burlaste de la patetica apariencia de " << S.EliteSName << endl;
-                    cout << "...Provocaste al enemigo\n \n";
+                    cout << "Te burlaste de la hermana del... " << S.EliteSName << "... Tan siquiera tiene?" << endl;
                     Sleep(1500);
-                    cout << S.EliteSName << " se enojo!\n";
+                    cout << "¿Que es eso? ¿Una baba de slime? ¿No tienes algo mejor?..." << endl;
+                    Sleep(1500);
+                    cout << "Ahora si " << S.EliteSName << " se puso rabioso! (enserio buscabas eso?).\n";
                     cout << "Empieza a burbujear su baba por su ira! y desea tu muerte a toda costa...\n\n"; 
                     RageEliteS = true;
                 
@@ -371,41 +374,45 @@ void EliteSBattle(Player& p, EliteS& S){
                     Sleep(1500);
                     cout << S.EliteSName << " incremento su vida!\n";
                     cout << S.EliteSName << " incremento su ataque!\n";
-                    cout << S.EliteSName << " La defensa de muñeco de Naika ha caido!\n";
+                    cout << S.EliteSName << " su defensa cayo a 0!\n";
                 } else {
                     RegMana = false;
-                    cout << S.EliteSName << " ya esta enojado\n";
-                    cout << S.EliteSName << " tiembla de furia!\n";
+                    cout << S.EliteSName << " ya esta rabioso\n";
+                    cout << S.EliteSName << " tiembla de furia!... pobrecito le dara un infarto\n\n";
                 }
-                cout << endl;
                 break;
             case 5: // HABLAR, tomar importancia luego de arreglar el codigo
                 cout << "Intentas hablar con " << S.EliteSName << endl;
+                RegMana = false;
                 Sleep(1500);
 
                 if (RNGTalkEliteS <= 20){
                     cout << TalkEliteS[0] << endl;
-                    cout << "( " << S.EliteSName << " escribe en la tierra )\n";
-                    cout << "¿Hablar? ¿Sabes que no tengo boca, verdad? Pero aprecio el intento. " << endl;
-                    RegMana = false;
+                    cout << "(" << S.EliteSName << " escribe en la tierra)\n";
+                    cout << "No le entiendes sus garabatos... escribe en sumerio o persa??" << endl;
 
                 } else if (RNGTalkEliteS > 20 && RNGTalkEliteS <= 40){
                     cout << TalkEliteS[1] << endl;
-                    cout << "Bueno, dicen que la baba de slime es un buen humectante de piel\n";
+                    cout << "Bueno, dicen que la baba de slime es un buen humectante de piel!\n";
+                    cout << "Ahora ya sabes porque los slimes son tan populares en la industria de la belleza.\n";
+                    Sleep(1500);
                     p.HP = min(p.HP += 5, p.MAX_HP);
                 
                 } else if (RNGTalkEliteS > 40 && RNGTalkEliteS <= 60){
                     cout << TalkEliteS[2] << endl;
-                    cout << "¡Ey, no te vayas! ¿Quién más va a rebotar conmigo después?\n";
-                    RegMana = false;
+                    cout << "Pero te atrapa con su baba pegajosa!\n";
+                    cout << "No puedes huir de un slime, ¡es como intentar escapar de un abrazo de tu abuela!\n";
 
                 } else if (RNGTalkEliteS > 60 && RNGTalkEliteS <= 80){
                     cout << TalkEliteS[3] << endl;
-                    cout <<"Pero tu mano decidió tomarse vacaciones. ¿Mano floja?\n";
+                    cout   <<"¡Oye! ¿Sabías que los slimes son expertos en matemáticas?\n";
+                    cout << "Porque siempre están sumando problemas a tu vida.\n";
+                    cout << "¡Cuidado! es más resbaloso que tu promedio de matemáticas.\n";
 
                 } else if (RNGTalkEliteS > 80 && RNGTalkEliteS <= 100){
                     cout << TalkEliteS[4] << endl;
-                    cout << "¡Cuidado! Soy más resbaloso que tu promedio de matemáticas.\n";
+                    cout << "Intentas acariciar al slime...\n";
+                    cout << "Es muy mono, pero no puedes evitar sentir que te va a chupar la vida.\n";
                 }
 
                 Sleep(2500);
@@ -418,30 +425,34 @@ void EliteSBattle(Player& p, EliteS& S){
                 Clear();
                 if (RNGMercy <= 25){ // 25 % de que aparezca el arreglo
                     cout << TalkMercyEliteS[0] << endl;
-                    string RealELiteS= "Hey! Estas peleando! no abrazando!...";
+                    string RealELiteS = "Pero... estas seguro de que quieres abrazar a un slime?\n";
                     cout << "\033[31mSlime de Elite\033[0m: ";
                     for (char c : RealELiteS) {
                         cout << c;
-                        Sleep(30); }
-                        cout << endl;
-                        if (RandomEvent < 50){ // 50%
-                            cout << S.EliteSName << ": ¿Me perdonas? ¡Eso es pegajosamente amable! " << endl;
+                        Sleep(30);
+                    }
+                    cout << endl;
+                    if (RandomEvent < 50){ // 50%
+                        cout << S.EliteSName << "glu glu glu glu... (sonidos de felicidad).\n";
+                        cout << "El slime de elite te abraza con su baba pegajosa...\n";
                             MercyPoints++;
                             cout << "Puntos de piedad actuales: " << MercyPoints << endl;
                         } else {
-                        cout << S.EliteSName <<" No acepto tu abrazo >:(" << endl;
+                        cout << S.EliteSName << " te mira con desdén, ¡Eso fue un insulto! Se prepara para atacar...\n";
+                        cout << "¡No puedes abrazar a un slime sin consecuencias!\n";
+                        Sleep(1500);
                         EliteSAttackPlayer(p, S);
                     }
 
                 } else if (RNGMercy > 25 && RNGMercy <= 50){ // 25%  de que aparezca el arreglo
                     cout << TalkMercyEliteS[1] << endl;
                     if (RandomEvent <= 25){ // 25%
-                        cout << S.EliteSName << ": ¿Eso fue una sonrisa? ¡Cuidado, puedo derretirme de ternura!" << endl;
-                        MercyPoints += 3;
+                        cout << ": ¿Eso fue una sonrisa? Se ha derretido de ternura!" << endl;
+                        MercyPoints += 2;
                         cout << "Puntos de piedad actuales: " << MercyPoints << endl;
                         
                     } else {
-                        cout  << S.EliteSName << " no le importo tu gesto de paz"<< endl;
+                        cout  << S.EliteSName << " no le importó tu gesto de paz"<< endl;
                         S.ATTACK += 5;
                     }
 
@@ -468,8 +479,8 @@ void EliteSBattle(Player& p, EliteS& S){
                         MercyPoints += 1;
                         cout << "Puntos de piedad actuales: " << MercyPoints << endl;
                     } else {
-                        cout << "Te abofeteo... eso fue sexista... deberias sentirte culpable" << endl;
-                        cout << S.EliteSName << " Se prepara para darte una leccion..." << endl;
+                        cout << S.EliteSName << " Pero se aburrio...\n";
+                        cout << S.EliteSName << " Se prepara para darte una leccion... de vida?" << endl;
                         EliteSAttackPlayer(p, S);
                     }
                 }
@@ -500,7 +511,7 @@ void EliteSBattle(Player& p, EliteS& S){
         case 4: // ITEM
         RegMana = false;
             Items(p, option_item);
-        break;
+            break;
 // end case 4
         case 5: // MERCY
             if (Mercy == false){
@@ -528,7 +539,7 @@ void EliteSBattle(Player& p, EliteS& S){
                 cout << "Retornando con valor..." << endl;
                 cout << "Volviendo al último checkpoint...\n" << endl;
                 Sleep(1000);
-                Checkpoint(p, S, PlayerHp, PlayerMana, EliteSHP, EliteSMana);
+                Checkpoint(p, S, PlayerHp, PlayerMana, EliteSHP, EliteSMana, MaxELiteSHP);
                 Clear();
                 break;
             case 2:

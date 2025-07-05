@@ -110,7 +110,6 @@ void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
     "Muneco con forma de Neika aparecio", //86
     };
 
-    bool BadRelation = false;
     bool Disobey = false;
     bool Disobey2 = false;
     bool CancelDialogue = false;
@@ -951,7 +950,7 @@ system("cls");
             }
             break;
         case 2:
-        BadRelation = true;
+        p.BadRelationNaika = true;
             for (int i = 6; i < 18; i++){
                 cout << (i > 9 ? "\033[31mNaika: \033[0m":"\033[3m");
             PrintWithPause_Tu(Genocide[i], 30);
@@ -976,7 +975,7 @@ system("cls");
         system("cls");
     };
 
-    if (BadRelation){
+    if (p.BadRelationNaika){
         cout << "\033[3m";
         for (char c : NaikaPostBattle[9]){
             cout << c;

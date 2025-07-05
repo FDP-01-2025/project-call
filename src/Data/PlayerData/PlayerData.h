@@ -4,6 +4,7 @@
 using namespace std;
 
 struct Player {
+    // Player attributes
     string PlayerName;
     int Level;
     int HP;
@@ -12,19 +13,19 @@ struct Player {
     int CRITICAL_ATTACK;
     int MAGIC_ATTACK;
     int HEALTH_MAGIC;
-    int MANACOST_AT;
-    int MANACOST_HE;
     int DEFENSE;
-    int MANA;
-    int MAX_MANA;
     int MONEY;
-    int KILLS;
-    int PacifistPoints;
     string WEAPON;
     string ARMOR;
+    // attributes for player magic
+    int MANA;
+    int MAX_MANA;
+    int MANACOST_AT;
+    int MANACOST_HE;
     string MagicDefault;
     string Magic1;
     string Magic2;
+    // attributes for player items and effects
     string Item1;
     string Item2;
     string Item3;
@@ -34,6 +35,10 @@ struct Player {
     int PoEffectHP;
     int PoEffectMANA;
     int EffectItem3;
+    // attributes for player relations and events
+    int KILLS;
+    int PacifistPoints;
+    bool BadRelationNaika;
     bool KilledNaikaDummy;
     bool KilledEliteSlime;
     bool KilledTroll;
