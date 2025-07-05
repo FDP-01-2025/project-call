@@ -284,7 +284,7 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
                     break;
                 }
                 break;
-            case 4: // MOCK - activa Rage
+            case 4: // activa Rage
                 Clear();
                 if (!RageMode){
                     cout << "Te burlas del vacío... y Nihilus ruge en silencio." << endl;
