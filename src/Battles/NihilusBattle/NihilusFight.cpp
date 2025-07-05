@@ -158,3 +158,289 @@ void NihilusAttackOrSteal(Player& p, Nihilus& Nihi, int turn){
     }
 }
 
+// Función principal de la batalla contra Nihilus
+void NihilusBattle(Player& p, Nihilus& Nihi){
+
+    int TempDefense = p.DEFENSE;
+    int MercyPoints = 0;
+    int PlayerHp = p.HP;
+    int PlayerMana = p.MANA;
+    int NihiHP = Nihi.HP;
+    int NihiMana = Nihi.MANA;
+    int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;
+    bool battleOver = false;
+    bool RageMode = false;
+    bool Mercy = false;
+    bool Return = false;
+    int turnCount = 0;  // cuenta turnos para aumentar probabilidad de robo
+
+    do{
+        turnCount++;
+        bool RegMana = true;
+        int RNGTalk = rand() % 101;
+        int RNGMercy = rand() % 101;
+        int RandomEvent = rand() % 101;
+
+        cout << "Jefe: \033[35m" << Nihi.NihilusName << "\033[0m" << endl;
+        EnemyHpBar(Nihi);
+
+        if (!Mercy)
+            cout << Nihi.NihilusName << " susurra desde el vacío..." << endl << endl;
+        else
+            cout << Nihi.NihilusName << " parece vacilar..." << endl << endl;
+
+        cout << "\033[34m" << p.PlayerName << "\033[0m" << endl;
+        HpBar(p);
+        ManaBar(p);
+        cout << "Piedad: " << MercyPoints << endl << endl;
+
+        if (!Mercy)
+            cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. MERCY\n";
+        else
+            cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. \033[33mMERCY\033[0m\n";
+
+        cin >> option;
+        Clear();
+
+        switch(option){
+        case 1: // ATTACK
+            cout << "1. " << Nihi.NihilusName << " HP: " << Nihi.HP << "/" << Nihi.MAX_HP << endl;
+            cout << "2. RETURN" << endl;
+            cin >> option_attack;
+            switch(option_attack){
+            case 1:
+                PlayerAttackNihilus(p, Nihi);
+                cout << endl;
+                NihilusAttackOrSteal(p, Nihi, turnCount);
+                break;
+            case 2:
+                RegMana = false;
+                Clear();
+                break;
+            default:
+                DefaultError();
+                RegMana = false;
+                break;
+            }
+            break;
+
+        case 2: // MAGIC
+            RegMana = false;
+            PlayerMagic(p, Nihi, Return);
+            cout << endl;
+            if (!Return) NihilusAttackOrSteal(p, Nihi, turnCount);
+            Return = false;
+            break;
+
+        case 3: // ACTION
+            cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. MOCK (RAGE)\n5. TALK\n6. PACIFY\n7. DEFEND\n8. RETURN\n";
+            cin >> option_action;
+            switch(option_action){
+            case 1:
+                RegMana = false;
+                Clear();
+                ShowStats(p);
+                cin.ignore(); cin.get();
+                Clear();
+                break;
+            case 2:
+                RegMana = false;
+                Clear();
+                ShowStatsNihilus(Nihi);
+                cin.ignore(); cin.get();
+                Clear();
+                break;
+            case 3: // EXCHANGE MAGIC
+                RegMana = false;
+                Clear();
+                cout << "Intercambiar magia actual:\n1. Ofensiva\n2. Curacion\n3. RETURN\n";
+                cin >> option_exmagic;
+                switch(option_exmagic){
+                case 1:
+                    Clear();
+                    if (p.MagicDefault == p.Magic1)
+                        cout << "Ya tienes equipada esta magia." << endl;
+                    else {
+                        p.MagicDefault = p.Magic1;
+                        cout << "Te equipaste: " << p.MagicDefault << endl;
+                    }
+                    Sleep(1000); cout << endl;
+                    break;
+                case 2:
+                    Clear();
+                    if (p.MagicDefault == p.Magic2)
+                        cout << "Ya tienes equipada esta magia." << endl;
+                    else {
+                        p.MagicDefault = p.Magic2;
+                        cout << "Te equipaste: " << p.MagicDefault << endl;
+                    }
+                    Sleep(1000); cout << endl;
+                    break;
+                case 3:
+                    Clear();
+                    break;
+                default:
+                    DefaultError();
+                    break;
+                }
+                break;
+            case 4: // MOCK - activa Rage
+                Clear();
+                if (!RageMode){
+                    cout << "Te burlas del vacío... y Nihilus ruge en silencio." << endl;
+                    Sleep(1500);
+                    cout << "\033[31mRAGE MODE ACTIVADO!\033[0m" << endl;
+                    Nihi.ATTACK += 20;
+                    Nihi.DEFENSE = 0;
+                    Nihi.MAX_HP += 30;
+                    Nihi.HP = min(Nihi.HP + 30, Nihi.MAX_HP);
+                    RageMode = true;
+                    Sleep(1500);
+                } else {
+                    RegMana = false;
+                    cout << "Nihilus ya está consumido por la furia..." << endl;
+                }
+                cout << endl;
+                break;
+            case 5: // TALK
+                Clear();
+                cout << "Intentas hablar con el vacío..." << endl;
+                Sleep(1500);
+                if(RNGTalk <= 25){
+                    cout << "Una voz susurra: 'Toda luz muere'... Te invade el frío. Pierdes 10 HP." << endl;
+                    p.HP -= 10;
+                } else if(RNGTalk <= 50){
+                    cout << "Escuchas ecos de antiguas ruinas... nada ocurre." << endl;
+                    RegMana = false;
+                } else if(RNGTalk <= 75){
+                    cout << "El vacío responde con compasión inesperada. +5 HP." << endl;
+                    p.HP = min(p.HP + 5, p.MAX_HP);
+                } else {
+                    cout << "Una sombra se retuerce y lanza un susurro mortal. Nihilus incrementa su ataque +5." << endl;
+                    Nihi.ATTACK += 5;
+                }
+                Sleep(2000);
+                NihilusAttackOrSteal(p, Nihi, turnCount);
+                break;
+            case 6: // PACIFY
+                Clear();
+                if(RNGMercy <= 25){
+                    cout << "Recitas palabras antiguas... Nihilus parece titubear." << endl;
+                    if(RandomEvent < 50){
+                        cout << "Tu voz traspasa el vacío. +1 piedad." << endl;
+                        MercyPoints++;
+                    } else {
+                        cout << "El vacío se burla de tus rezos..." << endl;
+                        NihilusAttackOrSteal(p, Nihi, turnCount);
+                    }
+                } else if(RNGMercy <= 50){
+                    cout << "Ofreces tu oro como tributo..." << endl;
+                    if(RandomEvent < 25){
+                        cout << "Nihilus acepta. +2 piedad." << endl;
+                        MercyPoints += 2;
+                        p.MONEY = 0;
+                    } else {
+                        cout << "Nihilus lo rechaza y su furia crece. +5 ATTACK." << endl;
+                        Nihi.ATTACK += 5;
+                    }
+                } else if(RNGMercy <= 75){
+                    cout << "Intentas exorcizar el vacío mismo..." << endl;
+                    if(RandomEvent < 15){
+                        cout << "El susurro se detiene... +2 piedad." << endl;
+                        MercyPoints += 2;
+                    } else {
+                        cout << "Fallas... Nihilus se hace más fuerte. +5 ATTACK." << endl;
+                        Nihi.ATTACK += 5;
+                    }
+                } else {
+                    cout << "Murmuras alabanzas al vacío..." << endl;
+                    if(RandomEvent < 50){
+                        cout << "El vacío escucha... +1 piedad." << endl;
+                        MercyPoints++;
+                    } else {
+                        cout << "Te consume la culpa. Nihilus ataca!" << endl;
+                        NihilusAttackOrSteal(p, Nihi, turnCount);
+                    }
+                }
+                cout << endl;
+                Sleep(1000);
+                break;
+            case 7: // DEFEND
+                RegMana = false;
+                Clear();
+                cout << "Te envuelves en un manto de sombras. Defensa x2 y +20 MANA." << endl;
+                p.MANA = min(p.MANA + 20, p.MAX_MANA);
+                p.DEFENSE = TempDefense * 2;
+                NihilusAttackOrSteal(p, Nihi, turnCount);
+                p.DEFENSE = TempDefense;
+                break;
+            case 8:
+                RegMana = false;
+                Clear();
+                break;
+            default:
+                DefaultError();
+                break;
+            }
+            break;
+
+        case 4: // ITEM
+            RegMana = false;
+            Items(p, option_item);
+            cout << endl;
+            NihilusAttackOrSteal(p, Nihi, turnCount);
+            break;
+
+        case 5: // MERCY
+            if (!Mercy){
+                cout << Nihi.NihilusName << " ignora tu compasión..." << endl;
+                NihilusAttackOrSteal(p, Nihi, turnCount);
+            } else {
+                cout << Nihi.NihilusName << " cede ante tu piedad... ¡VICTORIA!" << endl;
+                p.PacifistPoints++;
+                battleOver = true;
+            }
+            break;
+
+        default:
+            DefaultError();
+            break;
+        }
+
+        if(p.HP <= 0){
+            cout << Nihi.NihilusName << " ha derrotado a " << p.PlayerName << endl;
+            cout << "\033[31mGAME OVER\033[0m\n\033[33mContinue?\033[0m\n1. YES\n2. NO\n";
+            cin >> option_GameOver;
+            switch(option_GameOver){
+            case 1:
+                Clear();
+                cout << "Retornando al último checkpoint..." << endl;
+                Sleep(1000);
+                Checkpoint(p, Nihi, PlayerHp, PlayerMana, NihiHP, NihiMana);
+                Clear();
+                break;
+            case 2:
+                cout << "Adiós..." << endl;
+                Sleep(2000);
+                exit(0);
+                break;
+            default:
+                DefaultError();
+                break;
+            }
+        }
+
+        if(Nihi.HP <= 0){
+            cout << Nihi.NihilusName << " se desvanece en el abismo... ¡VICTORIA!" << endl;
+            p.KILLS++;
+            battleOver = true;
+        }
+
+        if(Nihi.HP <= 20 || MercyPoints >= 3)
+            Mercy = true;
+
+        if(RegMana)
+            p.MANA = min(p.MANA + 10, p.MAX_MANA);
+
+    } while(!battleOver);
+}
