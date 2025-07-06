@@ -2,8 +2,6 @@
 #include <windows.h>
 #include <cstdlib>
 #include "Data/PlayerData/PlayerData.h"
-#include <BattleUtils.h>
-#include "LibraryTraining.h"
 using namespace std; 
 void PrintWithPause_T(const string& Text, int Pause){
     for (char c : Text) {
@@ -63,31 +61,25 @@ void Training(Player& p){
         cout << colors[i] << prefixes[i] << "\033[0m";
         PrintWithPause_T(General[i], 30); 
         cout << "\033[34m" << p.PlayerName << "\033[0m";
-        SleepMS(1000); 
+        LongPause_T(1000); 
         cout << endl;
-        PtC();
-        Clear();
+        cin >> x;
+        system("cls");
     }
     else if (i == 23) {
         PrintWithPause_T(General[i], 500);
-        SleepMS(1000); 
+        LongPause_T(1000); 
         cout << endl;
-        PtC();
-        Clear();
+        cin >> x;
+        system("cls");
     }
     else {
         cout << colors[i] << prefixes[i] << "\033[0m";
         PrintWithPause_T(General[i], 30);
-        SleepMS(1000); 
+        LongPause_T(1000); 
         cout << endl;
-<<<<<<< HEAD
-        PtC();
-        Clear();
-    }
-=======
         cin >> x;
         system("cls");
         }
->>>>>>> 1d5a6d9 (Update 2.3 Finish Tutorial Dialogues)
     }
 }

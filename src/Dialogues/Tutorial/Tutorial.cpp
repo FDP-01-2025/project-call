@@ -22,14 +22,13 @@ void LevelUp(Player& p){
 void PrintWithPause_Tu(const string& Text, int Pause){
     for (char c : Text) {
         cout << c;
-        Sleep(0); // 0 para lectura instantanea.  // "Pause" to normal
+        Sleep(Pause); // 0 para lectura instantanea.  // "Pause" to normal
     }
 }
 void LongPause_Tu(int MiliSeconds){
-    Sleep(0); // 0 para lectura instantanea.  // "MiliSeconds" to normal
+    Sleep(MiliSeconds); // 0 para lectura instantanea.  // "MiliSeconds" to normal
 }
 void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
-    string x;
     string Tutorial[] = {
     "Bien soldado, bienvenido a tu entrenamiento.", //0
     "Por generaciones hemos entrenado arduamente a nuestros batallones.", //1
@@ -174,11 +173,10 @@ void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
         "Pero lárgate, tus compañeros deben estar esperándote... no?", // 17
     };
 
-    /*
 for (int i = 0; i < 11; i++) {
     if (i == 6) {
         cout << "\033[31mNaika: \033[0m";
-        PrintWithPause_Tu(Tutorial[6], 30);
+        PrintWithPause_Tu(Tutorial[6], 20);
         cout << endl << endl;
         PrintWithPause_Tu(Tutorial[7], 20);
         LongPause_Tu(1000); cout << endl;
@@ -187,14 +185,14 @@ for (int i = 0; i < 11; i++) {
         i++;
     } else if (i == 10) {
         cout << "\033[3m";
-        PrintWithPause_Tu(Tutorial[10], 30);
+        PrintWithPause_Tu(Tutorial[10], 20);
         cout << "\033[0m";
         LongPause_Tu(1000); cout << endl;
         PtC();
         Clear();
     } else {
         cout << "\033[31mNaika: \033[0m";
-        PrintWithPause_Tu(Tutorial[i], 30);
+        PrintWithPause_Tu(Tutorial[i], 20);
         LongPause_Tu(1000); cout << endl;
         PtC();
         Clear();
@@ -218,7 +216,7 @@ Clear();
             cout << "\033[31mNaika: \033[0m"; 
             for (char c : Conditionals[Index]){
             cout << c;
-            Sleep(30);
+            Sleep(20);
         }
             Sleep(1000);
             cout << endl;
@@ -231,7 +229,7 @@ Clear();
             cout << "\033[31mNaika: \033[0m";
             for (char c : Conditionals[0]){
             cout << c;
-            Sleep(30);
+            Sleep(20);
         }
             Sleep(1000);
             cout << endl;
@@ -250,11 +248,11 @@ Clear();
             PtC();
         Clear();
             cout << "\033[3m";
-            PrintWithPause_Tu(Tutorial[i], 30);
+            PrintWithPause_Tu(Tutorial[i], 20);
             LongPause_Tu(1000); cout << endl;
             PtC();
         Clear();
-            PrintWithPause_Tu(Tutorial[i+1], 30);
+            PrintWithPause_Tu(Tutorial[i+1], 20);
             LongPause_Tu(1000); cout << endl;
             cout << "\033[0m";
             PtC();
@@ -262,29 +260,29 @@ Clear();
         Clear();
         } else if (i == 20){
             cout << "\033[33mEspada de madera\033[0m: ";
-            PrintWithPause_Tu(Tutorial[i], 30);
+            PrintWithPause_Tu(Tutorial[i], 20);
             cout << "\033[0m";
             LongPause_Tu(1000); cout << endl;
             PtC();
         Clear();
         } else if (i == 19){
             cout << "\033[3m";
-            PrintWithPause_Tu(Tutorial[i], 30); cout << endl;
+            PrintWithPause_Tu(Tutorial[i], 20); cout << endl;
             LongPause_Tu(1000);
             PtC();
         Clear();
         } else if (i == 11){
             cout << "\033[3m";
-            PrintWithPause_Tu(Tutorial[i], 30); cout << endl;
+            PrintWithPause_Tu(Tutorial[i], 20); cout << endl;
             Sleep(1000);
-            PrintWithPause_Tu(Tutorial[i+1], 30);
+            PrintWithPause_Tu(Tutorial[i+1], 20);
             cout << "\033[0m";
             LongPause_Tu(1000); cout << endl;
             PtC();
             i++;
         Clear();
         } else {
-            cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
+            cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 20);
             LongPause_Tu(1000); cout << endl;
             PtC();
             Clear();
@@ -306,7 +304,7 @@ Clear();
             cout << "\033[31mNaika: \033[0m"; 
             for (char c : Conditionals[10]){
             cout << c;
-            Sleep(30);
+            Sleep(20);
         }
             Sleep(1000);
             cout << endl;
@@ -319,7 +317,7 @@ Clear();
             cout << "\033[31mNaika: \033[0m";
             for (char c : Conditionals[0]){
             cout << c;
-            Sleep(30);
+            Sleep(20);
         }
             Sleep(1000);
             cout << endl;
@@ -333,22 +331,22 @@ Clear();
 Clear();
     for (int i = 31; i < 50; i++){
     if (i == 49){
-        cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
+        cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 20);
         LongPause_Tu(1000); cout << endl;
         if (Disobey == true && Disobey2 == true){
-            cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Conditionals[9], 30); cout << endl;
+            cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Conditionals[9], 20); cout << endl;
         }
         PtC();
         Clear();
     } else if (i <= 35 || i >= 39 && i <= 43 || i == 47){
         cout << "\033[3m";
-        PrintWithPause_Tu(Tutorial[i], 30);
+        PrintWithPause_Tu(Tutorial[i], 20);
         LongPause_Tu(1000); cout << endl;
         PtC();
         cout << "\033[0m";
         Clear();
     } else if (i <= 38 || i >= 44 && i <= 46 || i >= 48 && i <= 49){
-        cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
+        cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 20);
         LongPause_Tu(1000); cout << endl;
         PtC();
         Clear();
@@ -369,7 +367,7 @@ Clear();
         cout << "\033[31mNaika: \033[0m";
             for (char c : Conditionals[10]){
             cout << c;
-            Sleep(30);
+            Sleep(20);
         }
             Sleep(1000);
             cout << endl;
@@ -381,7 +379,7 @@ Clear();
             cout << "\033[31mNaika: \033[0m";
             for (char c : Conditionals[0]){
             cout << c;
-            Sleep(30);
+            Sleep(20);
         }
             Sleep(1000);
             cout << endl;
@@ -396,12 +394,12 @@ Clear();
     for (int i = 50; i < 53; i++){
         if (i == 50){
             cout << "Opciones de accion: " << endl;
-            PrintWithPause_Tu(Tutorial[i], 30);
+            PrintWithPause_Tu(Tutorial[i], 20);
             LongPause_Tu(1000); cout << endl;
             PtC();
         Clear();
         } else {
-            cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
+            cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 20);
             LongPause_Tu(1000); cout << endl;
             PtC();
         Clear();
@@ -410,7 +408,7 @@ Clear();
     ShowStats(p);
     for (int i = 53; i < 62; i++){
         cout << "\033[31mNaika: \033[0m";
-        PrintWithPause_Tu(Tutorial[i], 30);
+        PrintWithPause_Tu(Tutorial[i], 20);
         LongPause_Tu(1000); cout << endl;
         PtC();
         Clear();
@@ -433,7 +431,7 @@ Clear();
     case 2:
         for (int i = 11; i < 13; i++){
         cout << "\033[3m";
-        PrintWithPause_Tu(Conditionals[i], 30);
+        PrintWithPause_Tu(Conditionals[i], 20);
         LongPause_Tu(1000); cout << endl;
         PtC();
         cout << "\033[0m";
@@ -445,7 +443,7 @@ Clear();
         cout << "\033[31mNaika: \033[0m";
             for (char c : Conditionals[0]){
             cout << c;
-            Sleep(30);
+            Sleep(20);
         }
         break;
         }
@@ -455,31 +453,30 @@ Clear();
     for (int i = 62; i < 87; i++){
         if (i == 79 || i == 83 || i == 86){
         cout << "\033[3m";
-        PrintWithPause_Tu(Tutorial[i], 30);
+        PrintWithPause_Tu(Tutorial[i], 20);
         cout << "\033[0m";
         LongPause_Tu(1000); cout << endl;
         PtC();
         Clear();
         } else if (i == 65){
         cout << "\033[31mNaika: \033[0m";
-        PrintWithPause_Tu(Tutorial[i], 30);
+        PrintWithPause_Tu(Tutorial[i], 20);
         LongPause_Tu(1000); cout << endl;
         PtC();
         Clear();
         cout << "\033[31mNaika: \033[0m";
-        PrintWithPause_Tu(Conditionals[13], 30);
+        PrintWithPause_Tu(Conditionals[13], 20);
         LongPause_Tu(1000); cout << endl;
         PtC();
         Clear();
         } else {
         cout << "\033[31mNaika: \033[0m";
-        PrintWithPause_Tu(Tutorial[i], 30);
+        PrintWithPause_Tu(Tutorial[i], 20);
         LongPause_Tu(1000); cout << endl;
         PtC();
         Clear();
         }
     }
-*/
 
 string NaikaPostBattle[] = {
     "horas después", // 0
@@ -940,7 +937,20 @@ string NaikaPostBattle[] = {
     "Se lanzan una última sonrisa y se retiran, comienza tu nueva aventura...", // 441
     "Bien soldados, como nos encontramos en tiempo de paz, su trabajo de hoy es solo guardia, siendo ustedes el rango más bajo del ejercito de momento, pero se que aspiraran a más, sin más que decir os deseo suerte.", // 442
     "Yuju que divertida es esta aventura...", // 443
-    "Te trasladaron a la ciudad de Calcis, donde te asignaron como un guardia menor de la puerta este de la ciudad junto a un compañero.", // 444
+    "Te trasladaron a la ciudad de Calcis, donde te asignaron como un guardia menor de la puerta este de la ciudad.", // 445
+    "Ya comenzaste a patrullar la ciudad más temprano de lo que esperabas, pero al menos te asignaron un compañero.", // 446
+    "Olvidalo, es algo molesto.", // 447
+    "Solo se la pasa hablando de como su esposa le fue infiel... y que ahora él vive con su amante.", // 448
+    "Que surrealista es esto, pero al menos te pagan...", // 449
+    "Te quedaste medio dormido y ya acabo tu turno, te despides de tu compañero y te vas a casa finalmente.", // 450
+    "Llegas a tu casa y te preparas para dormir, mañana será un día largo... nuevamente.", // 451
+    "Supones que no habra mucha acción en tu vida desde ahora... o eso creíste.", // 452
+    "Esa misma medianoche algo te despierta... un sonido algo peculiar.", // 453
+    "Apenas es de madrugada... estás muy cansado pero aún así decides investigar.", // 453
+    "A lo lejos observas una manada de slimes ir hacia un bosque... Lo dejas pasar... si no fuera porque te diste cuenta de un detalle.", // 454
+    "Eso que llevan... no es un cuerpo???", // 455
+    "Abandonas tu casa rápido y agarras tu arma para seguirlos.", // 456
+    "Te diriges al bosque lo más rápidamente.", // 457
     };
 
     p.WEAPON = "Espada de madera"; // void NaikaDummyBattle(Player p, NaikaDummy Ndum); no cometer esta estupidez de declarar en vez de llamar
@@ -952,7 +962,7 @@ string NaikaPostBattle[] = {
         for (int i = 0; i < 6; i++){
             if (i != 0){
                 cout << "\033[31mNaika: \033[0m";}
-            PrintWithPause_Tu(Pacifist[i], 30);
+            PrintWithPause_Tu(Pacifist[i], 20);
             LongPause_Tu(1000); cout << endl;
             PtC();
             Clear();
@@ -961,7 +971,7 @@ string NaikaPostBattle[] = {
     } else { // ruta neutral/genocida
         for (int i = 0; i < 1; i++){
             cout << "\033[3m";
-            PrintWithPause_Tu(Genocide[i], 30);
+            PrintWithPause_Tu(Genocide[i], 20);
             LongPause_Tu(1000); cout << endl;
             PtC();
             Clear();
@@ -981,7 +991,7 @@ string NaikaPostBattle[] = {
         case 1:
             for (int i = 1; i < 6; i++){
                 cout << (i != 2 ? "\033[31mNaika: \033[0m":"\033[3m");
-            PrintWithPause_Tu(Genocide[i], 30);
+            PrintWithPause_Tu(Genocide[i], 20);
             LongPause_Tu(1000); cout << endl;
             PtC();
             Clear();
@@ -989,7 +999,7 @@ string NaikaPostBattle[] = {
                 }
             for (int i = 4; i < 6; i++){
                 cout << "\033[31mNaika: \033[0m";
-                PrintWithPause_Tu(Pacifist[i], 30);
+                PrintWithPause_Tu(Pacifist[i], 20);
                 LongPause_Tu(1000); cout << endl;
                 PtC();
                 Clear();
@@ -1000,7 +1010,7 @@ string NaikaPostBattle[] = {
         p.BadRelationNaika = true;
             for (int i = 6; i < 18; i++){
                 cout << (i > 9 ? "\033[31mNaika: \033[0m":"\033[3m");
-            PrintWithPause_Tu(Genocide[i], 30);
+            PrintWithPause_Tu(Genocide[i], 20);
             LongPause_Tu(1000); cout << endl;
             PtC();
             Clear();
@@ -1015,7 +1025,7 @@ string NaikaPostBattle[] = {
 
     for (int i = 0; i < 9; i++){
         cout << (i == 0 || i == 7 || i== 8 ? "\033[3m":"\033[31mNaika: \033[0m");
-        PrintWithPause_Tu(NaikaPostBattle[i], 30);
+        PrintWithPause_Tu(NaikaPostBattle[i], 20);
         LongPause_Tu(1000);
         cout << endl;
         PtC();
@@ -1056,7 +1066,7 @@ string NaikaPostBattle[] = {
         Clear();
             for (int i = 11; i < 16; i++){
                 cout << (i < 14 ? "\033[3m":"\033[31mNaika: \033[0m");
-                PrintWithPause_Tu(NaikaPostBattle[i], 30);
+                PrintWithPause_Tu(NaikaPostBattle[i], 20);
                 LongPause_Tu(1000);
                 cout << endl;
                 PtC();
@@ -1090,7 +1100,7 @@ string NaikaPostBattle[] = {
             case 1:
                 for (int i = 16; i < 21; i++){
                     cout << "\033[31mNaika: \033[0m";
-                    PrintWithPause_Tu(NaikaPostBattle[i], 30);
+                    PrintWithPause_Tu(NaikaPostBattle[i], 20);
                     LongPause_Tu(1000);
                     cout << endl;
                     PtC();
@@ -1107,7 +1117,7 @@ string NaikaPostBattle[] = {
 
             for (int i = 21; i < 59; i++){
                 cout << "\033[31mNaika: \033[0m";
-                PrintWithPause_Tu(NaikaPostBattle[i], 30);
+                PrintWithPause_Tu(NaikaPostBattle[i], 20);
                 LongPause_Tu(1000);
                 cout << endl;
                 PtC();
@@ -1127,7 +1137,7 @@ string NaikaPostBattle[] = {
             case 1:
                 for (int i = 75; i < 414; i++){
                 cout << ( i < 78 ? "\033[3m":"\033[31mNaika: \033[0m");
-                PrintWithPause_Tu(NaikaPostBattle[i], 30);
+                PrintWithPause_Tu(NaikaPostBattle[i], 20);
                     if (i == 86) cout << "\033[34m" << p.PlayerName << "\033[0m";
                 LongPause_Tu(1000);
                 cout << endl;
@@ -1138,7 +1148,7 @@ string NaikaPostBattle[] = {
             case 2:
                 for (int i = 59; i < 75; i++){
                 cout << ( i != 74 ? "\033[31mNaika: \033[0m":"\033[3m");
-                PrintWithPause_Tu(NaikaPostBattle[i], 30);
+                PrintWithPause_Tu(NaikaPostBattle[i], 20);
                 LongPause_Tu(1000);
                 cout << endl;
                 PtC();
@@ -1154,12 +1164,12 @@ string NaikaPostBattle[] = {
 
 Clear();
     cout << "\033[3m" << NaikaPostBattle[415] << "\033[0m" << endl;
-    LongPause_Tu(3000);
+    LongPause_Tu(2000);
     PtC();
     Clear();
         for (int i = 416; i < 434; i++){
             if (i > 417) cout << (i <= 428 ? "\033[32mGeneral: \033[0m":"\033[31mNaika: \033[0m");
-            PrintWithPause_Tu(NaikaPostBattle[i], 30);
+            PrintWithPause_Tu(NaikaPostBattle[i], 20);
             LongPause_Tu(1000);
             cout << endl;
             PtC();
@@ -1169,17 +1179,17 @@ Clear();
     if(!p.BadRelationNaika){
         for (int i = 434; i < 442; i++){
             cout << "\033[31mNaika: \033[0m";
-            PrintWithPause_Tu(NaikaPostBattle[i], 30);
+            PrintWithPause_Tu(NaikaPostBattle[i], 20);
             if (i == 435) cout << "\033[34m" << p.PlayerName << "\033[0m";
             LongPause_Tu(1000);
             cout << endl;
             PtC();
         Clear();
         }
-        for(int i = 442; i < 446; i++){
+        for(int i = 442; i < 459; i++){
             cout << "\033[3m";
             if(i == 443) cout << "\033[32mGeneral: \033[0m";
-            PrintWithPause_Tu(NaikaPostBattle[i], 30);
+            PrintWithPause_Tu(NaikaPostBattle[i], 20);
             LongPause_Tu(1000);
             cout << endl;
             PtC();
