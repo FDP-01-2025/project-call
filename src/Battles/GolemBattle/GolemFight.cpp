@@ -121,8 +121,7 @@ void PlayerAttackGolem(Player& p, Golem& Gol) {
 }
 
 void GolemAttackPlayer(Player& p, Golem& Gol) {
-    int RNGolem = rand() % 101;
-    int damage = (RNGolem < 50) ? Gol.ATTACK : Gol.CRITICAL_ATTACK;
+    int RNGolem = rand() % 101;    
 
     cout << Gol.GolemName << " levanta sus pesados brazos de piedra y golpea..." << endl << endl;
     if (RNGolem < 10){

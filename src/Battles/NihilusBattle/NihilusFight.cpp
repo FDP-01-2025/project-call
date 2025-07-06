@@ -145,20 +145,31 @@ void NihilusAttackOrSteal(Player& p, Nihilus& Nihi, int turn){
         cout << "No te ataca este turno." << endl;
     } else {
         int RNG2 = rand() % 101;
-        if (RNG2 < 25){
+       if (RNG2 < 25) {
             cout << Nihi.NihilusName << " falla su ataque!" << endl;
-        } else if (RNG2 < 50){
-            cout << "¡Golpe crítico del vacío!" << endl;
-            p.HP -= max(0, Nihi.CRITICAL_ATTACK - p.DEFENSE);
-            cout << p.PlayerName << " recibió " << max(0, Nihi.CRITICAL_ATTACK - p.DEFENSE) << " de daño crítico!" << endl;
-        } else {
-            cout << Nihi.NihilusName << " ataca con su daga oscura." << endl;
-            p.HP -= max(0, Nihi.ATTACK - p.DEFENSE);
-            cout << p.PlayerName << " recibió " << max(0, Nihi.ATTACK - p.DEFENSE) << " de daño!" << endl;
+        } else if (RNG2 < 50) {
+            if (p.DEFENSE > Nihi.CRITICAL_ATTACK) {
+                cout << "Nihilus no es capaz de penetrar tu defensa!" << endl;
+            } else {
+                cout << Nihi.NihilusName << " convoca las sombras y lanza un golpe crítico..." << endl;
+                cout << "¡Es un impacto crítico del vacío!" << endl;
+                p.HP -= Nihi.CRITICAL_ATTACK - p.DEFENSE;
+                cout << "\033[34m" << p.PlayerName << "\033[0m" 
+                    << " recibió: " << Nihi.CRITICAL_ATTACK - p.DEFENSE 
+                    << " de daño crítico, tambaleándose por la fuerza oscura." << endl;
+            }
+            } else {
+            if (p.DEFENSE > Nihi.ATTACK) {
+                cout << "Nihilus intenta herirte, pero tu defensa lo detiene!" << endl;
+            } else {
+                cout << Nihi.NihilusName << " ataca con su daga maldita..." << endl;
+                p.HP -= Nihi.ATTACK - p.DEFENSE;
+                cout << "\033[34m" << p.PlayerName << "\033[0m" 
+                     << " recibió: " << Nihi.ATTACK - p.DEFENSE << " de daño." << endl;
+            }
         }
     }
 }
-
 // Función principal de la batalla contra Nihilus
 void NihilusBattle(Player& p, Nihilus& Nihi){
 
@@ -328,47 +339,53 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
                 Clear();
                 if(RNGMercy <= 25){
                     cout << "Recitas palabras antiguas... Nihilus parece titubear." << endl;
-                    if(RandomEvent < 50){
-                        cout << "Tu voz traspasa el vacío. +1 piedad." << endl;
-                        MercyPoints++;
-                    } else {
-                        cout << "El vacío se burla de tus rezos..." << endl;
-                        NihilusAttackOrSteal(p, Nihi, turnCount);
-                    }
+                if(RandomEvent < 50){
+                    cout << "Tu voz traspasa el vacío. +1 piedad." << endl;
+                    MercyPoints++;
+                } else {
+                    cout << "El vacío se burla de tus rezos..." << endl;
+                NihilusAttackOrSteal(p, Nihi, turnCount);
+                }
                 } else if(RNGMercy <= 50){
                     cout << "Ofreces tu oro como tributo..." << endl;
-                    if(RandomEvent < 25){
-                        cout << "Nihilus acepta. +1 piedad." << endl;
-                        MercyPoints++;
-                        p.MONEY = max(0, p.MONEY - 50);
-                        cout << "Perdiste 50 de oro." << endl;
-                        Sleep(1000);
+                if(RandomEvent < 25){
+                    cout << "Nihilus acepta. +1 piedad." << endl;
+                    MercyPoints++;
+                    if (p.MONEY >= 50) {
+                        p.MONEY -= 50;
                     } else {
-                        cout << "Nihilus lo rechaza y su furia crece. +5 ATTACK." << endl;
-                        Nihi.ATTACK += 5;
-                    }
-                } else if(RNGMercy <= 75){
-                    cout << "Intentas exorcizar el vacío mismo..." << endl;
-                    if(RandomEvent < 15){
-                        cout << "El susurro se detiene... +2 piedad." << endl;
-                        MercyPoints += 2;
-                    } else {
-                        cout << "Fallas... Nihilus se hace más fuerte. +5 ATTACK." << endl;
-                        Nihi.ATTACK += 5;
-                    }
-                } else {
-                    cout << "Murmuras alabanzas al vacío..." << endl;
-                    if(RandomEvent < 50){
-                        cout << "El vacío escucha tus plegarias... +1 punto de piedad." << endl;
-                        MercyPoints++;
-                    } else {
-                        cout << "Te consume la culpa. Nihilus ataca!" << endl;
-                        NihilusAttackOrSteal(p, Nihi, turnCount);
-                    }
+                        cout << "No tienes suficiente oro para ofrecer." << endl;
+                        p.MONEY = 0;
                 }
-                cout << endl;
-                Sleep(1000);
-                break;
+            cout << "Perdiste 50 de oro." << endl;
+            Sleep(1000);
+        } else {
+            cout << "Nihilus lo rechaza y su furia crece. +5 ATTACK." << endl;
+            Nihi.ATTACK += 5;
+        }
+    } else if(RNGMercy <= 75){
+        cout << "Intentas exorcizar el vacío mismo..." << endl;
+        if(RandomEvent < 15){
+            cout << "El susurro se detiene... +2 piedad." << endl;
+            MercyPoints += 2;
+        } else {
+            cout << "Fallas... Nihilus se hace más fuerte. +5 ATTACK." << endl;
+            Nihi.ATTACK += 5;
+        }
+    } else {
+        cout << "Murmuras alabanzas al vacío..." << endl;
+        if(RandomEvent < 50){
+            cout << "El vacío escucha tus plegarias... +1 punto de piedad." << endl;
+            MercyPoints++;
+        } else {
+            cout << "Te consume la culpa. Nihilus ataca!" << endl;
+            NihilusAttackOrSteal(p, Nihi, turnCount);
+        }
+    }
+    cout << endl;
+    Sleep(1000);
+    break;
+
             case 7: // DEFEND
                 RegMana = false;
                 Clear();
