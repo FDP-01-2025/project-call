@@ -100,15 +100,26 @@ void CerberoAttackPlayer(Player& p, Cerbero& Cb, int MercyPoints) {
     int baseCrit = Cb.CRITICAL_ATTACK;
 
     if (MercyPoints >= 75) {
-        baseAttack -= 30;
-        baseCrit -= 30;
-    } else if (MercyPoints >= 50) {
-        baseAttack -= 20;
-        baseCrit -= 20;
-    } else if (MercyPoints >= 25) {
-        baseAttack -= 10;
-        baseCrit -= 10;
-    }
+    cout << "El feroz rugido de Cerbero se apaga un poco... parece dudar ante tu compasión." << endl;
+    baseAttack -= 20;
+    baseCrit -= 20;
+    if (baseAttack < 0) baseAttack = 0;
+    if (baseCrit < 0) baseCrit = 0;
+}
+else if (MercyPoints >= 50) {
+    cout << "Por un instante, la mirada de Cerbero se suaviza... su rabia disminuye." << endl;
+    baseAttack -= 15;
+    baseCrit -= 15;
+    if (baseAttack < 0) baseAttack = 0;
+    if (baseCrit < 0) baseCrit = 0;
+}
+else if (MercyPoints >= 25) {
+    cout << "Notas que tus cantos y bailes logran calmar ligeramente a Cerbero." << endl;
+    baseAttack -= 5;
+    baseCrit -= 5;
+    if (baseAttack < 0) baseAttack = 0;
+    if (baseCrit < 0) baseCrit = 0;
+}
 
     if (RNG < 25) {
     cout << Cb.CerberoName << " se lanza rugiendo entre llamas..." << endl;
