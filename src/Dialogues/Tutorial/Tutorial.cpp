@@ -8,16 +8,26 @@
 
 using namespace std;
 
+void LevelUp(Player& p){
+    p.Level = 5; // sube de nvl + Stats
+    p.MAX_HP += 50;
+    p.HP += 50;
+    p.DEFENSE += 5;
+    p.MAX_MANA += 25;
+    p.MANA += 25;
+    p.MONEY += 25;
+    p.PotionsHP += 1;
+    p.PotionsMANA += 1;
+}
 void PrintWithPause_Tu(const string& Text, int Pause){
     for (char c : Text) {
         cout << c;
-        Sleep(0); // 0 para lectura rapida.  // "Pause" to normal
+        Sleep(0); // 0 para lectura instantanea.  // "Pause" to normal
     }
 }
 void LongPause_Tu(int MiliSeconds){
-    Sleep(0); // 0 para lectura rapida.  // "MiliSeconds" to normal
+    Sleep(0); // 0 para lectura instantanea.  // "MiliSeconds" to normal
 }
-
 void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
     string x;
     string Tutorial[] = {
@@ -113,7 +123,7 @@ void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
     bool Disobey = false;
     bool Disobey2 = false;
     bool CancelDialogue = false;
-    int Option, option_kill, option_view, option_Naika, option_consolation;
+    int Option = 0, option_kill = 0, option_view = 0, option_Naika = 0, option_consolation = 0;
 
     string Conditionals[] = {
         "No te hagas el listo, usa las \033[31mOPCIONES\033[0m que te muestra el menu!.", // 0
@@ -153,7 +163,7 @@ void Tutorial(Player& p, Naika Na, NaikaDummy& Ndum){
         "Sueltas tu espada y te abalanzas con el muñeco", // 6
         "Con tus puños empiezas a destruir al muñeco con un odio incandescente", // 7
         "El pobre muñeco, sin alma ni voz, no puede siquiera expresar su agonía.", // 8
-        "\033[31mNaika\033[0m te aparta", // 9
+        "\033[31mNaika\033[0m\033[3m te aparta\033[0m", // 9
         "hey chico para! para! el muñeco no te hizo nada más.", // 10
         "Somos griegos... no monstruos.", // 11
         "Hice con amor este muñeco...", // 12
@@ -172,26 +182,26 @@ for (int i = 0; i < 11; i++) {
         cout << endl << endl;
         PrintWithPause_Tu(Tutorial[7], 20);
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
         i++;
     } else if (i == 10) {
         cout << "\033[3m";
         PrintWithPause_Tu(Tutorial[10], 30);
         cout << "\033[0m";
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
     } else {
         cout << "\033[31mNaika: \033[0m";
         PrintWithPause_Tu(Tutorial[i], 30);
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
     }
 }
 
-system("cls");
+Clear();
     do{
         int Index = rand() % 4+1;
         cout << "Opcion: " << endl;
@@ -212,8 +222,8 @@ system("cls");
         }
             Sleep(1000);
             cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             cout << endl;
             Disobey = true;
             break;
@@ -225,44 +235,44 @@ system("cls");
         }
             Sleep(1000);
             cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             cout << endl;
             break;
         }
     } while (Option != 1);
 
-system("cls");
+Clear();
     for (int i = 11; i < 31; i++){
         if (i == 22){
             cout << "Opcion: " << endl;
             cout << "\033[31m1. ATTACK\033[0m\n2. MAGIC\n3. ACTION\n4. ITEM\n5. MERCY\n" << endl;
-            cin >> x;
-        system("cls");
+            PtC();
+        Clear();
             cout << "\033[3m";
             PrintWithPause_Tu(Tutorial[i], 30);
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-        system("cls");
+            PtC();
+        Clear();
             PrintWithPause_Tu(Tutorial[i+1], 30);
             LongPause_Tu(1000); cout << endl;
             cout << "\033[0m";
-            cin >> x;
+            PtC();
         i++;
-        system("cls");
+        Clear();
         } else if (i == 20){
             cout << "\033[33mEspada de madera\033[0m: ";
             PrintWithPause_Tu(Tutorial[i], 30);
             cout << "\033[0m";
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-        system("cls");
+            PtC();
+        Clear();
         } else if (i == 19){
             cout << "\033[3m";
             PrintWithPause_Tu(Tutorial[i], 30); cout << endl;
             LongPause_Tu(1000);
-            cin >> x;
-        system("cls");
+            PtC();
+        Clear();
         } else if (i == 11){
             cout << "\033[3m";
             PrintWithPause_Tu(Tutorial[i], 30); cout << endl;
@@ -270,14 +280,14 @@ system("cls");
             PrintWithPause_Tu(Tutorial[i+1], 30);
             cout << "\033[0m";
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
+            PtC();
             i++;
-        system("cls");
+        Clear();
         } else {
             cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
         }
     }
 
@@ -300,8 +310,8 @@ system("cls");
         }
             Sleep(1000);
             cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             cout << endl;
             Disobey2 = true;
             break;
@@ -313,14 +323,14 @@ system("cls");
         }
             Sleep(1000);
             cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             cout << endl;
             break;
         }
     } while (true);
     
-system("cls");
+Clear();
     for (int i = 31; i < 50; i++){
     if (i == 49){
         cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
@@ -328,20 +338,20 @@ system("cls");
         if (Disobey == true && Disobey2 == true){
             cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Conditionals[9], 30); cout << endl;
         }
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
     } else if (i <= 35 || i >= 39 && i <= 43 || i == 47){
         cout << "\033[3m";
         PrintWithPause_Tu(Tutorial[i], 30);
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
+        PtC();
         cout << "\033[0m";
-        system("cls");
+        Clear();
     } else if (i <= 38 || i >= 44 && i <= 46 || i >= 48 && i <= 49){
         cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
         }
     }
 
@@ -363,8 +373,8 @@ system("cls");
         }
             Sleep(1000);
             cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             cout << endl;
             break;
         default:
@@ -375,26 +385,26 @@ system("cls");
         }
             Sleep(1000);
             cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             cout << endl;
             break;
         }
     } while (true);
 
-system("cls");
+Clear();
     for (int i = 50; i < 53; i++){
         if (i == 50){
             cout << "Opciones de accion: " << endl;
             PrintWithPause_Tu(Tutorial[i], 30);
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-        system("cls");
+            PtC();
+        Clear();
         } else {
             cout << "\033[31mNaika: \033[0m"; PrintWithPause_Tu(Tutorial[i], 30);
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-        system("cls");
+            PtC();
+        Clear();
         }
     }
     ShowStats(p);
@@ -402,8 +412,8 @@ system("cls");
         cout << "\033[31mNaika: \033[0m";
         PrintWithPause_Tu(Tutorial[i], 30);
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
     }
 
     bool Close = false;
@@ -411,7 +421,7 @@ system("cls");
     do{
     cin >> Option;
 
-system("cls");
+Clear();
     switch (Option){
     case 1:
         ShowStats(Na);
@@ -425,9 +435,9 @@ system("cls");
         cout << "\033[3m";
         PrintWithPause_Tu(Conditionals[i], 30);
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
+        PtC();
         cout << "\033[0m";
-        system("cls");
+        Clear();
         }
         Close = true;
         break;
@@ -448,25 +458,25 @@ system("cls");
         PrintWithPause_Tu(Tutorial[i], 30);
         cout << "\033[0m";
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
         } else if (i == 65){
         cout << "\033[31mNaika: \033[0m";
         PrintWithPause_Tu(Tutorial[i], 30);
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
         cout << "\033[31mNaika: \033[0m";
         PrintWithPause_Tu(Conditionals[13], 30);
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
         } else {
         cout << "\033[31mNaika: \033[0m";
         PrintWithPause_Tu(Tutorial[i], 30);
         LongPause_Tu(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
         }
     }
 */
@@ -567,7 +577,7 @@ string NaikaPostBattle[] = {
     "Lamento que me veas en este estado tan deplorado...", //82
     "Se que no es nada profesional...", //83
     "Nadie me ha visto llorar... ni siquiera ellos...", //84
-    "He estado sola en esta situación...", //85    /////
+    "He estado sola en esta situación...", //85
     "Y por eso aprecio mucho tu gesto ", //86
     "Me haces recordar mucho a un viejo amigo.", //87
     "Recuerdo que cuando comenzamos nuestro entrenamiento no teníamos ni los 14 cumplidos.", //88
@@ -618,13 +628,13 @@ string NaikaPostBattle[] = {
     "Leo era del primer batallón... y yo del segundo...", //133
     "Tenía un nudo en la garganta... Íbamos a pelear en diferentes zonas...", //134
     "Pero antes de partir...", //135
-    "me tomo de la mano y...", //136
-    "me declaro su amor... nos prometimos que si sobrevivimos a esto...", //137
-    "Nos casariamos...", //138
-    "No contuve las lágrimas de felicidad y acepté...", //139
+    "Él me abrazó...", //136
+    "Me dijo que sea fuerte, nos tenemos el uno al otro y que esta batalla no nos separara.", //137
+    "Y que sin importar lo que pase, siempre estaríamos juntos.", //138
+    "No contuve las lágrimas... No quería perder a quien se había convertido en mi familia.", //139
     "Pero...", //140
     "No era el momento...", //141
-    "Me soltó la mano... Tomó su arma y lo ví desaparecer entre los escombros...", //142
+    "Me soltó... Tomó su arma y lo ví desaparecer entre los escombros...", //142
     "Me sequé las lágrimas y tomé mi arma para dirigirme a mi batallón...", //143
     "Y entre en combate...", //144
     "Gracias a él pude valerme por cuenta propia...", //145
@@ -635,8 +645,8 @@ string NaikaPostBattle[] = {
     "Di todo pero... el arma se me resbaló...", //150
     "Y en ese momento... solo vi a un ateniense alzar su arma y preparado para cortarme el cuelo...", //151
     "Yo solo... me rendí... y esperar lo peor...", //152
-    "Derrame lágrimas... No por morir... si no porque no volveré a ver a mi prometido...", //153
-    "Romperé la promesa...", //154
+    "Derrame lágrimas... No por morir... si no porque no volveré a ver a quien consideraba mi hermano mayor...", //153
+    "Y con mi perdida no quería que él sufriera... Pero no habia nada que pudiera hacer ya...", //154
     "Solo cerré los ojos... vi pasar mi vida... todo iba a cámara lenta...", //155
     "Pero justo cuando sentía el filo de la espada en el cuello.", //156
     "Escuche su voz... y lo ví.", //157
@@ -646,7 +656,7 @@ string NaikaPostBattle[] = {
     "Hizo lo imposible por salvarme...", //161
     "Me abrazó con todas sus fuerzas", //162
     "Y me dijo que si yo hubiese muerto...", //163
-    "Él no se hubiera perdonado...", //164
+    "Él no se lo hubiera perdonado...", //164
     "Pero al vernos nos llenamos de determinación y no nos detendremos hasta acabar con esto... muriendo o salvando nuestro reino...", //165
     "Tomamos nuestras armas y volvimos al frente...", //166
     "Solo vi que peleamos codo a codo...", //167
@@ -665,7 +675,7 @@ string NaikaPostBattle[] = {
     "Escuchamos explosiones...", //180
     "Ellos... ya empezaron el asedio con sus nuevas armas...", //181
     "Catapultas... Helepolis... Balistas...", //182
-    "No pasó ni la hora y nuestras bajas se dispararon...", //183
+    "No pasó ni el día y nuestras bajas se dispararon...", //183
     "Ya estábamos peleando bajo escombros cuando tomé consciencia de la situación...",//184
     "Polvo... sangre... escombros... media ciudad ya estaba en ruinas...", //185
     "Mire a los ojos a Leo...", //186
@@ -675,8 +685,8 @@ string NaikaPostBattle[] = {
     "Mis heridas... El olor a sangre.. compañeros perdidos... no se como no colapse en ese momento...", //190
     "Leo solo me tomó de la mano y me dijo que todo estaría bien mientras siguiéramos juntos...", //191
     "Yo estuve a punto de estallar en lágrimas... balbuceando que moriríamos...", //192
-    "Pero Leo solo se calmó... y me besó.", //193
-    "Fue mágico...", //194
+    "Pero Leo solo se calmó... y me abrazó.", //193
+    "Él me dijo que todo estaría bien... y que si moríamos o sobrevivíamos... lo haríamos juntos.", //194
     "Logró calmarme y me dijo que era una ateniense... que Thanatos no nos visitara hoy...", //195
     "La sangre de Magnus corre por nuestras venas de guerreros...", //196
     "Y nuevamente me levante... me secó las lágrimas... y yo asenté con la cabeza...", //197
@@ -790,13 +800,13 @@ string NaikaPostBattle[] = {
     "Con esa nueva transformación.", // 304
     "Me entró una idea...", // 305
     "No sabía que pasaba pero lo intente...", // 306
-    "Me dirigí a las niñas… no respiraban...", // 307
+    "Me dirigí a las niñas... no respiraban...", // 307
     "Así que me concentre y rece a Zeus para ver si mi idea funcionaba...", // 308
-    "Si puedo arrebatarme el alma… ¿Puedo hacer lo contrario? me dije...", // 309
+    "Si puedo arrebatarme el alma... ¿Puedo hacer lo contrario? me dije...", // 309
     "Así que me tomo varios minutos concentrandome...", // 310
     "No podía llorar por la muerte de mi prometido ahora...", // 311
     "Pasaron varios minutos hasta que...", // 312
-    "Tosieron… estaban débiles… pero con vida...", // 313
+    "Tosieron... estaban débiles... pero con vida...", // 313
     "Apenas podían moverse...", // 314
     "Así que tomé una decisión difícil...", // 315
     "Tomar prestadas sus almas.", // 316
@@ -804,31 +814,31 @@ string NaikaPostBattle[] = {
     "Así que empuñe el arma y no perdí el tiempo.", // 318
     "Estaba en contrarreloj...", // 319
     "Terminaré esta guerra de una vez por todas...", // 320
-    "Ya no estaba agotada... me sentía liviana… experimente...", // 321
-    "Volvieron a caer piedras... pero use mi magia… con un enorme esfuerzo logré redirigirlas... acabando con medio batallón a la lejanía.", // 322
+    "Ya no estaba agotada... me sentía liviana... experimenté este creciente poder...", // 321
+    "Volvieron a caer piedras... pero use mi magia... con un enorme esfuerzo logré redirigirlas... acabando con medio batallón a la lejanía.", // 322
     "Era un progreso.", // 323
     "No perdí el tiempo y fui directo al frente de la guerra...", // 324
     "Yo cambie el rumbo de la guerra.", // 325
-    "En cuestión de horas frene su avance... empezaron a retroceder...", // 326
+    "En cuestión de un día frene su avance... empezaron a retroceder...", // 326
     "Lidere las tropas y logre subir su moral...", // 327
-    "Nadie sabía quién era… pero estaban felices de estar en su bando... y los persas… aterrados...", // 328
+    "Nadie sabía quién era... pero estaban felices de estar en su bando... y los persas… aterrados...", // 328
     "La gota que derramó el vaso fue cuando concentré todo mi mana en una roca del trabuquete que tomó la decisión de apuntarme...", // 329
     "Grave error...", // 330
     "para ellos...", // 331
-    "Con odio les redirige la piedra… y logre atinarle a su juguete...", // 332
+    "Con odio les redirige la piedra... y logre atinarle a su juguete...", // 332
     "Se me grabó su cara de horror cuando vieron que su arma estrella estaba en ruinas...", // 333
     "La retirada fue pronta...", // 334
     "Ganamos...", // 335
     "Llegue a ver el atardecer con sangre en mis manos... feliz de poner fin a esto...", // 336
     "pero… estaba vacía...", // 337
     "Mientras me idolatraban...", // 338
-    "Yo solo caí de espaldas... me desplome y llore... alce mi reino a la victoria... pero con una promesa rota...", // 339
+    "Yo solo caí de espaldas... me desplomé y lloré... alce mi reino a la victoria... pero con una promesa rota...", // 339
     "No era tiempo para llorar... tenía asuntos pendientes...", // 340
     "Fui directo donde magnus... y lo asesiné a sangre fría...", // 341
-    "Evite que continuara la guerra… pero fue una pésima decisión como heroína...", // 342
+    "Evite que continuara la guerra... pero fue una pésima decisión como heroína...", // 342
     "En un solo día entre en los libros de historia... interferí en 2 eventos históricos que tuvieron que terminar de maneras diferentes.", // 343
     "Fui declarada Héroe de guerra de esa forma... pese a que no sabían quién era... y hasta el momento nadie sabe de mi paradero... claro en esa forma.", // 344
-    "Atenas siguió soberana y con la Dinastia Aira vencedora...", // 345
+    "Atenas siguió soberana y con la Dinastía Aira vencedora...", // 345
     "La reina y otros pocos compañeros que sobrevivieron tomamos puestos importantes en el ejército.", // 346
     "De hecho tú actual general es un veterano también.", // 347
     "Pero tiene un puesto más alto que él mío al ser cercano a la familia real.", // 348
@@ -836,15 +846,15 @@ string NaikaPostBattle[] = {
     "Regrese con las niñas... con hambre... frío... y sed...", // 350
     "Les regrese la totalidad de sus almas... o eso creía...", // 351
     "Perdí mi transformación... pero es lo de menos...", // 352
-    "Les di abrigo... comida y agua... iba a llevarlas para que las sanarán...", // 353
+    "Les di abrigo... comida y agua... iba a llevarlas para que las sanaran...", // 353
     "Pero una de ellas... estaba más débil que la otra...", // 354
     "No controle bien mi poder... y gaste más el alma de una que de la otra...", // 355
     "El precio que pagué fue caro...", // 356
-    "La abrace y entre lágrimas le implore perdón...", // 357
+    "La abracé y entre lágrimas le imploré perdón...", // 357
     "El sacrificio de Leo... fue en vano...", // 358
-    "Ella… solo miro... y me llamó madre...", // 359
-    "Están agradecidas por ser la única que se preocupó por ellas...", // 360
-    "Ambas me calmaron… la hermana mayor no tuvo ningún rencor conmigo...", // 361
+    "Ella... solo miró... y me llamó madre...", // 359
+    "Éllas están agradecidas por ser la única que se preocupó por ellas... no tenía la culpa.", // 360
+    "Ambas me calmaron.. la hermana mayor no tuvo ningún rencor conmigo...", // 361
     "Era muy madura... sabía que estábamos en una situación crítica...", // 362
     "Pero no contuvo las lágrimas de ver la vida de su hermana menor apagándose...", // 363
     "Se dieron un último abrazo...", // 364
@@ -852,63 +862,100 @@ string NaikaPostBattle[] = {
     ".....", // 366
     "Esa misma noche la enterramos afuera de Atenas...", // 367
     "Se me acercó y me dijo...", // 368
-    "Madre... no te preocupes... diste tu mejor esfuerzo… te amo...", // 369
-    "No contuve las lágrimas y la abrace... es com... si fuese la hija que Leo me dejó...", // 370
+    "Madre... no te preocupes... diste tu mejor esfuerzo... te amo...", // 369
+    "No contuve las lágrimas y la abracé... ella actuaba exactamente como Leo...", // 370
     "También en ese momento me entregó algo...", // 371
     "Era una pequeña fracción del alma de su hermana...", // 372
     "Me mencionó que antes de fallecer su hermana... le dijo que cuando muera no dejen ir su alma... que desearía estar con ellos.", // 373
     "Y que si se desata nuevamente una crisis similar...", // 374
-    "Que almenos ella me acompañaria... indirectamente me presto un poder devastador... y yo... podre evitar que otros niños pasen por algo similar a lo que vivimos...", // 375
-    "Acepte...", // 376
+    "Que al menos ella me acompañaría... indirectamente me prestó un poder devastador... y yo... podré evitar que otros niños pasen por algo similar a lo que vivimos...", // 375
+    "Acepté...", // 376
     "Y bueno...", // 377
-    "abre su puño y le muestra su alma", // 378
+    "\033[3mAbre su puño y le muestra su alma\033[0m", // 378
     "Tengo acceso nuevamente a tal poder... pero... no quisiera usarlo nunca...", // 379
     "Sería como usar a mi hija como arma...", // 380
-    "Cierra el puño", // 381
+    "Y si tuviera que usarlo... sería en una situación de extrema importancia.", // 381
     "Así que para mí... aún es como si la mantuviese con vida...", // 382
-    "Y en cambio su hermana... la lleve a un orfanato… No permití que viviera lo mismo que yo...", // 383
-    "Y actualmente dirige su propio orfanato... y es una gran madre para muchos niños...", // 384
+    "Y en cambio su hermana... la llevé a un orfanato... No permití que viviera lo mismo que yo...", // 383
+    "Y actualmente dirige ese mismo orfanato... y es una gran madre para muchos niños...", // 384
     "Incluso aprendió a hornear deliciosa comida...", // 385
     "Te digo que la comida que estabas comiendo tú y ellos.", // 386
     "La preparó ella para ustedes, hecha con todo su amor.", // 387
-    "Así que no la desperdicies si no quieres quedarte sin cabeza he...", // 388
-    "se seca las lágrimas", // 389
+    "Así que no la desperdicies si no quieres quedarte sin cabeza Eh...", // 388
+    "\033[3mSe seca las lágrimas\033[0m", // 389
     "Te agradezco mucho que me haya desahogado contigo...", // 390
     "Enserio gracias...", // 391
     "Y dime...", // 392
     "¿Te gustó mi historia?", // 393
     "Lo siento si te hice perder el tiempo...", // 394
     "Vaya paso casi la hora...", // 395
-    "Tus compañeros ya se deben estar pregutando que hacemos aqui tanto tiempo...", // 396
+    "Tus compañeros ya se deben estar preguntando que hacemos aqui tanto tiempo...", // 396
     "Pero... antes de que regresemos", // 397
-    "No tienes dudas sobre mi historia?", // 398
-    // SI
-    "",
-    // NO
-    "",
+    "No... no le digas nada a ellos... vale?", // 398
+    "No quiero que se preocupen de más por mi", // 399
+    "Me verían como una figura materna... sabes que si les sucede algo a ellos...", // 400
+    "Me afectaría mucho... y peor.", // 401
+    "Bueno en fin, anda chico.", // 402
+    "Tus amigos deben estarse preguntando que hacemos los 2 aquí afuera.", // 403
+    "No queremos que se esparzan rumores o si?", // 404
+    "Toma.", // 405
+    "\033[3mTe regala la copa de vino\033[0m", // 406
+    "Pronto os alcanzo...", // 407
+    "Cuídate mucho, y gracias por escucharme.", // 408
+    "\033[3mSe despide con una sonrisa\033[0m", // 409
+    "Disfruta, la aún noche es joven.", // 410
+    "Y oye, ten cuidado... por alguna razón presiento que una gran tormenta se aproxima...", // 411
+    "Y apenas se estan formando las nubes...", // 412
+    "...Bueno, ya no te interrumpo más, anda ve con tus amigos.", // 413
+    "Nos vemos pronto en el campo de entrenamiento mañana.", // 414
+    /// 3 YEARS LATER
+    "3 AÑOS DESPUES", // 415
+    "\033[3mLograste cumplir tu entrenamiento y te graduaras con honores.\033[0m", // 416
+    "\033[3mLlegas a tu ceremonia de graduación, donde te esperan tus compañeros, Naika y el General.\033[0m", // 417
+    "Hoy, es un día especial cadetes.", // 418
+    "Hoy celebramos un momento decisivo en la vida de cada uno de ustedes, donde ya no sera considerados cadetes.", // 419
+    "Si no hoy ya se volveran soldados de pleno derecho del ejercito ateniense.", // 420
+    "Han superado pruebas duras, que no cualquiera podría soportar.", // 421
+    "Han demostrado su valentía, fuerza y determinación.", // 422
+    "Llegaron aquí siendo niños, y ahora parten como hombres forjados en la adversidad.", // 423
+    "La guerra no perdona, pero ha templado su espíritu y su cuerpo.", // 424
+    "Cada uno de ustedes es un pilar de esta nación, un escudo contra la oscuridad que amenaza nuestra tierra.", // 425
+    "Recuerden siempre que el verdadero valor no está en la fuerza, sino en la lealtad, el honor y la voluntad de proteger a los suyos.", // 426
+    "Salgan con la frente en alto, porque de ustedes depende el futuro de nuestro pueblo.", // 427
+    "Bien hecho muchachos.", // 428
+    "Fue un completo honor y orgullo haber sido su tutora.", // 429
+    "Compartimos muchos momentos especiales.", // 430
+    "Realmente espero que se vuelvan grandes soldados de prestigio.", // 431
+    "Cuídense entre ustedes y rompanse una pierna.", // 432
+    "Y recuerden, siempre estaré aquí para apoyarlos en lo que necesiten.", // 433
+    // Badrelation = false
+    "Y tú ", // 434
+    "\033[3mTe mira con una sonrisa\033[0m.", // 435
+    "¿Cómo te sientes ahora que te graduas?.", // 436
+    "¿Estás emocionado por lo que viene?.", // 437
+    "Has crecido mucho desde cruzamos miradas.", // 438
+    "Cuídate mucho en serio.", // 439
+    "Anhelo el momento en que nos volvamos a ver.", // 440
+    // FIN
+    "Se lanzan una última sonrisa y se retiran, comienza tu nueva aventura...", // 441
+    "Bien soldados, como nos encontramos en tiempo de paz, su trabajo de hoy es solo guardia, siendo ustedes el rango más bajo del ejercito de momento, pero se que aspiraran a más, sin más que decir os deseo suerte.", // 442
+    "Yuju que divertida es esta aventura...", // 443
+    "Te trasladaron a la ciudad de Calcis, donde te asignaron como un guardia menor de la puerta este de la ciudad junto a un compañero.", // 444
     };
 
     p.WEAPON = "Espada de madera"; // void NaikaDummyBattle(Player p, NaikaDummy Ndum); no cometer esta estupidez de declarar en vez de llamar
     NaikaDummyBattle(p, Ndum); // funcion de batalla
-    p.Level = 5;
-    p.MAX_HP += 50;
-    p.HP+= 50;
-    p.DEFENSE += 5;
-    p.MAX_MANA += 25;
-    p.MANA += 25;
-    p.MONEY += 25;
-    p.PotionsHP += 1;
-    p.PotionsMANA+= 1;
+    LevelUp(p); // sube de nivel al jugador
     Sleep(2000);
-system("cls");
+    Clear();
     if (!p.KilledNaikaDummy){ // ruta pacifista
         for (int i = 0; i < 6; i++){
             if (i != 0){
                 cout << "\033[31mNaika: \033[0m";}
             PrintWithPause_Tu(Pacifist[i], 30);
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             }
 
     } else { // ruta neutral/genocida
@@ -916,12 +963,12 @@ system("cls");
             cout << "\033[3m";
             PrintWithPause_Tu(Genocide[i], 30);
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             cout << "\033[0m";
         }
 
-            while (option_kill != 1 && option_kill != 2){
+        while (option_kill != 1 && option_kill != 2){
                 cout << "Que prosigue?\n1. Pose de victoria\n2. Destruir" << endl;
                 cin >> option_kill;
             if (option_kill < 1 || option_kill > 2){
@@ -929,23 +976,23 @@ system("cls");
             }
         }
 
-    system("cls");
+    Clear();
         switch (option_kill){
         case 1:
             for (int i = 1; i < 6; i++){
                 cout << (i != 2 ? "\033[31mNaika: \033[0m":"\033[3m");
             PrintWithPause_Tu(Genocide[i], 30);
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             cout << "\033[0m";
                 }
             for (int i = 4; i < 6; i++){
                 cout << "\033[31mNaika: \033[0m";
                 PrintWithPause_Tu(Pacifist[i], 30);
                 LongPause_Tu(1000); cout << endl;
-                cin >> x;
-                system("cls");
+                PtC();
+                Clear();
                 cout << "\033[0m";
             }
             break;
@@ -955,8 +1002,8 @@ system("cls");
                 cout << (i > 9 ? "\033[31mNaika: \033[0m":"\033[3m");
             PrintWithPause_Tu(Genocide[i], 30);
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
             cout << "\033[0m";
                 }
             break;
@@ -971,8 +1018,8 @@ system("cls");
         PrintWithPause_Tu(NaikaPostBattle[i], 30);
         LongPause_Tu(1000);
         cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
     };
 
     if (p.BadRelationNaika){
@@ -981,10 +1028,10 @@ system("cls");
             cout << c;
         }
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
         cout << "\033[0m";
-// si es genocida se cancelan los dialogos
+// si mataste a dummy
 
     } else {
         cout << "\033[3m";
@@ -992,8 +1039,8 @@ system("cls");
             cout << c;
         }
             LongPause_Tu(1000); cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
         cout << "\033[0m";
 
         while (option_view != 1 && option_view != 2){
@@ -1006,30 +1053,30 @@ system("cls");
 
         switch (option_view){
         case 1:
-        system("cls");
+        Clear();
             for (int i = 11; i < 16; i++){
                 cout << (i < 14 ? "\033[3m":"\033[31mNaika: \033[0m");
                 PrintWithPause_Tu(NaikaPostBattle[i], 30);
                 LongPause_Tu(1000);
                 cout << endl;
-                cin >> x;
-                system("cls");
+                PtC();
+                Clear();
             };
             break;
         case 2:
-        system("cls");
+        Clear();
             cout << "\033[3m" << NaikaPostBattle[9] << "\033[0m" << endl;
             Sleep(1000);
-            cin >> x;
+            PtC();
             CancelDialogue = true;
-            system("cls");
+            Clear();
             break;
         default:
             DefaultError();
             break;
         }
 
-        if (!CancelDialogue){
+        if (!CancelDialogue){ // si no se cancela el dialogo
             while (option_Naika != 1 && option_Naika != 2){
             cout << "1. Nada\n2. ¿Sucede algo?\n";
             cin >> option_Naika;
@@ -1038,7 +1085,7 @@ system("cls");
             }
         }
 
-        system("cls");
+        Clear();
             switch (option_Naika){
             case 1:
                 for (int i = 16; i < 21; i++){
@@ -1046,8 +1093,8 @@ system("cls");
                     PrintWithPause_Tu(NaikaPostBattle[i], 30);
                     LongPause_Tu(1000);
                     cout << endl;
-                    cin >> x;
-                system("cls");
+                    PtC();
+                Clear();
                 };
                 break;
             case 2:
@@ -1063,8 +1110,8 @@ system("cls");
                 PrintWithPause_Tu(NaikaPostBattle[i], 30);
                 LongPause_Tu(1000);
                 cout << endl;
-                cin >> x;
-            system("cls");
+                PtC();
+            Clear();
             }
             
             while (option_consolation != 1 && option_consolation != 2){
@@ -1075,17 +1122,17 @@ system("cls");
             }
         }
 
-        system("cls");
+        Clear();
             switch (option_consolation){
             case 1:
-                for (int i = 75; i < 398; i++){
+                for (int i = 75; i < 414; i++){
                 cout << ( i < 78 ? "\033[3m":"\033[31mNaika: \033[0m");
                 PrintWithPause_Tu(NaikaPostBattle[i], 30);
                     if (i == 86) cout << "\033[34m" << p.PlayerName << "\033[0m";
                 LongPause_Tu(1000);
                 cout << endl;
-                cin >> x;
-            system("cls");
+                PtC();
+            Clear();
                     }
                 break;
             case 2:
@@ -1094,14 +1141,49 @@ system("cls");
                 PrintWithPause_Tu(NaikaPostBattle[i], 30);
                 LongPause_Tu(1000);
                 cout << endl;
-                cin >> x;
-            system("cls");
+                PtC();
+            Clear();
                     }
                 break;
             default:
                 DefaultError();
                 break;
             }
+        } // si no se cancela el dialogo
+    }
+
+Clear();
+    cout << "\033[3m" << NaikaPostBattle[415] << "\033[0m" << endl;
+    LongPause_Tu(3000);
+    PtC();
+    Clear();
+        for (int i = 416; i < 434; i++){
+            if (i > 417) cout << (i <= 428 ? "\033[32mGeneral: \033[0m":"\033[31mNaika: \033[0m");
+            PrintWithPause_Tu(NaikaPostBattle[i], 30);
+            LongPause_Tu(1000);
+            cout << endl;
+            PtC();
+        Clear();
+        }
+
+    if(!p.BadRelationNaika){
+        for (int i = 434; i < 442; i++){
+            cout << "\033[31mNaika: \033[0m";
+            PrintWithPause_Tu(NaikaPostBattle[i], 30);
+            if (i == 435) cout << "\033[34m" << p.PlayerName << "\033[0m";
+            LongPause_Tu(1000);
+            cout << endl;
+            PtC();
+        Clear();
+        }
+        for(int i = 442; i < 446; i++){
+            cout << "\033[3m";
+            if(i == 443) cout << "\033[32mGeneral: \033[0m";
+            PrintWithPause_Tu(NaikaPostBattle[i], 30);
+            LongPause_Tu(1000);
+            cout << endl;
+            PtC();
+        Clear();
         }
     }
 }

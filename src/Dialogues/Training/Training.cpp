@@ -80,8 +80,14 @@ void Training(Player& p){
         PrintWithPause_T(General[i], 30);
         SleepMS(1000); 
         cout << endl;
+<<<<<<< HEAD
         PtC();
         Clear();
     }
+=======
+        cin >> x;
+        system("cls");
+        }
+>>>>>>> 1d5a6d9 (Update 2.3 Finish Tutorial Dialogues)
     }
 }

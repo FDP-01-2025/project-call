@@ -42,12 +42,12 @@ int main(){
 system("cls");
     // Prologue();
     // Training(p);
-    // Tutorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
+    Tutorial(p, Na, Ndum); // no es necesario Num porque es una variable local, se llamara la funcion de batalla, nacera y morira en Tutorial.cpp
 
     // EliteSBattle(p, S);
     // TrollBattle(p, Tr); // batalla futura
     // GolemBattle(p, Gol);
-    NihilusBattle(p, Nihi);
+    // NihilusBattle(p, Nihi);
 
     return 0;
 }
