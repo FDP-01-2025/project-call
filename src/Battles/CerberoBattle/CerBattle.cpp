@@ -96,47 +96,48 @@ void PlayerMagic(Player& p, Cerbero& Cb, bool& Return) {
 
 void CerberoAttackPlayer(Player& p, Cerbero& Cb, int MercyPoints) {
     int RNG = rand() % 101;
-    int baseAttack = Cb.ATTACK;
-    int baseCrit = Cb.CRITICAL_ATTACK;
 
     if (MercyPoints >= 75) {
-        baseAttack -= 30;
-        baseCrit -= 30;
+        cout << "El feroz rugido de Cerbero se apaga un poco... parece dudar ante tu compasión." << endl;
+        Cb.ATTACK -= 20;
+        Cb.CRITICAL_ATTACK -= 20;
     } else if (MercyPoints >= 50) {
-        baseAttack -= 20;
-        baseCrit -= 20;
+        cout << "Por un instante, la mirada de Cerbero se suaviza... su rabia disminuye." << endl;
+        Cb.ATTACK -= 15;
+        Cb.CRITICAL_ATTACK -= 15;
     } else if (MercyPoints >= 25) {
-        baseAttack -= 10;
-        baseCrit -= 10;
+        cout << "Notas que tus cantos y bailes logran calmar ligeramente a Cerbero." << endl;
+        Cb.ATTACK -= 5;
+        Cb.CRITICAL_ATTACK -= 5;
     }
 
-    if (RNG < 25) {
-    cout << Cb.CerberoName << " se lanza rugiendo entre llamas..." << endl;
-    Sleep(500);
-    cout << "¡Pero resbaló sobre el terreno ardiente y falla el ataque!" << endl;
-} else if (RNG < 50) {
-    if (p.DEFENSE > baseCrit) {
-        cout << "Cerbero se abalanza con furia, pero tu defensa resiste el impacto!" << endl;
-    } else {
-        cout << "¡Cerbero abre sus tres fauces y lanza un mordisco devastador!" << endl;
+    Sleep(500); // pausa para dramatismo xd
+
+if (RNG < 25) {
+        cout << Cb.CerberoName << " se lanza rugiendo entre llamas..." << endl;
         Sleep(500);
-        cout << "¡Es un golpe crítico!" << endl;
-        int damage = baseCrit - p.DEFENSE;
-        p.HP -= damage;
-        cout << "\033[34m" << p.PlayerName << "\033[0m recibió: " << damage << " de daño crítico, tambaleándose ante el poder infernal." << endl;
-    }
-} else {
-    if (p.DEFENSE > baseAttack) {
-        cout << Cb.CerberoName << " ataca con rabia..." << endl;
-        Sleep(500);
-        cout << "¡Pero tu armadura resiste el impacto del fuego infernal!" << endl;
+        cout << "¡Pero resbala sobre el terreno ardiente y falla el ataque!" << endl;
+    } else if (RNG < 50) {
+        if (p.DEFENSE > Cb.CRITICAL_ATTACK) {
+            cout << "Cerbero se abalanza con furia, pero tu defensa resiste el impacto infernal!" << endl;
+        } else {
+            cout << "¡Cerbero abre sus tres fauces y lanza un mordisco devastador!" << endl;
+            Sleep(500);
+            cout << "¡Es un golpe crítico!" << endl;
+            p.HP -= Cb.CRITICAL_ATTACK - p.DEFENSE;
+            cout << "\033[34m" << p.PlayerName << "\033[0m recibió: " << Cb.CRITICAL_ATTACK - p.DEFENSE << " de daño crítico, tambaleándose ante el poder infernal." << endl;
+        }
     } else {
-        cout << Cb.CerberoName << " muerde ferozmente con sus fauces llameantes!" << endl;
-        int damage = baseAttack - p.DEFENSE;
-        p.HP -= damage;
-        cout << "\033[34m" << p.PlayerName << "\033[0m recibió: " << damage << " de daño." << endl;
+        if (p.DEFENSE > Cb.ATTACK) {
+            cout << Cb.CerberoName << " ataca con rabia..." << endl;
+            Sleep(500);
+            cout << "¡Pero tu armadura resiste el impacto del fuego infernal!" << endl;
+        } else {
+            cout << Cb.CerberoName << " muerde ferozmente con sus fauces llameantes!" << endl;
+            p.HP -= Cb.ATTACK - p.DEFENSE;
+            cout << "\033[34m" << p.PlayerName << "\033[0m recibió: " << Cb.ATTACK - p.DEFENSE << " de daño." << endl;
+        }
     }
-}
 }
 
 void CerberoBattle(Player& p, Cerbero& Cb) {
