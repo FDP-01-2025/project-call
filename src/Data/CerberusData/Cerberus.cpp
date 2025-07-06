@@ -19,7 +19,7 @@ Cerbero Cerbero_Data(){
 }
 
 void ShowStatsCerbero(const Cerbero& Cb){
-    cout << "\033[3;4m-- TROLL STATS --\033[0m" << endl << endl;
+    cout << "\033[3;4m-- Cerbero STATS --\033[0m" << endl << endl;
     cout << "\033[34m" <<  Cb.CerberoName << "\033[0m" << endl;
     cout << "Nivel:    " << Cb.Level << endl;
     cout << "Vida:     " << Cb.HP << "/" << Cb.MAX_HP << endl;
