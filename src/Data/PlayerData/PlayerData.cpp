@@ -50,6 +50,7 @@ system("cls");
         p.PoEffectHP = 30;
         p.PoEffectMANA = 30;
         p.BadRelationNaika = false; // relacion con Naika
+        p.GoodRelationChama = false; // relacion con la chamana
         p.KilledNaikaDummy = false; // si mataste al dummy de Naika
         p.KilledEliteSlime = false; // si mataste al slime
         p.KilledTroll = false; // si mataste al troll
@@ -84,6 +85,7 @@ system("cls");
         p.PoEffectHP = 15;
         p.PoEffectMANA = 15;
         p.BadRelationNaika = false; // relacion con Naika
+        p.GoodRelationChama = false; // relacion con la chamana
         p.KilledNaikaDummy = false; // si mataste al dummy de Naika
         p.KilledEliteSlime = false; // si mataste al slime
         p.KilledTroll = false; // si mataste al troll
@@ -119,6 +121,7 @@ system("cls");
         p.PoEffectHP = 9999;
         p.PoEffectMANA = 9999;
         p.BadRelationNaika = false; // relacion con Naika
+        p.GoodRelationChama = false; // relacion con la chamana
         p.KilledNaikaDummy = false; // si mataste al dummy de Naika
         p.KilledEliteSlime = false; // si mataste al slime
         p.KilledTroll = false; // si mataste al troll

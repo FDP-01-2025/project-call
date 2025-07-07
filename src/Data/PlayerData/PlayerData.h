@@ -39,6 +39,7 @@ struct Player {
     int KILLS;
     int PacifistPoints;
     bool BadRelationNaika;
+    bool GoodRelationChama;
     bool KilledNaikaDummy;
     bool KilledEliteSlime;
     bool KilledTroll;

@@ -4,6 +4,7 @@
 #include "src/Dialogues/Prologue/LibraryPrologue.h"
 #include "src/Dialogues/Training/LibraryTraining.h"
 #include "src/Dialogues/Tutorial/LibraryTutorial.h"
+#include "src/Dialogues/Forest/LibraryForest.h"
 #include "src/Dialogues/DeepCave/LibraryCave.h"
 #include "src/Data/PlayerData/PlayerData.h"
 #include "src/Data/NaikaData/Naika.h"
@@ -45,7 +46,7 @@ Clear();
     // Prologue();
     // Training(p);
     // Tutorial(p, Na, Ndum);
-    // forest aqui va
+    Forest(p, S, Tr);
     // CaveDialogue(p, Gol);
 
     // EliteSBattle(p, S);

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <windows.h>
-#include <time.h>
 #include "BattleUtils/BattleUtils.h"
 #include "Data/PlayerData/PlayerData.h"
 #include "Battles/GolemBattle/GolemFight.h"

@@ -9,7 +9,7 @@ Cerbero Cerbero_Data(){
     Cb.HP = 8000;
     Cb.MAX_HP = 8000;
     Cb.ATTACK = 50;
-    Cb.CRITICAL_ATTACK = Cb.ATTACK*2;
+    Cb.CRITICAL_ATTACK = Cb.ATTACK * 2;
     Cb.DEFENSE = 100;
     Cb.MANA = 0;
     Cb.MAX_MANA = 0;

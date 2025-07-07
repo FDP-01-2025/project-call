@@ -10,7 +10,7 @@ KingMagnus KMagnus_Data(){
     Km.HP = 500;
     Km.MAX_HP = 500;
     Km.ATTACK = 40;
-    Km.CRITICAL_ATTACK = Km.ATTACK * 3;
+    Km.CRITICAL_ATTACK = Km.ATTACK * 2;
     Km.DEFENSE = 50;
     Km.MANA = 150;
     Km.MAX_MANA = 150;
