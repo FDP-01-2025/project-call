@@ -5,7 +5,6 @@
 #include "Data/NaikaData/Naika.h"
 #include "Battles/NaikaDummy/NaBattle.h"
 #include "BattleUtils/BattleUtils.h"
-
 using namespace std;
 
 void LevelUp(Player& p){
@@ -936,13 +935,13 @@ string NaikaPostBattle[] = {
     // FIN
     "Se lanzan una última sonrisa y se retiran, comienza tu nueva aventura...", // 441
     "Bien soldados, como nos encontramos en tiempo de paz, su trabajo de hoy es solo guardia, siendo ustedes el rango más bajo del ejercito de momento, pero se que aspiraran a más, sin más que decir os deseo suerte.", // 442
-    "Yuju que divertida es esta aventura...", // 443
+    "Yuju que divertida es esta aventura... almenos te diero nuevo equipamiento...", // 443
     "Te trasladaron a la ciudad de Calcis, donde te asignaron como un guardia menor de la puerta este de la ciudad.", // 445
     "Ya comenzaste a patrullar la ciudad más temprano de lo que esperabas, pero al menos te asignaron un compañero.", // 446
     "Olvidalo, es algo molesto.", // 447
     "Solo se la pasa hablando de como su esposa le fue infiel... y que ahora él vive con su amante.", // 448
     "Que surrealista es esto, pero al menos te pagan...", // 449
-    "Te quedaste medio dormido y ya acabo tu turno, te despides de tu compañero y te vas a casa finalmente.", // 450
+    "Te quedaste medio dormido y ya acabo tu turno, te despides de tu compañero y te vas a casa finalmente despues de tu paga de 50 monedas...", // 450
     "Llegas a tu casa y te preparas para dormir, mañana será un día largo... nuevamente.", // 451
     "Supones que no habra mucha acción en tu vida desde ahora... o eso creíste.", // 452
     "Esa misma medianoche algo te despierta... un sonido algo peculiar.", // 453
@@ -966,7 +965,7 @@ string NaikaPostBattle[] = {
             LongPause_Tu(1000); cout << endl;
             PtC();
             Clear();
-            }
+        }
 
     } else { // ruta neutral/genocida
         for (int i = 0; i < 1; i++){
@@ -1196,4 +1195,9 @@ Clear();
         Clear();
         }
     }
+    p.WEAPON = "Espada de soldado;"; // nuevo equipo
+    p.ATTACK += 10;
+    p.ARMOR = "Cota de hierro";
+    p.DEFENSE += 5;
+    p.MONEY += 50;
 }

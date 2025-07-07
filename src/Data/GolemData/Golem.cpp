@@ -8,11 +8,11 @@ Golem Golem_Data(){
     Gol.Level = 20;
     Gol.HP = 300;
     Gol.MAX_HP = 300;
-    Gol.ATTACK = 20;
+    Gol.ATTACK = 15;
     Gol.CRITICAL_ATTACK = Gol.ATTACK * 3;
     Gol.DEFENSE = 100;
-    Gol.MANA = 0;
-    Gol.MAX_MANA = 0;
+    Gol.MANA = 150;
+    Gol.MAX_MANA = 150;
     Gol.WEAPON = "Puños de granito";
     Gol.ARMOR = "Placas de roca";
     return Gol;

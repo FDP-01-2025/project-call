@@ -40,7 +40,7 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
 
         switch (opcionPlayerMagic) {
             case 1:
-                system("cls");
+                Clear();
                 if (p.MANA < p.MANACOST_AT) {
                     cout << "No cuentas con el \033[34mMANA\033[0m suficiente "
                         << "\033[31m" << p.MANA << "\033[0m/" << p.MAX_MANA << endl;
@@ -55,7 +55,7 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
                 break;
             case 2:
                 Return = true;
-                system("cls");
+                Clear();
                 break;
             default:
                 DefaultError();
@@ -67,7 +67,7 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
         cout << "2. RETURN" << endl;
         cin >> opcionPlayerMagic;
 
-        system("cls");
+        Clear();
         switch (opcionPlayerMagic) {
             case 1:
                 if (p.MANA < p.MANACOST_HE) {
@@ -80,7 +80,7 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
                     if (HPtemp > p.MAX_HP) {
                         cout << "\033[31mDANGER:\033[0m Si te curas ahora desperdicias parte del hechizo. ¿Proceder?\n1. Si\n2. No\n";
                         cin >> opcion_heal;
-                        system("cls");
+                        Clear();
                         switch (opcion_heal) {
                             case 1:
                                 p.HP = min(p.HP + p.HEALTH_MAGIC, p.MAX_HP);
@@ -88,10 +88,10 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
                                 cout << "\033[34m" << p.PlayerName << "\033[0m se curó +" << p.HEALTH_MAGIC << " HP." << endl;
                                 break;
                             case 2:
-                                system("cls");
+                                Clear();
                                 break;
                             default:
-                                system("cls");
+                                Clear();
                                 cout << "Opción inválida" << endl;
                                 Sleep(1000);
                                 break;
@@ -104,10 +104,10 @@ void PlayerMagic(Player& p, Golem& Gol, bool& Return) {
                 }
                 break;
             case 2:
-                system("cls");
+                Clear();
                 break;
             default:
-                system("cls");
+                Clear();
                 cout << "Opción inválida" << endl;
                 Sleep(1000);
                 break;
@@ -170,7 +170,7 @@ void GolemBattle(Player& p, Golem& Gol) {
         cout << endl;
         cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. HABLAR\n";
         cin >> option;
-        system("cls");
+        Clear();
 
         switch (option) {
             case 1: // ATTACK
@@ -179,13 +179,13 @@ void GolemBattle(Player& p, Golem& Gol) {
                 cin >> option_attack;
                 switch (option_attack) {
                     case 1:
-                        system("cls");
+                        Clear();
                         PlayerAttackGolem(p, Gol);
                         GolemAttackPlayer(p, Gol);
                         break;
                     case 2:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         break;
                     default:
                         DefaultError();
@@ -204,29 +204,29 @@ void GolemBattle(Player& p, Golem& Gol) {
                 break;
 
             case 3: // ACTION
-                system("cls");
+                Clear();
                 cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. PROVOCAR\n5. DEFEND\n6. RETURN\n";
                 cin >> option_action;
                 switch (option_action) {
                     case 1:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         ShowStats(p);
                         cin.ignore();
                         cin.get();
-                        system("cls");
+                        Clear();
                         break;
                     case 2:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         ShowStatsGolem(Gol);
                         cin.ignore();
                         cin.get();
-                        system("cls");
+                        Clear();
                         break;
                     case 3:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         cout << "Intercambiar magia:\n1. Vendaval\n2. Curación\n3. RETURN\n";
                         cin >> option_exmagic;
                         switch (option_exmagic) {
@@ -250,7 +250,7 @@ void GolemBattle(Player& p, Golem& Gol) {
                                 break;
                             case 3:
                                 RegMana = false;
-                                system("cls");
+                                Clear();
                                 break;
                             default:
                                 DefaultError();
@@ -260,12 +260,12 @@ void GolemBattle(Player& p, Golem& Gol) {
                         break;
                     case 4: // PROVOCAR
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         cout << "Intentas provocar al golem, pero permanece imperturbable como una roca..." << endl << endl;
                         break;
                     case 5: // DEFEND
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         cout << "Te pones en guardia, duplicas tu defensa este turno y recuperas +20 MANA." << endl;
                         p.MANA = min(p.MANA + 20, p.MAX_MANA);
                         p.DEFENSE = TempDefense * 2;
@@ -274,7 +274,7 @@ void GolemBattle(Player& p, Golem& Gol) {
                         break;
                     case 6:
                         RegMana = false;
-                        system("cls");
+                        Clear();
                         break;
                     default:
                         DefaultError();
@@ -290,7 +290,7 @@ void GolemBattle(Player& p, Golem& Gol) {
 
             case 5: // HABLAR
                 RegMana = false;
-                system("cls");
+                Clear();
                 cout << "Intentaste hablar con el golem... Solo entiende el idioma de los golpes." << endl;
                 Sleep(1500);
                 GolemAttackPlayer(p, Gol);
@@ -298,7 +298,7 @@ void GolemBattle(Player& p, Golem& Gol) {
 
             case 6: // HABLAR
                 RegMana = false;
-                system("cls");
+                Clear();
                 cout << "Intentaste hablar con el golem..." << endl;
                 Sleep(1000);
                 cout << "Pero solo entiende el idioma de los golpes." << endl;
@@ -315,11 +315,15 @@ void GolemBattle(Player& p, Golem& Gol) {
             if (!ManaDepleted){
                 cout << Gol.GolemName << " ha derrotado a \033[34m" << p.PlayerName << "\033[0m" << endl;
             } else {
+                cout << "\033[31mTe quedaste sin MANA.....\033[0m" << endl;
                 cout << Gol.GolemName << " Aplasto a \033[34m" << p.PlayerName << "\033[0m En la oscuridad..." << endl;
             }
 
+        PtC();
+            Clear();
             while (option_GameOver != 1 && option_GameOver != 2){
-            cout << "\033[31mGAME OVER\033[0m\n1. YES\n2. NO\n";
+                cout << endl;
+            cout << "\033[31mGAME OVER\033[0m\nContinuar?\n1. YES\n2. NO\n";
             cin >> option_GameOver;
             if (option_GameOver < 1 || option_GameOver > 2){
                 DefaultError();
@@ -328,24 +332,32 @@ void GolemBattle(Player& p, Golem& Gol) {
 
             switch (option_GameOver) {
                 case 1:
-                    system("cls");
+                    Clear();
+                    cout << "Retornando con valor..." << endl;
+                    cout << "Volviendo al último checkpoint...\n" << endl;
+                    Sleep(1000);
                     Checkpoint(p, Gol, PlayerHp, PlayerMana, GolemHp, GolemMana, GolemMaxHp);
+                    Clear();
                     break;
                 case 2:
                     cout << "Adiós, " << p.PlayerName << endl;
+                    Sleep(2500);
                     exit(0);
                     break;
                 default:
                     DefaultError();
+                    RegMana = false;
                     break;
             }
         }
 
         if (Gol.HP <= Gol.MAX_HP * 0.5) { // mitad de vida
             cout << Gol.GolemName << " se detiene... y asiente lentamente. Baja los puños y sus ojos se volvieron pacificos..." << endl;
-            Sleep(5000);
+            Sleep(1000);
+            PtC();
             Clear();
             cout << "¡Has pasado la prueba!...??" << endl;
+            PtC();
             battleOver = true;
         }
 

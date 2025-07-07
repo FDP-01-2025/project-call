@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <cstdlib>
 #include "Data/PlayerData/PlayerData.h"
-using namespace std; 
+using namespace std;
 void PrintWithPause_T(const string& Text, int Pause){
     for (char c : Text) {
         cout << c;
