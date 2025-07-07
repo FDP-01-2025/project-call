@@ -145,7 +145,7 @@ void NihilusAttackOrSteal(Player& p, Nihilus& Nihi, int turn){
         cout << "No te ataca este turno." << endl;
     } else {
         int RNG2 = rand() % 101;
-       if (RNG2 < 25) {
+        if (RNG2 < 25) {
             cout << Nihi.NihilusName << " falla su ataque!" << endl;
         } else if (RNG2 < 50) {
             if (p.DEFENSE > Nihi.CRITICAL_ATTACK) {
@@ -157,7 +157,7 @@ void NihilusAttackOrSteal(Player& p, Nihilus& Nihi, int turn){
                 cout << "\033[34m" << p.PlayerName << "\033[0m" 
                     << " recibió: " << Nihi.CRITICAL_ATTACK - p.DEFENSE 
                     << " de daño crítico, tambaleándose por la fuerza oscura." << endl;
-            }
+                }
             } else {
             if (p.DEFENSE > Nihi.ATTACK) {
                 cout << "Nihilus intenta herirte, pero tu defensa lo detiene!" << endl;
@@ -165,7 +165,7 @@ void NihilusAttackOrSteal(Player& p, Nihilus& Nihi, int turn){
                 cout << Nihi.NihilusName << " ataca con su daga maldita..." << endl;
                 p.HP -= Nihi.ATTACK - p.DEFENSE;
                 cout << "\033[34m" << p.PlayerName << "\033[0m" 
-                     << " recibió: " << Nihi.ATTACK - p.DEFENSE << " de daño." << endl;
+                    << " recibió: " << Nihi.ATTACK - p.DEFENSE << " de daño." << endl;
             }
         }
     }
@@ -174,7 +174,6 @@ void NihilusAttackOrSteal(Player& p, Nihilus& Nihi, int turn){
 void NihilusBattle(Player& p, Nihilus& Nihi){
 
     int TempDefense = p.DEFENSE;
-    int MercyPoints = 0;
     int PlayerHp = p.HP;
     int PlayerMana = p.MANA;
     int NihiMaxHp = Nihi.MAX_HP;
@@ -183,7 +182,6 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
     int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;
     bool battleOver = false;
     bool RageMode = false;
-    bool Mercy = false;
     bool Return = false;
     int turnCount = 0;  // cuenta turnos para aumentar probabilidad de robo
 
@@ -197,20 +195,14 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
         cout << "Jefe: \033[35m" << Nihi.NihilusName << "\033[0m" << endl;
         EnemyHpBar(Nihi);
 
-        if (!Mercy)
-            cout << Nihi.NihilusName << " susurra desde el vacío..." << endl << endl;
-        else
-            cout << Nihi.NihilusName << " parece vacilar..." << endl << endl;
+        cout << Nihi.NihilusName << " Esta determinado en matarlos..." << endl << endl;
 
         cout << "\033[34m" << p.PlayerName << "\033[0m" << endl;
         HpBar(p);
         ManaBar(p);
-        cout << "Piedad: " << MercyPoints << endl << endl;
+        cout << "Piedad: No... el no merece compasión" << endl;
 
-        if (!Mercy)
-            cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. MERCY\n";
-        else
-            cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. \033[33mMERCY\033[0m\n";
+        cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. MERCY\n";
 
         cin >> option;
         Clear();
@@ -246,7 +238,7 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
             break;
 
         case 3: // ACTION
-            cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. MOCK (RAGE)\n5. TALK\n6. PACIFY\n7. DEFEND\n8. RETURN\n";
+            cout << "1. MY STATS\n2. ENEMY DESCRIPTION\n3. EXCHANGE MAGIC\n4. BURLARTE\n5. HABLAR\n6. PACIFICAR\n7. DEFEND\n8. RETURN\n";
             cin >> option_action;
             switch(option_action){
             case 1:
@@ -336,55 +328,11 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
                 NihilusAttackOrSteal(p, Nihi, turnCount);
                 break;
             case 6: // PACIFY
-                Clear();
-                if(RNGMercy <= 25){
-                    cout << "Recitas palabras antiguas... Nihilus parece titubear." << endl;
-                if(RandomEvent < 50){
-                    cout << "Tu voz traspasa el vacío. +1 piedad." << endl;
-                    MercyPoints++;
-                } else {
-                    cout << "El vacío se burla de tus rezos..." << endl;
-                NihilusAttackOrSteal(p, Nihi, turnCount);
-                }
-                } else if(RNGMercy <= 50){
-                    cout << "Ofreces tu oro como tributo..." << endl;
-                if(RandomEvent < 25){
-                    cout << "Nihilus acepta. +1 piedad." << endl;
-                    MercyPoints++;
-                    if (p.MONEY >= 50) {
-                        p.MONEY -= 50;
-                    } else {
-                        cout << "No tienes suficiente oro para ofrecer." << endl;
-                        p.MONEY = 0;
-                }
-            cout << "Perdiste 50 de oro." << endl;
+            Clear();
+                cout << "No es posible pacificarlos..." << endl;
+            cout << endl;
             Sleep(1000);
-        } else {
-            cout << "Nihilus lo rechaza y su furia crece. +5 ATTACK." << endl;
-            Nihi.ATTACK += 5;
-        }
-    } else if(RNGMercy <= 75){
-        cout << "Intentas exorcizar el vacío mismo..." << endl;
-        if(RandomEvent < 15){
-            cout << "El susurro se detiene... +2 piedad." << endl;
-            MercyPoints += 2;
-        } else {
-            cout << "Fallas... Nihilus se hace más fuerte. +5 ATTACK." << endl;
-            Nihi.ATTACK += 5;
-        }
-    } else {
-        cout << "Murmuras alabanzas al vacío..." << endl;
-        if(RandomEvent < 50){
-            cout << "El vacío escucha tus plegarias... +1 punto de piedad." << endl;
-            MercyPoints++;
-        } else {
-            cout << "Te consume la culpa. Nihilus ataca!" << endl;
-            NihilusAttackOrSteal(p, Nihi, turnCount);
-        }
-    }
-    cout << endl;
-    Sleep(1000);
-    break;
+            break;
 
             case 7: // DEFEND
                 RegMana = false;
@@ -413,14 +361,8 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
             break;
 
         case 5: // MERCY
-            if (!Mercy){
-                cout << Nihi.NihilusName << " ignora tu compasión..." << endl;
-                NihilusAttackOrSteal(p, Nihi, turnCount);
-            } else {
-                cout << Nihi.NihilusName << " el vacio cede ante tu piedad... ¡VICTORIA!" << endl;
-                p.PacifistPoints++;
-                battleOver = true;
-            }
+            cout << "Tu enemigo no merece compasion..." << endl;
+            cout << endl;
             break;
 
         default:
@@ -453,12 +395,11 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
 
         if(Nihi.HP <= 0){
             cout << Nihi.NihilusName << " se desvanece en el abismo... ¡VICTORIA!" << endl;
+            Sleep(2000);
+            Clear();
             p.KILLS++;
             battleOver = true;
         }
-
-        if(Nihi.HP <= 20 || MercyPoints >= 3)
-            Mercy = true;
 
         if(RegMana)
             p.MANA = min(p.MANA + 10, p.MAX_MANA);

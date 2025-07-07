@@ -5,11 +5,11 @@ using namespace std;
 Naika Naika_Data(){
     struct Naika Na;
     Na.NaikaName = "\033[31mNaika\033[0m";
-    Na.Level = 50;
-    Na.HP = 800;
-    Na.MAX_HP = 800;
+    Na.Level = 30;
+    Na.HP = 350;
+    Na.MAX_HP = 350;
     Na.ATTACK = 40;
-    Na.DEFENSE = 20;
+    Na.DEFENSE = 25;
     Na.MANA = 200;
     Na.MAX_MANA = 200;
     Na.WEAPON = "Espada de oficial";

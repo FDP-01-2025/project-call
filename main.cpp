@@ -6,6 +6,7 @@
 #include "src/Dialogues/Tutorial/LibraryTutorial.h"
 #include "src/Dialogues/Forest/LibraryForest.h"
 #include "src/Dialogues/DeepCave/LibraryCave.h"
+#include "src/Dialogues/AtenasCity/LibraryAtenas.h"
 #include "src/Data/PlayerData/PlayerData.h"
 #include "src/Data/NaikaData/Naika.h"
 #include "src/Battles/NaikaDummy/NaBattle.h"
@@ -46,11 +47,11 @@ Clear();
     // Prologue();
     // Training(p);
     // Tutorial(p, Na, Ndum);
-    Forest(p, S, Tr);
+    //Forest(p, S, Tr); // Capitulo 1 - Bosque
     // CaveDialogue(p, Gol);
+    AtenasCity(p, Nihi);
 
     // EliteSBattle(p, S);
-    // TrollBattle(p, Tr); // batalla futura
     // GolemBattle(p, Gol);
     // NihilusBattle(p, Nihi);
 

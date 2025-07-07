@@ -753,3 +753,57 @@ void Forest(Player& p, EliteS& S, Troll& Tr) {
 
     cout << "END CHAPTER 1";
 }
+
+void ChamanScene(Player &p) {
+    int option_chamana = 0;
+    bool cancelDialogue = false;
+
+    do {
+        cout << "\033[35mChamana:\033[0m ¿Qué deseas hacer?\n";
+        cout << "1. Pedir magia\n2. Pedir un beso\n3. Preguntar por recompensas\n4. Salir\n";
+        cin >> option_chamana;
+
+        if (option_chamana < 1 || option_chamana > 4) {
+            DefaultError();
+            continue;
+        }
+
+        Clear();
+        switch(option_chamana) {
+            case 1:
+                cout << "\033[35mChamana:\033[0m ";
+                PrintWithPause_F("Usaré mi magia para ayudarte. ¡Prepárate!", 20);
+                LongPause_F(1000);
+                cout << endl;
+                PtC();
+                Clear();
+                break;
+            case 2:
+                cout << "\033[35mChamana:\033[0m ";
+                PrintWithPause_F("Un beso de chamana te dará suerte...", 20);
+                LongPause_F(1000);
+                cout << endl;
+                PtC();
+                Clear();
+                break;
+            case 3:
+                cout << " \033[35mChamana:\033[0m ";
+                PrintWithPause_F("Las recompensas vienen con esfuerzo y respeto.", 20);
+                LongPause_F(1000);
+                cout << endl;
+                PtC();
+                Clear();
+                break;
+            case 4:
+                cancelDialogue = true;
+                break;
+        }
+    } while (!cancelDialogue);
+
+    if(cancelDialogue) {
+        cout << "\033[35mChamana:\033[0m Hasta luego, que tengas buen viaje.\n";
+        LongPause_F(1000);
+        PtC();
+        Clear();
+    }
+}

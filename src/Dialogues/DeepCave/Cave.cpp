@@ -439,7 +439,7 @@ Clear();
             PrintWithPause_Cv(CaveDialogue[i], 20);
             LongPause_Cv(1000);
             cout << endl;
-            cout << "\033[0m";
+            cout << "\033[ 0m";
             PtC();
         Clear();
         }
