@@ -397,7 +397,6 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
             cout << Nihi.NihilusName << " se desvanece en el abismo... ¡VICTORIA!" << endl;
             Sleep(2000);
             Clear();
-            p.KILLS++;
             battleOver = true;
         }
 

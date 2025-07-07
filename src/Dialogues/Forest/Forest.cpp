@@ -798,12 +798,48 @@ void ChamanScene(Player &p) {
                 cancelDialogue = true;
                 break;
         }
-    } while (!cancelDialogue);
+            } while (!cancelDialogue);
 
-    if(cancelDialogue) {
-        cout << "\033[35mChamana:\033[0m Hasta luego, que tengas buen viaje.\n";
-        LongPause_F(1000);
-        PtC();
-        Clear();
+            if(cancelDialogue) {
+                cout << "\033[35mChamana:\033[0m Hasta luego, que tengas buen viaje.\n";
+                LongPause_F(1000);
+                PtC();
+                Clear();
+            }
+            int option_consolation = 0;
+            bool cancelConsolation = false;
+
+            do {
+                cout << "\033[35mChamana:\033[0m ¿Qué deseas?\n";
+                cout << "1. Magia\n2. Beso\n";
+                cin >> option_consolation;
+
+                if (option_consolation < 1 || option_consolation > 2) {
+                    DefaultError();
+                    continue;
+                }
+
+                Clear();
+
+                switch (option_consolation) {
+                    case 1:
+                        cout << "\033[35mChamana:\033[0m ";
+                        PrintWithPause_F("Usaré mi magia para ayudarte. ¡Prepárate!", 20);
+                        LongPause_F(1000);
+                        cout << endl;
+                        PtC();
+                        Clear();
+                        cancelConsolation = true;
+                        break;
+                    case 2:
+                        cout << "\033[35mChamana:\033[0m ";
+                        PrintWithPause_F("Un beso... qué clásico. Pero no te lo negaré.", 20);
+                        LongPause_F(1000);
+                        cout << endl;
+                        PtC();
+                        Clear();
+                        cancelConsolation = true;
+                        break;
+                }
+            } while (!cancelConsolation);
     }
-}

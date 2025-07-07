@@ -18,6 +18,8 @@
 #include "src/Battles/GolemBattle/GolemFight.h"
 #include "src/Data/NihilusData/Nihilus.h"
 #include "src/Battles/NihilusBattle/NihilusFight.h"
+#include "src/Data/HypnosData/Hypnos.h"
+#include "src/Battles/HypnosBattle/DHBattle.h"
 
 using namespace std;
 
@@ -38,6 +40,7 @@ int main(){
     Troll Tr = Troll_Data();
     Golem Gol = Golem_Data();
     Nihilus Nihi = Nihilus_Data();
+    DHypnos h = DH_Data();
 
     cout << endl;
     cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
@@ -49,11 +52,9 @@ Clear();
     // Tutorial(p, Na, Ndum);
     //Forest(p, S, Tr); // Capitulo 1 - Bosque
     // CaveDialogue(p, Gol);
-    AtenasCity(p, Nihi);
+    // AtenasCity(p, Nihi);
 
-    // EliteSBattle(p, S);
-    // GolemBattle(p, Gol);
-    // NihilusBattle(p, Nihi);
+    DHBattle(p, h);
 
     return 0;
 }
