@@ -7,5 +7,6 @@ using namespace std;
 
 void PrintWithPause_Oly(const string& Text, int Pause);
 void LongPause_Oly(int MiliSeconds);
+void MountOlympus(Player& p, KingMagnus& Km);
 
 #endif

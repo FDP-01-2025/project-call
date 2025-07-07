@@ -7,6 +7,7 @@
 #include "src/Dialogues/Forest/LibraryForest.h"
 #include "src/Dialogues/DeepCave/LibraryCave.h"
 #include "src/Dialogues/AtenasCity/LibraryAtenas.h"
+#include "src/Dialogues/Olympus/LibraryOlympus.h"
 #include "src/Data/PlayerData/PlayerData.h"
 #include "src/Data/NaikaData/Naika.h"
 #include "src/Battles/NaikaDummy/NaBattle.h"
@@ -40,6 +41,7 @@ int main(){
     Troll Tr = Troll_Data();
     Golem Gol = Golem_Data();
     Nihilus Nihi = Nihilus_Data();
+    KingMagnus Km = KMagnus_Data();
     DHypnos h = DH_Data();
 
     cout << endl;
@@ -53,8 +55,9 @@ Clear();
     //Forest(p, S, Tr); // Capitulo 1 - Bosque
     // CaveDialogue(p, Gol);
     // AtenasCity(p, Nihi);
+    MountOlympus(p, Km);
 
-    DHBattle(p, h);
+    // DHBattle(p, h);
 
     return 0;
 }

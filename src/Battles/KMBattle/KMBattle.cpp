@@ -159,15 +159,6 @@ void MagnusAttackPlayer(Player& p, KingMagnus& Km) {
             cout << "\033[34m" << p.PlayerName << "\033[0m recibió: " << Km.ATTACK - p.DEFENSE << " de daño." << endl;
         }
     }
-
-    cout << endl;
-    if (p.MANA >= 10) {
-        p.MANA -= 20;
-        Km.MANA = min(Km.MANA + 10, Km.MAX_MANA);
-        cout << Km.KingMagnusName << " absorbe -10 de tu \033[34mMANA\033[0m para fortalecerse." << endl;
-    } else {
-        cout << Km.KingMagnusName << " intenta absorber tu \033[34mMANA\033[0m, pero no tienes suficiente..." << endl;
-    }
 }
 
 void KingMagnusBattle(Player& p, KingMagnus& Km) {
