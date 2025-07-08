@@ -8,6 +8,7 @@
 #include "src/Dialogues/DeepCave/LibraryCave.h"
 #include "src/Dialogues/AtenasCity/LibraryAtenas.h"
 #include "src/Dialogues/Olympus/LibraryOlympus.h"
+#include "src/Dialogues/Sky/LibrarySky.h"
 #include "src/Data/PlayerData/PlayerData.h"
 #include "src/Data/NaikaData/Naika.h"
 #include "src/Battles/NaikaDummy/NaBattle.h"
@@ -52,12 +53,13 @@ Clear();
     // Prologue();
     // Training(p);
     // Tutorial(p, Na, Ndum);
-    //Forest(p, S, Tr); // Capitulo 1 - Bosque
-    // CaveDialogue(p, Gol);
-    // AtenasCity(p, Nihi);
-    MountOlympus(p, Km);
+    // Forest(p, S, Tr); // Capitulo 1 - Bosque
+    // CaveDialogue(p, Gol); // Capitulo 2 - Cueva
+    // AtenasCity(p, Nihi); // Capitulo 3 - Ciudad de Atenas
+    //MountOlympus(p, Km); // Capitulo 4 - Monte Olimpo
+    // Sky(p, h); // Capitulo 5 - Reino de Zeus
 
-    // DHBattle(p, h);
+    DHBattle(p, h);
 
     return 0;
 }

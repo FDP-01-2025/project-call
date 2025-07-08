@@ -306,7 +306,7 @@ void Forest(Player& p, EliteS& S, Troll& Tr) {
         "\033[3mSolo se escucha un corte en esto...\033[0m", //163
         "\033[3mLa liberas de su atadura\033[0m", //164
         "\033[3msus manos temblorosas rozan la libertad.\033[0m", //165
-        "{Player} eres libre.", //166
+        "eres libre.", //166
         "\033[3mla voz rota, traspasada por el dolor y la incredulidad\033[0m", //167
         "Porque...", //168
         "Ellos solo buscaban su supervivencia...", //169
@@ -317,9 +317,9 @@ void Forest(Player& p, EliteS& S, Troll& Tr) {
         "Acaso eres humano??", //174 
         "Que justifico ese genocidio...", //175
         "QUE TE HICIERON?", //176
-        "{Player} eres libre.", //177
+        "eres libre.", //177
         "RESPONDE MI P.TA PREGUNTA!", //178 
-        "{Player} Resolvi el problema.", //179
+        "Resolvi el problema.", //179
         "¿Problema? Sí, mataste el problema... y a todos los inocentes con él.", //180
         "Me ayudaste... sí... a convertirme en testigo del horror absoluto.", //181
         "\033[3mRompe en llanto\033[0m", //182
@@ -330,9 +330,9 @@ void Forest(Player& p, EliteS& S, Troll& Tr) {
         "Mejor dicho...", //187
         "Me dan...", //188
         "...", //189
-        "{Player}: ... ¿terminaste?", //190
+        ".. ¿terminaste?", //190
         "Si... ni creas que olvidaré esto.", //191
-        "{name} estás de su lado?", //192
+        "estás de su lado?", //192
         "\033[3mlanzas una mirada fría\033[0m", //193
         "\033[3mtraga saliva\033[0m", //194
         "N-No...", //195
@@ -676,13 +676,31 @@ void Forest(Player& p, EliteS& S, Troll& Tr) {
     cout << "\033[0m";
     EliteSBattle(p, S); // batalla contra el slime de Élite
 
-    if (p.KilledEliteSlime){
-        cout << "Kill slime dialogues";
-    } else {
-        cout << "Mercy slime dialogues";
-    }
+    if (p.KilledEliteSlime) {
+    // Diálogos si mataste al slime de élite
+    for (int i = 0; i <= 9; i++) {
+        PrintWithPause_F(BattleES[i], 20);
+        cout << endl;
+        PtC();
+        Clear();
+            }
+        } else {
+            // Diálogos si perdonaste al slime de élite
+            for (int i = 10; i <= 17; i++) {
+                PrintWithPause_F(BattleES[i], 20);
+                cout << endl;
+                PtC();
+                Clear();
+            }
+        }
 
-    cout << "Continue dialogues";
+        // Diálogos de historia y contexto
+        for (int i = 18; i <= 83; i++) {
+            PrintWithPause_F(BattleES[i], 20);
+            cout << endl;
+            PtC();
+            Clear();
+        }
 
     while (option_route != 1 && option_route != 3){
             cout << "Que decides?\n1. Ayudarlos\n2. Terminar los secuestros.\n3. Retirarte\n" << endl;
@@ -708,49 +726,138 @@ void Forest(Player& p, EliteS& S, Troll& Tr) {
     }
 
     if (Return){
-        cout << "Retornas";
-    } else if (Kill){
-        cout << "Ruta genocida";
-
-            while (option_geno != 1 && option_geno != 2){
-                cout << "Decide?\n1. Proceder\n2. Rendirte\n" << endl;
-                cin >> option_geno;
-            if (option_geno < 1 || option_geno > 2){
-                DefaultError();
-            }
-        }
-
-        switch (option_geno){
-        case 1:
-            Proceed = true;
-            break;
-        case 2:
-            Return = true;
-            break;
-        default:
+        for (int i = 84; i <= 91; i++) {
+        PrintWithPause_F(BattleES[i], 20);
+        cout << endl;
+        PtC();
+        Clear();
+    }
+}
+else if (Kill){
+    for (int i = 0; i <= 55; i++) {
+        PrintWithPause_F(Genocide[i], 20);
+        cout << endl;
+        PtC();
+        Clear();
+    }
+    while (option_geno != 1 && option_geno != 2){
+        cout << "Decide?\n1. Proceder\n2. Rendirte\n" << endl;
+        cin >> option_geno;
+        if (option_geno < 1 || option_geno > 2){
             DefaultError();
-            break;
-        }
-
-        if (Proceed){
-            cout << "Ruta genocida";
-        } else if (Return){
-            cout << "Te rindes";
-        }
-
-    } else if (Help){
-        cout << "Los ayudas";
-        TrollBattle(p, Tr); // pelea con troll
-
-        if (p.KilledTroll){
-            cout << "Kill troll";
-            cout << "Chamana te da regalo";
-        } else {
-            cout << "Mercy troll";
-            cout << "Chamana beso o magia";
         }
     }
+    switch (option_geno){
+    case 1:
+        Proceed = true;
+        break;
+    case 2:
+        Return = true;
+        break;
+    default:
+        DefaultError();
+        break;
+    }
+    if (Proceed){
+        for (int i = 72; i <= 203; i++) {
+            PrintWithPause_F(Genocide[i], 20);
+            cout << endl;
+        PtC();
+        Clear();
+        }
+    } else if (Return){
+        for (int i = 56; i <= 71; i++) {
+            PrintWithPause_F(Genocide[i], 20);
+            cout << endl;
+            PtC();
+            Clear();
+        }
+    }
+}else if (Help){
+    for (int i = 0; i <= 26; i++) {
+        PrintWithPause_F(Pacifist[i], 20);
+        cout << endl;
+         PtC();
+         Clear();
+    }
+    TrollBattle(p, Tr); // pelea con troll
 
+    if (p.KilledTroll){
+        for (int i = 27; i <= 54; i++) {
+            PrintWithPause_F(Pacifist[i], 20);
+            cout << endl;
+             PtC();
+             Clear();
+        }
+        // Recompensa tras matar al troll
+        int option_reward = 0;
+        bool cancelReward = false;
+        do {
+            cout << "¿Qué recompensa quieres?\n1. Magia\n2. Beso\n";
+            cin >> option_reward;
+            if (option_reward < 1 || option_reward > 2) {
+                DefaultError();
+            }
+        } while (option_reward < 1 || option_reward > 2);
+
+        if (option_reward == 1) {
+            for (int i = 240; i <= 246; i++) {
+                PrintWithPause_F(Pacifist[i], 20);
+                cout << endl;
+                 PtC();
+                 Clear();
+            }
+        } else if (option_reward == 2) {
+            for (int i = 222; i <= 239; i++) {
+                PrintWithPause_F(Pacifist[i], 20);
+                cout << endl;
+                 PtC();
+                 Clear();
+            }
+        }
+    } else {
+        // Ruta de perdón al troll
+        for (int i = 71; i <= 125; i++) {
+            PrintWithPause_F(Pacifist[i], 20);
+            cout << endl;
+             PtC();
+             Clear();
+        }
+        // Recompensa tras perdonar al troll
+        int option_consolation = 0;
+        bool cancelConsolation = false;
+        do {
+            cout << "¿Qué deseas?\n1. Magia\n2. Beso\n";
+            cin >> option_consolation;
+            if (option_consolation < 1 || option_consolation > 2) {
+                DefaultError();
+            }
+        } while (option_consolation < 1 || option_consolation > 2);
+
+        if (option_consolation == 1) {
+            for (int i = 240; i <= 246; i++) {
+                PrintWithPause_F(Pacifist[i], 20);
+                cout << endl;
+                 PtC();
+                 Clear();
+            }
+        } else if (option_consolation == 2) {
+            for (int i = 222; i <= 239; i++) {
+                PrintWithPause_F(Pacifist[i], 20);
+                cout << endl;
+                 PtC();
+                 Clear();
+            }
+        }
+    }
+    // Epílogo de la ruta pacifista
+    for (int i = 126; i <= 298; i++) {
+        PrintWithPause_F(Pacifist[i], 20);
+        cout << endl;
+         PtC();
+         Clear();
+    }
+}
     cout << "END CHAPTER 1";
 }
 

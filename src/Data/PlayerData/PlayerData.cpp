@@ -95,7 +95,7 @@ system("cls");
         p.Level = 100;
         p.HP = 9999;
         p.MAX_HP = 9999;
-        p.ATTACK = 9999;
+        p.ATTACK = 100;
         p.CRITICAL_ATTACK = p.ATTACK*2;
         p.MAGIC_ATTACK = 9999;
         p.HEALTH_MAGIC = 9999;

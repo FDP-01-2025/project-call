@@ -54,7 +54,7 @@ void MountOlympus(Player& p, KingMagnus& Km){
         "Esto no esta bien esto no esta bien.", // 35
         "Sera posible...?", // 36
         "Que él... siga vivo?", // 37
-        "Esuchan pasos que llegan.", // 38
+        "Escuchan pasos que llegan.", // 38
         "Y ven a una figura hermosa saliendo.", // 39
         "Se tapa los ojos por el brillo del sol.", // 40
         "...", // 41
@@ -156,12 +156,12 @@ void MountOlympus(Player& p, KingMagnus& Km){
         "Gracias enserio señor.", // 135
         "Yo seguire en esta montaña... si saben que estoy vivo no se de lo que mis leales u opositores sean capaces de hacer.", // 136
         "Si... hubo una guerra civil por ello. Y las chispas revivirian si saben que estas vivo.", // 137
-        "Ya veo... bueno. Vivire aqui hasta el fin de mis días... Yo ya estuve el tiempo suficiente en los libros de historia.", // 138
+        "Ya veo... bueno. Vivire aqui hasta el fin de mis días... Yo ya estuve el tiempo suficiente en los libros de historia... Ahora, es tu turno de escribir los nuevos capítulos.", // 138
         "Y bueno, para derrotar a Hades chico, como eres un gran humano ya tendrias la capacidad de hacerlo... pero necesitas tener mucha determinación.", // 139
         "Antes de partir, le dejare parte de mi fuerza", // 140
-        "Un fragmento de armadura balnca. Que es lo unico que me queda de ella.", // 141
+        "Un fragmento de armadura blanca. Que es lo unico que me queda de ella.", // 141
         "Mi arma, la Maxima", // 142
-        "y mi magia... Explosion", // 143
+        "y mi magia... Explosión", // 143
         "Gracias por todo...\033[3m\nTu ataque y defensa se incrementaron\nTambien desbloqueatse un nuevo tipo de magia.\033[0m", // 144
         "De nada... Y buena suerte.", // 145
         "Que Zeus... os acompañe...", // 146

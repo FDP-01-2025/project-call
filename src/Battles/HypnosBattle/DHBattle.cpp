@@ -170,14 +170,15 @@ void DHAttackPlayer(Player& p, DHypnos& h){
             cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << h.ATTACK - p.DEFENSE << " de dano." << endl << endl;
         }
     }
+    cout << endl;
 }
 
 string TalkDH[] = {
-    "Intentas hablar con el \033[31mDios Hypnos\033[0m", // 0
-    "Le haces una peticion al \033[31mDios Hypnos\033[0m", // 1 
-    "Intentas sacarle platica al \033[31mDios Hypnos\033[0m ", // 2
-    "Intentas sacarle platica al \033[31mDios Hypnos\033[0m ", // 3
-    "Intentas sacarle platica al \033[31mDios Hypnos\033[0m "  // 4
+    "Intentas hablar con el \033[31mdios Hypnos\033[0m", // 0
+    "Le haces una peticion al \033[31mdios Hypnos\033[0m", // 1 
+    "Intentas sacarle platica al \033[31mdios Hypnos\033[0m ", // 2
+    "Intentas sacarle platica al \033[31mdios Hypnos\033[0m ", // 3
+    "Intentas sacarle platica al \033[31mdios Hypnos\033[0m "  // 4
 };
 
 void DHBattle(Player& p, DHypnos& h){
@@ -200,10 +201,16 @@ void DHBattle(Player& p, DHypnos& h){
         int RandomEvent = rand() % 101;
         cout << "Oponente: " << "\033[33m" << h.DHName << "\033[0m" << endl; // Codigo ANSI amarillo
         EnemyHpBar(h);
+        cout << h.DHName << " Esta observando tus sueños." << endl << endl;
         HpBar(p); // barra de vida dinamica
         ManaBar(p); // barra de mana dinamica
+        cout << "Turno: " << "\033[33m" << TurnCount << "\033[0m" << endl;
+        cout << "Resiste 20 turnos lo mejor que puedas..." << endl;
+        cout << endl;
         
-
+        cout << "\033[34m" << p.PlayerName << "\033[0m" << endl;
+        cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. MERCY\n";
+        cin >> option;      
 
     Clear();
         switch (option){ // switch general
@@ -262,6 +269,7 @@ void DHBattle(Player& p, DHypnos& h){
                 Clear();
                 break;
             case 2: // ENEMY DESCRIPTION
+
             RegMana = false;
                 Clear();
                 ShowStats(h); // llamar funcion
@@ -271,6 +279,7 @@ void DHBattle(Player& p, DHypnos& h){
                 Clear();
                 break;
             case 3: // EXCHANGE MAGIC
+
             RegMana = false;
                 Clear();
                 cout << "Intercambiar magia actual:\n";
@@ -284,7 +293,7 @@ void DHBattle(Player& p, DHypnos& h){
                         cout << "Ya tienes equipada esta magia" << endl;
                     } else {
                         p.MagicDefault = p.Magic1;
-                        cout << "Te quipaste: " << p.MagicDefault << endl;
+                        cout << "Te equipaste: " << p.MagicDefault << endl;
                     }
                     Sleep(1000);
                     cout << endl;
@@ -295,7 +304,7 @@ void DHBattle(Player& p, DHypnos& h){
                         cout << "Ya tienes equipada esta magia" << endl;
                     } else {
                         p.MagicDefault = p.Magic2;
-                        cout << "Te quipaste: " << p.MagicDefault << endl;
+                        cout << "Te equipaste: " << p.MagicDefault << endl;
                     }
                     Sleep(1000);
                     cout << endl;
@@ -329,35 +338,15 @@ void DHBattle(Player& p, DHypnos& h){
                 cout << "Intentas hablar con " << h.DHName << endl;
                 Sleep(1500);
 
-                if (RNGTalkDH <= 20){
-                    cout << TalkDH[0] << endl;
-                    cout << p.PlayerName << ": Oye, Hypnos, ¿no quieres un poco de café? Porque te veo medio dormido... ¡y eso que eres el dios del sueño!\n";
-                    cout << h.DHName << ": ¿Café? ¿Para qué? Mi trabajo es hacer que los demás duerman, no que yo me quede despierto. Pero... bosteza... gracias por la intención.";
-
-                } else if (RNGTalkDH > 20 && RNGTalkDH <= 40){
-                    cout << TalkDH[1] << endl;
-                    cout << p.PlayerName << ": Hypnos, ¿y si en vez de hacerme soñar, me haces una siesta eterna?\n";
-                    cout << h.DHName << ": Fácil, pero luego no te quejes si despiertas con el cuello torcido.\n";
-                    RegMana = false;
-                } else if (RNGTalkDH > 40 && RNGTalkDH <= 60){
-                    cout << TalkDH[2] << endl;
-                     cout << p.PlayerName << ": Si me haces un sueño épico, te prometo que no te molesto más hoy.\n";
-                    cout << h.DHName << ": ¿Y si te hago soñar que eres un héroe que se olvida de su misión? ¿Te gusta la idea?";
-                } else if (RNGTalkDH > 60 && RNGTalkDH <= 80){
-                    cout << TalkDH[3] << endl;
-                    cout << p.PlayerName << ": Hypnos, ¿puedes hacer que mis enemigos tengan pesadillas?";
-                    cout << h.DHName << ": Claro, pero solo si me pagas con siestas extra largas.";
-                }
-
-                Sleep(2500);
-                cout << "\n¡El \033[31mDios Hypnos\033[0m ataca repentinamente!" << endl;
-                Sleep(1000);
-                DHAttackPlayer(p, h);
+                cout << h.DHName << " No hablara contigo. Te pide que te concentres y des lo mejor de tí." << endl;
                 break;
 
-            
-            case 6: // DEFEND
+            case 6: // PACIFY
             RegMana = false;
+            Clear();
+                cout << "Intentas pacificar a Hypnos... él ya es pacifico..." << endl << endl;
+                break;
+            case 7:
             Clear();
                 cout << "Te defiendes del proximo ataque de " << h.DHName << endl;
                 cout << "Tu defensa de multiplico x2 este turno." << endl;
@@ -384,10 +373,25 @@ void DHBattle(Player& p, DHypnos& h){
             cout << endl;
         break;
 // end case 4
+        case 5:
+            Clear();
+            cout << "Intentas perdonar a Hypnos pero el ya te ha perdonado a tí... solo te prueba como si fueras su hijo." << endl;
+            break;
         default:
             DefaultError();
             break;
         }
+
+        if (RegMana) {
+            p.MANA = min(p.MANA + 10, p.MAX_MANA);
+        }
+
+        TurnCount++;
+        Clear();
+            if(TurnCount >= 20){
+            cout << "\n\033[32mHaz pasado la prueba\033[0m" << endl;
+            battleOver = true;
+            }
 
         if(p.HP <= 0){
             cout << h.DHName << " ha derrotado a " << "\033[34m" << p.PlayerName << "\033[0m" << endl;
@@ -415,12 +419,6 @@ void DHBattle(Player& p, DHypnos& h){
                 break;  // variable para continuar o no
                 }
             }
-            TurnCount++;
-            if(TurnCount >= 20){
-            cout << "\n\033[32mHaz pasado la prueba\033[0m" << endl;
-            battleOver = true;
-            }
-            
 
     } while (!battleOver); // condicion para que termine la batalla
 }
