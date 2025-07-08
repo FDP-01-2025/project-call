@@ -323,7 +323,8 @@ void GolemBattle(Player& p, Golem& Gol) {
             Clear();
             while (option_GameOver != 1 && option_GameOver != 2){
                 cout << endl;
-            cout << "\033[31mGAME OVER\033[0m\nContinuar?\n1. YES\n2. NO\n";
+            ShowGameOver();
+            cout << "\nContinuar?\n1. YES\n2. NO\n";
             cin >> option_GameOver;
             if (option_GameOver < 1 || option_GameOver > 2){
                 DefaultError();

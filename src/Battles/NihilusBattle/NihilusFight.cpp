@@ -372,7 +372,8 @@ void NihilusBattle(Player& p, Nihilus& Nihi){
 
         if(p.HP <= 0){
             cout << Nihi.NihilusName << " ha derrotado a " << p.PlayerName << " y lo llevo al vacío..." << endl;
-            cout << "\033[31mGAME OVER\033[0m\n\033[33mContinue?\033[0m\n1. YES\n2. NO\n";
+            ShowGameOver();
+            cout << "\033[33mContinue?\033[0m\n1. YES\n2. NO\n";
             cin >> option_GameOver;
             switch(option_GameOver){
             case 1:

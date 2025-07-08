@@ -396,7 +396,7 @@ void DHBattle(Player& p, DHypnos& h){
 
         if(p.HP <= 0){
             cout << h.DHName << " ha derrotado a " << "\033[34m" << p.PlayerName << "\033[0m" << endl;
-            cout << "\033[31mGAME OVER\033[0m" << endl;
+            ShowGameOver(); // mostrar game over
             cout << "\033[33mContinue?\033[0m\n1. YES\n2. NO\n\n";
             cin >> option_GameOver;
 
