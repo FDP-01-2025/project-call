@@ -28,41 +28,65 @@
 
 using namespace std;
 
-int main(){
+int main() {
 
-    SetConsoleOutputCP(CP_UTF8); // util para que en la terminar se usen caracteres especiales como ñ, tildes, etc...
+    SetConsoleOutputCP(CP_UTF8); // util para que en la terminal se usen caracteres especiales como ñ, tildes, etc...
     srand(time(NULL)); // generador de semilla RNG
+
+    int menu;
     Clear();
-
     ShowAshesOfOlympus();
-    Player p = Global_Data(); // funcion para declarar el parametro de Player
-    ShowStats(p);             // funcion para mostrar las estadisticas
-
-    cout << "Tienes un momento para ver tus estadisticas iniciales";
-    Naika Na = Naika_Data(); // funciones para declarar parametros de Naika y enemigos
-    NaikaDummy Ndum = Dummy_Data();
-    EliteS S = EliteS_Data();
-    Troll Tr = Troll_Data();
-    Golem Gol = Golem_Data();
-    Nihilus Nihi = Nihilus_Data();
-    KingMagnus Km = KMagnus_Data();
-    DHypnos h = DH_Data();
-    DHades inf = Hades_Data();
-
     cout << endl;
-    cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
-    Sleep(6000);
+    cout << "1.     NUEVA PARTIDA\n2.     CREDITOS\n3.     SALIR\n";
+    cin >> menu;
 
-Clear();
-    // Prologue();
-    // Training(p);
-    // Tutorial(p, Na, Ndum);
-    // Forest(p, S, Tr); // Capitulo 1 - Bosque
-    // CaveDialogue(p, Gol); // Capitulo 2 - Cueva
-    // AtenasCity(p, Nihi); // Capitulo 3 - Ciudad de Atenas
-    //MountOlympus(p, Km); // Capitulo 4 - Monte Olimpo
-    //Sky(p, h); // Capitulo 5 - Reino de Zeus
-    Underworld(p, inf);
+    switch (menu){
+    case 1: {
+        Clear();
 
+        Player p = Global_Data(); // funcion para declarar el parametro de Player
+        Naika Na = Naika_Data(); // funciones para declarar parametros de Naika y enemigos
+        NaikaDummy Ndum = Dummy_Data();
+        EliteS S = EliteS_Data();
+        Troll Tr = Troll_Data();
+        Golem Gol = Golem_Data();
+        Nihilus Nihi = Nihilus_Data();
+        KingMagnus Km = KMagnus_Data();
+        DHypnos h = DH_Data();
+        DHades inf = Hades_Data();
+
+        ShowStats(p);
+        cout << "Tienes un momento para ver tus estadisticas iniciales" << endl;
+        cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
+        Sleep(6000);
+        
+        Prologue();
+        Training(p);
+        Tutorial(p, Na, Ndum);
+        Forest(p, S, Tr);
+        CaveDialogue(p, Gol);
+        AtenasCity(p, Nihi);
+        MountOlympus(p, Km);
+        Sky(p, h);
+        Underworld(p, inf);
+        break;
+    }
+
+    case 2:
+        Clear();
+        cout << "UNIVERSIDAD CENTROAMERICANA JOSÉ SIMEON CAÑAS(UCA)" << endl;
+        cout << "Proyecto final de Fundamentos de programación." << endl << endl;
+        cout << " --INTEGRANTES-- " << endl;
+        cout << "- Ricardo Alexei Valle Avalos #00080525\n- Edgar Alejandro Ventura Zelaya #00210925\n- Carlos David Toledo García #00228725\n- Herberth Ariel Tobar Sermeño #00158525\nGracias a este equipo por ser parte de este proyecto!.\n";
+        break;
+
+    case 3:
+        cout << "Saliendo...";
+        return 0;
+
+    default:
+        DefaultError();
+        break;
+    }
     return 0;
 }
