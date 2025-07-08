@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include <cstdlib>
+#include "BattleUtils/BattleUtils.h"
 using namespace std;
 
 void PrintWithPause_P(const string& Text, int Pause){
@@ -218,9 +219,9 @@ void Prologue(){
             if (i == 0){
                 cout << "Enter any letter to continue" << endl;
             }
-        cin >> x;
+        PtC();        
         cout << "\033[0m";
-        system("cls");
+        Clear();
     }
 
     for (int i = 0; i < 64; i++){
@@ -228,14 +229,14 @@ void Prologue(){
             cout << colors[i] << prefixes[i] << "\033[0m" << ": ";
             PrintWithPause_P(texts[i], 500);
             LongPause_P(1000); cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
         } else {
             cout << colors[i] << prefixes[i] << "\033[0m" << ": ";
             PrintWithPause_P(texts[i], 30);
             LongPause_P(1000); cout << endl;
-            cin >> x;
-            system("cls");
+            PtC();
+            Clear();
         }
     }
         
@@ -244,8 +245,8 @@ void Prologue(){
         cout << "\033[3m";
         PrintWithPause_P(You[i], 30);
         LongPause_P(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
     } 
 
     for (int i = 0; i < 6; i++){
@@ -258,8 +259,8 @@ void Prologue(){
         cout << ColorsH[i] << prefixesH[i] << "\033[0m" << ": ";
         PrintWithPause_P(Soldiers[i], 30);
         LongPause_P(1000); cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
         }
     }
 }
