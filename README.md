@@ -56,7 +56,7 @@ AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde en
 
 ## 📦 Requisitos mínimos
 
-- **RAM:** 2 GB
+- **RAM:** 6 GB
 - **Procesador:** Intel Pentium 400 MHz o superior
 - **Espacio:** 200 MB
 
