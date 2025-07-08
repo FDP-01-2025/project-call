@@ -21,7 +21,7 @@ AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde en
 
 - Sistema de combate por turnos (ataques, magia, defensa, piedad)
 - Barra de vida y mana con colores
-- Jefes con mecánicas únicas (como Hades, Cerbero, etc.)
+- Jefes con mecánicas únicas (como un Slime, Bandido, y hasta el mismisimo Hades.)
 - Checkpoint para reiniciar en caso de derrota
 - diálogos para ambientar la historia 
 
