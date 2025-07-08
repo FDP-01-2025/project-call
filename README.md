@@ -1,11 +1,81 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/mi1WNrHU)
-# Proyecto de C++ - [Ashes of Olympus]
+# 📦 Ashes Of Olympus
 
-## Descripción del Proyecto
+## 🎮 Descripción del Proyecto
 
-**Ashes of Olympus** es un juego estilo `RPG narrativo`, donde el jugador tomara el rol de un soldado, que a lo largo de su viaje tomara una u otra desición que afectara de forma permanente a la historia, donde tambien de forma opcional podra hablar con los diferentes NPC´s para conocer a detalle la historia del reino y explicar como sucedio cada suceso.
+AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde enfrentas dioses y criaturas legendarias. Tendrás que elegir entre atacar, usar magia, hablar o mostrar piedad para derrotar a tus enemigos o perdonarlos.
 
-## Equipo
+## ⚙ Características Técnicas
+
+- Lenguaje: **C++**
+- Compilador: **MinGW / g++**
+- Librerías utilizadas:
+  - `<iostream>`
+  - `<windows.h>`
+  - `<ctime>`
+  - `<fstream>`
+  - `<algorithm>`
+  - `<vector>`
+
+## 🧩 Funcionalidades principales
+
+- Sistema de combate por turnos (ataques, magia, defensa, piedad)
+- Barra de vida y mana con colores
+- Jefes con mecánicas únicas (como Hades, Cerbero, etc.)
+- Checkpoint para reiniciar en caso de derrota
+- diálogos para ambientar la historia 
+
+## 🛠 Temas de programación aplicados
+
+- **Variables y tipos de datos:**
+  - Ejemplo: 
+ ![Ejemplo de tipo de datos](/resources/Images/Variables%20.png)
+
+- **Condicionales (if, else):**
+  - Ejemplo: 
+  ![Ejemplo de if, else](/resources/Images/If,%20else.png)
+
+- **Bucles:**
+  - Ejemplo: dibujar la barra de vida.
+  ![Ejemplo de bucle](/resources/Images/For.png)
+
+- **Funciones:**
+  - Ejemplo: 
+  ![Ejemplo de funciones](/resources/Images/Funcion.png)
+
+- **Arrays / vectores:**
+  - Ejemplo: guardar dialogos.
+  ![Ejemplo de Array](/resources/Images/Array.png)
+
+
+## 🖼 Mockups y ejemplo de pantallas
+
+- Pantalla de combate con stats y comandos
+![Ejemplo:](/resources/Images/Interfaz.jpg)
+- Pantalla de "Game Over" con opción de continuar
+
+## 📦 Requisitos mínimos
+
+- **RAM:** 2 GB
+- **Procesador:** Intel Pentium 400 MHz o superior
+- **Espacio:** 200 MB
+
+## ▶ Cómo compilar
+
+```bash
+cd ruta/al/proyecto
+g++ -Isrc main.cpp ... -o AshesOfOlympus.exe
+```
+
+> Sustituye `...` por los archivos `.cpp` del proyecto.
+
+## 💾 Ejecución
+
+```bash
+./AshesOfOlympus.exe
+```
+
+## 🧑‍💻 Equipo
 
 - **Nombre del equipo:** [Call of Coding]
 
@@ -14,25 +84,24 @@
 1. **Nombre completo:** [Ricardo Alexei Valle Avalos]  
    **Carnet:** [00080525]
 
-2. **Nombre completo:** [Edgar Alejandro Ventura]  
-   **Carnet:** [Carnet del estudiante 2]
+2. **Nombre completo:** [Edgar Alejandro Ventura Zelaya]  
+   **Carnet:** [00210925]
 
-3. **Nombre completo:** [Carlos David]  
-   **Carnet:** [Carnet del estudiante 3]
+3. **Nombre completo:** [Carlos David Toledo Garcia]  
+   **Carnet:** [00228725]
 
-4. **Nombre completo:** [Herbert]  
-   **Carnet:** [Carnet del estudiante 3]
+4. **Nombre completo:** [Herberth Ariel Tobar Sermeño]  
+   **Carnet:** [00158525]
 
-## Instrucciones de Ejecución
 
-## Herramientas a usar
-  `If / Else if:` Se usara principalmente como condicional para la toma de desiciones dentro del juego, su el jugaor tomo la desición **A** o **B**, o si la condición es Falsa o Verdadera.
-  `Switch: ` Se usara para otorgarle al jugador opciones en distintas partes del juego.
-  `While / Do While:` Se usara principalmente para escenarios en bucle como batallas o una tienda.
-  `For: ` Se usara junto a los arreglos para mostrar que posee, en donde se encuentra, etc el jugador, tambien le podemos hacer uso para ataques en cadena.
-  `Srand, Rand: ` Para el uso del RNG dentro del juego.
-  `Bool: ` Se usara para condicionales *Verdadero* o *Falso*, ejemplo si el jugador es derrotado.
+## 📂 Repositorio 
 
-1. Clona este repositorio en tu máquina local:
-   ```bash
-   git clone [URL del repositorio]
+https://github.com/FDP-01-2025/project-call.git
+
+## 🚀 Créditos y agradecimientos
+
+Gracias al equipo por el esfuerzo, la inspiración de la mitología griega por hacer épico el proyecto.
+
+---
+
+> *AshesOfOlympus* — Proyecto académico para práctica de programación en C++.
