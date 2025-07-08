@@ -56,13 +56,13 @@ Clear();
     // Prologue();
     // Training(p);
     // Tutorial(p, Na, Ndum);
-    // Forest(p, S, Tr); // Capitulo 1 - Bosque
+    Forest(p, S, Tr); // Capitulo 1 - Bosque
     // CaveDialogue(p, Gol); // Capitulo 2 - Cueva
     // AtenasCity(p, Nihi); // Capitulo 3 - Ciudad de Atenas
     //MountOlympus(p, Km); // Capitulo 4 - Monte Olimpo
     // Sky(p, h); // Capitulo 5 - Reino de Zeus
 
-    // HadesBattle(p, inf);
+    HadesBattle(p, inf);
 
     return 0;
 }

@@ -2,6 +2,7 @@
 #define BATTLE_UTILS_H
 #include "Data/PlayerData/PlayerData.h"
 
+void ShowGameOver(); // muestra el game over
 void PtC(); // Press to continue
 void Clear(); // Clear the console
 void SleepMS(int milliseconds); // Sleep for a specified number of milliseconds
