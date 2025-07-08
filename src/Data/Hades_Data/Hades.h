@@ -9,6 +9,7 @@ struct DHades {
     int HP;
     int MAX_HP;
     int ATTACK;
+     int CRITICAL_ATTACK;
     int DEFENSE;
     int MANA;
     int MAX_MANA;

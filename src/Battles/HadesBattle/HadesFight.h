@@ -5,10 +5,11 @@
 #include "BattleUtils/BattleUtils.h"
 using namespace std;
 
-    void HadesBattle(Player& p, DHades& inf);
+    void DhadesBattle(Player& p, DHades& inf);
     void DefaultError();
     void Items(Player& p, int option_item);
     void HpBar(Player& p);
     void ManaBar(Player& p);
 
 #endif
+

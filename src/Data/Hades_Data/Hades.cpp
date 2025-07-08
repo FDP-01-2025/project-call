@@ -8,7 +8,7 @@ DHades Hades_Data(){
     inf.Level = 100;
     inf.HP = 10000;
     inf.MAX_HP = 10000;
-    inf.ATTACK = 30;
+    inf.ATTACK = 26;
     inf.DEFENSE = 40;
     inf.MANA = 100;
     inf.MAX_MANA = 100;

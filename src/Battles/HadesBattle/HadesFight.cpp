@@ -147,41 +147,48 @@ void PlayerAttackHades(Player& p, DHades& inf){
     }
 }
 
-// FUNCIÓN MODIFICADA: Ataque de Hades con probabilidad de daño multiplicado
+
 void HadesAttackPlayer(Player& p, DHades& inf){
     int RNGHades = rand() % 101; // RNG 0-100
-    int RNGDamageMultiplier = rand() % 101; // RNG para multiplicador de daño
-    int damageMultiplier = 1;
-    string multiplierText = "";
-    
-    // Determinar multiplicador de daño (10% probabilidad total)
-    if (RNGDamageMultiplier <= 3){ // 3% probabilidad de daño triplicado
-        damageMultiplier = 3;
-        multiplierText = "\033[31m¡DAÑO DEVASTADOR!\033[0m ";
-    } else if (RNGDamageMultiplier <= 10){ // 7% probabilidad de daño duplicado
-        damageMultiplier = 2;
-        multiplierText = "\033[33m¡DAÑO POTENCIADO!\033[0m ";
-    }
+    int damageBonus = 0;
+    string damageType = "";
 
     if (RNGHades < 25){
-        cout << inf.HadesName << " Fallo su ataque... su Guadaña casi revana tu alma..." << endl << endl;
+        cout << inf.HadesName << " Fallo el ataque!" << endl << endl;
     } else {
-        int finalDamage = (inf.ATTACK * damageMultiplier) - p.DEFENSE;
-        if (p.DEFENSE > (inf.ATTACK * damageMultiplier)){
+        // Determinar si hay bonus de daño
+        int bonusRNG = rand() % 101;
+        if (bonusRNG < 20) { // 20% probabilidad de +25 daño
+            damageBonus = 25;
+            damageType = " \033[33m(+25 daño infernal)\033[0m";
+        } else if (bonusRNG < 35) { // 15% probabilidad de +50 daño (35-20=15)
+            damageBonus = 50;
+            damageType = " \033[31m(+50 daño devastador)\033[0m";
+        }
+
+        // Calcular daño total
+        int totalDamage = (inf.ATTACK - p.DEFENSE) + damageBonus;
+        
+        if (p.DEFENSE > inf.ATTACK && damageBonus == 0){
             cout << "El enemigo no es capaz de penetrar tu defensa!" << endl;
         } else {
-            cout << multiplierText << inf.HadesName << " realizo un ataque exitoso" << endl;
-            p.HP -= finalDamage;
-            cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << finalDamage << " de dano." << endl;
-            if (damageMultiplier > 1){
-                cout << "\033[31m¡El poder del inframundo multiplica el daño x" << damageMultiplier << "!\033[0m" << endl;
+            cout << inf.HadesName << " realizo un ataque exitoso" << damageType << endl;
+            
+            // Asegurar que el daño mínimo sea 1 si hay bonus
+            if (totalDamage < 1 && damageBonus > 0) {
+                totalDamage = damageBonus;
+            }
+            
+            if (totalDamage > 0) {
+                p.HP -= totalDamage;
+                cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << totalDamage << " de dano." << endl << endl;
+            } else {
+                cout << "El enemigo no es capaz de penetrar tu defensa!" << endl;
             }
         }
-        cout << endl;
     }
 }
 
-// NUEVA FUNCIÓN: Habilidad especial de Hades usando mana
 void HadesSpecialAbility(Player& p, DHades& inf){
     int RNGSpecial = rand() % 101;
     int manaCost = 40; // Costo de mana para la habilidad especial
@@ -226,15 +233,7 @@ void HadesSpecialAbility(Player& p, DHades& inf){
     }
 }
 
-string TalkHades[] = {
-    "Intentas hacer un trato con el \033[31mRey del inframundo Hades\033[0m", // 0
-    "Le ofrece una galleta a Hades", // 1
-    "Saca un sombrero de copa y te lo pones ", // 2
-    "le lanzas una flor", // 3
-    "Intentas sacarle platica al \033[31mRey del inframundo Hades\033[0m "  // 4
-};
-
-void HadesBattle(Player& p, DHades& inf){
+void DhadesBattle(Player& p, DHades& inf){
 
     int TempDefense = p.DEFENSE; // guardamos una variable de defensa temporal, para evitar posibles conflictos futuros en caso de que se cambie
     int PlayerHp = p.HP; // variables para guardar los datos del Player y Enemy en una funcion checkpoint
@@ -256,10 +255,7 @@ void HadesBattle(Player& p, DHades& inf){
         EnemyHpBar(inf);
         HpBar(p); // barra de vida dinamica
         ManaBar(p); // barra de mana dinamica
-        
-        // Mostrar mana de Hades
-        cout << "MANA " << inf.HadesName << ": " << inf.MANA << "/" << inf.MAX_MANA << endl << endl;
-        
+     
         cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n\n";
         cin >> option;
 
@@ -399,24 +395,27 @@ void HadesBattle(Player& p, DHades& inf){
                 Sleep(1500);
 
                 if (RNGTalkHades <= 20){
-                    cout << TalkHades[0] << endl;
-                    cout << p.PlayerName << ": Hades, ¿y si hacemos un trato? Yo te ayudo a organizar el inframundo y tú me das un pase VIP.\n";
-                    cout << inf.HadesName << ": Trato tentador, pero mi idea de organización es caos controlado... y tú pareces más caos descontrolado.";
+                    cout << " " << endl;
+                    cout << p.PlayerName << ": Devuelve la paz a este mundo o te detendré con mi propia fuerza, Hades\n";
+                    cout << inf.HadesName << ":  La paz es una ilusión efímera. Yo soy el fin inevitable. Ven y demuestra que puedes desafiar al destino.";
 
                 } else if (RNGTalkHades > 20 && RNGTalkHades <= 40){
-                    cout << TalkHades[1] << endl;
-                    cout << inf.HadesName << ": ¿Qué es esto? ¿Intentas sobornarme con galletas? ¡Ni el dios del inframundo se vende por snacks baratos!...\n";
+                    cout << " " << endl;
+                    cout << p.PlayerName << ": Tu oscuridad no tiene lugar aquí. Me enfrentaré a ti para salvar todo lo que amo.\n";
+                    cout << inf.HadesName << ": El amor es débil ante el poder de la muerte. Ven, y que tu valentía sea tu último suspiro.";
                     RegMana = false;
                 } else if (RNGTalkHades > 40 && RNGTalkHades <= 60){
-                    cout << TalkHades[2] << endl;
-                    cout << inf.HadesName << ": ¿Crees que un sombrero fancy me va a impresionar? Yo tengo un reino entero y tú solo un mal peinado.\n";
+                    cout << " " << endl;
+                    cout << p.PlayerName << ": He cruzado el abismo y desafiado a la muerte misma para llegar hasta ti, Hades. Hoy, tu oscuridad conocerá la luz de mi voluntad.\n";
+                    cout << inf.HadesName << ": Solo los necios desafían al dios del inframundo. Tu llama se extinguirá y tu nombre será olvidado entre las sombras eternas.";
                 } else if (RNGTalkHades > 60 && RNGTalkHades <= 80){
-                    cout << TalkHades[3] << endl; cout << p.PlayerName << ": Hypnos, ¿puedes hacer que mis enemigos tengan pesadillas?";
-                    cout << inf.HadesName << ": Claro, pero solo si me pagas con siestas extra largas.";
+                    cout << " " << endl;
+                    cout << p.PlayerName << ": No temo a la muerte, porque lucho por la vida. Y esa fuerza es más poderosa que tu reino oscuro.\n";
+                    cout << inf.HadesName << ": La vida es solo un suspiro antes del abismo. Ven, y deja que te muestre el verdadero poder del inframundo.";
                 }
 
                 Sleep(2500);
-                cout << "\n¡El \033[31mDios Hypnos\033[0m ataca repentinamente!" << endl;
+                cout << "\n¡El \033[31mRey de los Muertos\033[0m ataca repentinamente!" << endl;
                 Sleep(1000);
                 
                 // Decidir si usa habilidad especial después de hablar
@@ -474,7 +473,7 @@ void HadesBattle(Player& p, DHades& inf){
 
         if(p.HP <= 0){
             cout << inf.HadesName << " ha derrotado a " << "\033[34m" << p.PlayerName << "\033[0m" << endl;
-            ShowGameOver();
+            cout << "\033[31mGAME OVER\033[0m" << endl;
             cout << "\033[33mContinue?\033[0m\n1. YES\n2. NO\n\n";
             cin >> option_GameOver;
 
