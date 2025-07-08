@@ -2,6 +2,7 @@
 #include <windows.h>
 #include "BattleUtils/BattleUtils.h"
 #include "Data/PlayerData/PlayerData.h"
+#include "Battles/HadesBattle/HadesFight.h"
 using namespace std;
 
 void PrintWithPause_UW(const string& Text, int Pause){
@@ -13,7 +14,7 @@ void PrintWithPause_UW(const string& Text, int Pause){
 void LongPause_UW(int MiliSeconds){
     Sleep(0); // 1000 para pausa larga.  // "MiliSeconds" to normal
 }
-void Underworld(){
+void Underworld(Player& p, DHades& inf){
     string UnderW[] = {
         "\033[3mTú y naika atraviesan cada rincón del inframundo.\033[0m", // 0
         "\033[3mVencen a cada bestia... atraviesan el río estigia.\033[0m", // 1
@@ -54,36 +55,73 @@ void Underworld(){
         "\033[35mMinos: \033[0mY que la sombra de Hades no te consuma antes de llegar.", // 36
         "\033[3mSe abre un portal dorado y os dejan pasar\033[0m", // 37
         "Andando chico, no tenemos tiempo que perder", // 38
-        "Cruza... y observan un hermoso Jardín...", // 39
-        "Es... hermoso... peor debemos ir rapido al templo de Hades.", // 40
+        "Cruzan... y observan un hermoso Jardín...", // 39
+        "Es... hermoso... pero debemos ir rapido al templo de Hades.", // 40
         "Caminan y...", // 41
         "Se topan con lo que parece ser Thanatos...", // 42
         "Esta dormido... así que pasan de él...", // 43
         "Llegan al templo de Hades.", // 44
-        "Bien... preparados...", // 45
+        "Se preparan y que sea lo que Zeus quiera.", // 45
         "Derriban la puerta.", // 46
-        "Que vacio...", // 47
+        "Notan que esta muy vacío... pero hay una vasija al fondo.", // 47
         "Entran...", // 48
         "Sienten una presión enorme dentro...", // 49
-        "", // 50
-        "", // 51
-        "", // 52
-        "", // 53
-        "", // 54
-        "", // 55
-        "", // 56
-        "", // 57
-        "", // 58
-        "", // 59
-        "", // 61
-        "", // 62
-        "", // 63
-        "", // 64
-        "", // 65
-        "", // 66
-        "", // 67
-        "", // 68
-        "", // 69
-        "", // 70
+        "Esto no me gusta chic...", // 50
+        "Cuando de repente una enorme explosión de energia los saca del tempo!", // 51
+        "MIERDA!", // 52
+        "Se lograron cubrir por los pelos... estan afuera del templo", // 53
+        "El cielo se pone oscuro... la hierba se seca... Él... ha despertado.", // 54
+        "Ven a una figura majestuosa salir del templo poco a poco.", // 55
+        "...Interesante.", // 56
+        "Desde que inicie mi guerra contra la humanidad era yo quien iba tras ustedes...", // 57
+        "Y ahora... han decidido en venir aqui a plantarme cara en mi propio hogar?", // 58
+        "Esplendido.", // 59
+        "Ademas de interrumpir mi sueño...", // 61
+        "Tú... vienes a plantarme batalla cara a cara.", // 62
+        "pero que agallas. Debo reconocer que te admiro por ser tan valiente. O muy estupido...", // 63
+        "...", // 64
+        "Bien, las veces que me he confiado termine donde estoy.", // 65
+        "Terminare este ciclo sin fin... Gran huamno, el destino nos enlazo por tercera vez para nuestra revancha.", // 66
+        "Y que chica tan linda trajiste por cierto.", // 67
+        "!!!", // 68
+        "Naika es incapaz de hacer algo... la mera presencia de Hades la hizo caer al piso", // 69
+        "C-c..chico... no te preocupes por mi... tu... tu puedes... no llegaste hasta aqui para rendirte... hazlo... por... mí...", // 70
+        "Naika cae inconciente", // 71
+        "Bien... ", // 72
+        "Hades saca su Guadaña", // 73
+        "Que el destino de la humanidad se decida aquí y ahora.", // 74
+
+        //FINAL BATTLE
+        "Una fulminante luz envuelve a Hades", // 75
+        "NOOOO", // 76
+        "Como es posible que este gusano vuelva a sellarme.", // 77
+        "NOOO", // 78
+        "NO LO PERMI...TIREEE", // 79
+        "Sellas a Hade sun su teplo por otros 500 años...", // 80
+        "Él caos... ha terminado.", // 81
+        "Agarras en brazos a Naika y regresas al mundo terrenal... ya no como un chico... ya eres un hombre.", // 82
+        "Y evitaste que la humanidad observe una vez más el terror de Hades.", // 83
+        "Y diste fin a su reinado del terror.", // 84
+        "Los humanos veran nuevamente el amanecer de un nuevo día. La flora crecera nuevamente.", // 85
+        "Bendito sea este mundo maravilloso.", // 86
+        "FIN", // 87
     };
+
+    string Pla = "\033[3m";
+    string Nai = "\033[31Naika: \033[0m";
+    string Hds = "\033[30Hades: \033[0m";
+
+    for (int i = 0; i < 88; i++){
+        if (i == 39 || i >= 41 && i <= 49 || i == 51 || i >= 53 && i <= 55 || i == 69 || i == 71 || i == 73 || i == 75 || i >= 80 && i <= 87){
+            cout << Pla;
+        } else {
+            cout << (i >= 56 && i <= 59 || i >= 61 && i <= 66 || i == 72 || i == 74 || i >= 76 && i <= 79 ? Hds:Nai);
+        }
+            PrintWithPause_UW(UnderW[i], 20);
+            LongPause_UW(1000);
+            cout << endl;
+            PtC();
+        Clear();
+        if(i == 74) HadesBattle(p, inf); 
+    }
 }

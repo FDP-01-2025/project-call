@@ -9,6 +9,7 @@
 #include "src/Dialogues/AtenasCity/LibraryAtenas.h"
 #include "src/Dialogues/Olympus/LibraryOlympus.h"
 #include "src/Dialogues/Sky/LibrarySky.h"
+#include "src/Dialogues/Underworld/LibraryUnderw.h"
 #include "src/Data/PlayerData/PlayerData.h"
 #include "src/Data/NaikaData/Naika.h"
 #include "src/Battles/NaikaDummy/NaBattle.h"
@@ -33,7 +34,7 @@ int main(){
     srand(time(NULL)); // generador de semilla RNG
     Clear();
 
-    cout << "Bienvenido a Ashes of Olympus" << endl;
+    ShowAshesOfOlympus();
     Player p = Global_Data(); // funcion para declarar el parametro de Player
     ShowStats(p);             // funcion para mostrar las estadisticas
 
@@ -53,16 +54,15 @@ int main(){
     Sleep(6000);
 
 Clear();
-    Prologue();
+    // Prologue();
     // Training(p);
     // Tutorial(p, Na, Ndum);
-     // Forest(p, S, Tr); // Capitulo 1 - Bosque
+    // Forest(p, S, Tr); // Capitulo 1 - Bosque
     // CaveDialogue(p, Gol); // Capitulo 2 - Cueva
     // AtenasCity(p, Nihi); // Capitulo 3 - Ciudad de Atenas
     //MountOlympus(p, Km); // Capitulo 4 - Monte Olimpo
-    // Sky(p, h); // Capitulo 5 - Reino de Zeus
-
-    HadesBattle(p, inf);
+    //Sky(p, h); // Capitulo 5 - Reino de Zeus
+    Underworld(p, inf);
 
     return 0;
 }

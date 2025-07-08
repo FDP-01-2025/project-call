@@ -21,7 +21,7 @@ AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde en
 
 - Sistema de combate por turnos (ataques, magia, defensa, piedad)
 - Barra de vida y mana con colores
-- Jefes con mecánicas únicas (como un Slime, Bandido, y hasta el mismisimo Hades.)
+- Jefes con mecánicas únicas (como Hades, Cerbero, etc.)
 - Checkpoint para reiniciar en caso de derrota
 - diálogos para ambientar la historia 
 
@@ -29,38 +29,30 @@ AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde en
 
 - **Variables y tipos de datos:**
   - Ejemplo: 
- 
- ![Ejemplo de tipo de datos\n](/resources/Images/Variables%20.png)
+ ![Ejemplo de tipo de datos](/resources/Images/Variables%20.png)
 
 - **Condicionales (if, else):**
   - Ejemplo: 
-  
-  ![Ejemplo de if, else\n](/resources/Images/If,%20else.png)
+  ![Ejemplo de if, else](/resources/Images/If,%20else.png)
 
 - **Bucles:**
   - Ejemplo: dibujar la barra de vida.
-  
-  ![Ejemplo de bucle\n](/resources/Images/For.png)
+  ![Ejemplo de bucle](/resources/Images/For.png)
 
 - **Funciones:**
   - Ejemplo: 
-  
-  ![Ejemplo de funciones\n](/resources/Images/Funcion.png)
+  ![Ejemplo de funciones](/resources/Images/Funcion.png)
 
 - **Arrays / vectores:**
   - Ejemplo: guardar dialogos.
-  
-  ![Ejemplo de Array\n](/resources/Images/Array.png)
+  ![Ejemplo de Array](/resources/Images/Array.png)
 
 
 ## 🖼 Mockups y ejemplo de pantallas
 
 - Pantalla de combate con stats y comandos
-
-![Ejemplo\n](/resources/Images/Interfaz.jpg)
+![Ejemplo:](/resources/Images/Interfaz.jpg)
 - Pantalla de "Game Over" con opción de continuar
-
-![Ejemplo\n](/resources/Images/game%20over.jpg)
 
 ## 📦 Requisitos mínimos
 
