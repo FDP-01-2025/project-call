@@ -63,24 +63,21 @@ void Training(Player& p){
         PrintWithPause_T(General[i], 30); 
         cout << "\033[34m" << p.PlayerName << "\033[0m";
         LongPause_T(1000); 
-        cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
     }
     else if (i == 23) {
         PrintWithPause_T(General[i], 500);
         LongPause_T(1000); 
-        cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
     }
     else {
         cout << colors[i] << prefixes[i] << "\033[0m";
         PrintWithPause_T(General[i], 30);
         LongPause_T(1000); 
-        cout << endl;
-        cin >> x;
-        system("cls");
+        PtC();
+        Clear();
         }
     }
 }
