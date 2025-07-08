@@ -108,8 +108,8 @@ void Underworld(Player& p, DHades& inf){
     };
 
     string Pla = "\033[3m";
-    string Nai = "\033[31Naika: \033[0m";
-    string Hds = "\033[30Hades: \033[0m";
+    string Nai = "\033[31mNaika: \033[0m";
+    string Hds = "\033[35mHades: \033[0m";
 
     for (int i = 0; i < 88; i++){
         if (i == 39 || i >= 41 && i <= 49 || i == 51 || i >= 53 && i <= 55 || i == 69 || i == 71 || i == 73 || i == 75 || i >= 80 && i <= 87){

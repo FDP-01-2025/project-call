@@ -69,6 +69,21 @@ int main() {
         MountOlympus(p, Km);
         Sky(p, h);
         Underworld(p, inf);
+
+    cout << "Tu final: " << endl;
+    PtC();
+        if (!p.BadRelationNaika){
+            cout << "Al tener una buena relación con Naika y de que te admirara que te hayas vuelto más fuerte se convirtio en tu esposa. Con la paz ya establecida vivieron felices.";
+        } else {
+            cout << "Te llegas a reconciliar con Naika, y se vuelven excelentes compañeros de equipo.";
+        }
+        cout << endl;
+        if (p.MONEY >= 200) cout << "Termianste tu aventura con una buena suma de dinero, ya puedes vivir feliz.";
+        if (p.KILLS == 0){
+            cout << "Y como tu camino fue pacifista... Hades no es capaz de tomar posesión de tu alma... y el mundo no vera por tercera vez a un genocida.";
+        } else {
+            cout << "Lastimosamente como has derramado sangr... sucumbiras progresivamente al control de Hades... y tarde o temprano terminaras como Magnus o Azael...";
+        }
         break;
     }
 

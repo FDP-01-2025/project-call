@@ -13,9 +13,9 @@ AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde en
   - `<iostream>`
   - `<windows.h>`
   - `<ctime>`
-  - `<fstream>`
   - `<algorithm>`
-  - `<vector>`
+  - `<chrono>`
+  - `<thread>`
 
 ## 🧩 Funcionalidades principales
 

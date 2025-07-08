@@ -49,7 +49,7 @@ void ShowGameOver() {
 void PtC() {
     cout << "\033[2m[Presiona Enter para continuar...]\033[0m"; // Imprimir el mensaje corregido
     cin.clear(); // Limpia flags de error
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpiar cualquier caracter residual en el buffer
+    cin.ignore(numeric_limits<streamsize>::max(),'\n'); // Limpiar cualquier caracter residual en el buffer
     cin.get(); // Esperar a que el jugador presione Enter
 }
 
