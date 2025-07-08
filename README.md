@@ -56,8 +56,11 @@ AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde en
 ## 🖼 Mockups y ejemplo de pantallas
 
 - Pantalla de combate con stats y comandos
+
 ![Ejemplo\n](/resources/Images/Interfaz.jpg)
 - Pantalla de "Game Over" con opción de continuar
+
+![Ejemplo\n](/resources/Images/game%20over.jpg)
 
 ## 📦 Requisitos mínimos
 
