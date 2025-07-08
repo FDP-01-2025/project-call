@@ -53,10 +53,10 @@ int main(){
     Sleep(6000);
 
 Clear();
-    // Prologue();
+    Prologue();
     // Training(p);
     // Tutorial(p, Na, Ndum);
-    Forest(p, S, Tr); // Capitulo 1 - Bosque
+     // Forest(p, S, Tr); // Capitulo 1 - Bosque
     // CaveDialogue(p, Gol); // Capitulo 2 - Cueva
     // AtenasCity(p, Nihi); // Capitulo 3 - Ciudad de Atenas
     //MountOlympus(p, Km); // Capitulo 4 - Monte Olimpo
