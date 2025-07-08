@@ -165,6 +165,6 @@ void Sky(Player& p, DHypnos& h){
         cout << "\033[0m";
         PtC();
         Clear();
-        // if (i == 86) DHBattle(p, h);
+        if (i == 86) DHBattle(p, h);
     }
 }

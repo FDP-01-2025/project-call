@@ -1,7 +1,7 @@
 #ifndef CERBEROFIGHT_H
 #define CERBEROFIGHT_H
 #include "Data/PlayerData/PlayerData.h"
-#include "Data/CerberusData/Cerberus.h"
+#include "Cerberus.h"
 #include "BattleUtils/BattleUtils.h"
 using namespace std;
 

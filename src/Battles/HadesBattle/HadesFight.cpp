@@ -1,41 +1,40 @@
 #include <iostream>
 #include <windows.h>
 #include <time.h>
-#include <algorithm> // para usar min y max
+#include <algorithm>
 #include "Data/PlayerData/PlayerData.h"
-#include "Data/HypnosData/Hypnos.h" // librería del jefe Nihilus
+#include "Data/Hades_Data/Hades.h"
 #include "BattleUtils/BattleUtils.h"
+#include "HadesFight.h"
 using namespace std;
-// Nihilus, el Vacío Andante ha emergido*
 
-// Barra de vida dinámica del enemigo
-void EnemyHpBar(DHypnos& h){
+void EnemyHpBar(DHades& inf){
     int total_blocks = 10;
-    int filled_blocks = (h.HP * total_blocks) / h.MAX_HP;
-    if (h.HP > 0 && filled_blocks == 0) filled_blocks = 1;
+    int filled_blocks = (inf.HP * total_blocks) / inf.MAX_HP;
+    if (inf.HP > 0 && filled_blocks == 0) filled_blocks = 1;
     int empty_blocks = total_blocks - filled_blocks;
 
-    string color = (h.HP > h.MAX_HP * 0.3) ? "\033[35m" : "\033[31m";
+    string color = (inf.HP > inf.MAX_HP * 0.3) ? "\033[35m" : "\033[31m";
     cout << "HP:   " << color;
     for (int i = 0; i < filled_blocks; ++i) cout << "█";
     cout << "\033[30m";
     for (int i = 0; i < empty_blocks; ++i) cout << "█";
-    cout << "\033[0m " << h.HP << "/" << h.MAX_HP << endl << endl;
+    cout << "\033[0m " << inf.HP << "/" << inf.MAX_HP << endl << endl;
 }
 
 // Función local: restaurar checkpoint
-void Checkpoint(Player& p, DHypnos& h, int PlayerHP, int PlayerMana, int DHHp, int DHMana, int DHMaxHp){
+void Checkpoint(Player& p, DHades& inf, int PlayerHP, int PlayerMana, int HadesHp, int HadesMana, int HadesMaxHp){
     p.HP = PlayerHP;
     p.MANA = PlayerMana;
-    h.HP = DHHp;
-    h.MANA = DHMana;
-    h.MAX_HP = DHMaxHp;
+    inf.HP = HadesHp;
+    inf.MANA = HadesMana;
+    inf.MAX_HP = HadesMaxHp;
 }
 
-void PlayerMagic(Player& p, DHypnos& h, bool& Return){
+void PlayerMagic(Player& p, DHades& inf, bool& Return){
     int opcionPlayerMagic;
     if (p.MagicDefault == p.Magic1){ // si magia es vendaval
-    cout << "1. " << h.DHName << " HP: " << h.HP << "/" << h.MAX_HP << endl;
+    cout << "1. " << inf.HadesName << " HP: " << inf.HP << "/" << inf.MAX_HP << endl;
     cout << "2. RETURN" << endl;
     cin >> opcionPlayerMagic;
 
@@ -47,10 +46,10 @@ void PlayerMagic(Player& p, DHypnos& h, bool& Return){
             } else {
             cout << "Usaste: " << p.MagicDefault << endl;
             Sleep(1000);
-            cout << "El viento dano emocionalmente a " << h.DHName << endl;
+            cout << "El viento daño emocionalmente a " << inf.HadesName << endl;
             p.MANA -= p.MANACOST_AT;
-            h.HP -= p.MAGIC_ATTACK;
-            cout << h.DHName << " recibió " << p.MAGIC_ATTACK << " de daño!" << endl;
+            inf.HP -= p.MAGIC_ATTACK;
+            cout << inf.HadesName << " recibió " << p.MAGIC_ATTACK << " de daño!" << endl;
             }
         break;
     case 2:
@@ -121,7 +120,7 @@ void PlayerMagic(Player& p, DHypnos& h, bool& Return){
     }
 }
 
-void PlayerAttackDH(Player& p, DHypnos& h){
+void PlayerAttackHades(Player& p, DHades& inf){
     int RNGPlayer = rand() % 101; // RNG 0-100 (se le agregua el 101 porque si es 100, seria 0-99)
 
     if (RNGPlayer < 25){
@@ -129,102 +128,159 @@ void PlayerAttackDH(Player& p, DHypnos& h){
         cout << "Fallaste el ataque!" << endl;
     } else if (RNGPlayer < 50){
         Clear();
-        if (h.DEFENSE > p.CRITICAL_ATTACK){
+        if (inf.DEFENSE > p.CRITICAL_ATTACK){
             cout << "No lograste penetrar la defensa enemiga!" << endl;
         } else {
             cout << "Ataque critico!" << endl;
-            h.HP -= p.CRITICAL_ATTACK - h.DEFENSE;
+            inf.HP -= p.CRITICAL_ATTACK - inf.DEFENSE;
         }
-        cout << h.DHName << " Recibio: " << p.CRITICAL_ATTACK - h.DEFENSE << " de dano critico!" << endl;
+        cout << inf.HadesName << " Recibio: " << p.CRITICAL_ATTACK - inf.DEFENSE << " de dano critico!" << endl;
     } else {
         Clear();
         cout << "Ataque exitoso" << endl;
-        if (h.DEFENSE > p.ATTACK){
+        if (inf.DEFENSE > p.ATTACK){
             cout << "No lograste penetrar la defensa enemiga!" << endl;
         } else {
-            h.HP -= p.ATTACK - h.DEFENSE;
+            inf.HP -= p.ATTACK - inf.DEFENSE;
         }
-        cout << h.DHName << " Recibio: " << p.ATTACK - h.DEFENSE << " de dano!" << endl;
+        cout << inf.HadesName << " Recibio: " << p.ATTACK - inf.DEFENSE << " de dano!" << endl;
     }
 }
 
-void DHAttackPlayer(Player& p, DHypnos& h){
-    int RNGDH = rand() % 101; // RNG 0-100 (se le agregua el 101 porque si es 100, seria 0-99)
+// FUNCIÓN MODIFICADA: Ataque de Hades con probabilidad de daño multiplicado
+void HadesAttackPlayer(Player& p, DHades& inf){
+    int RNGHades = rand() % 101; // RNG 0-100
+    int RNGDamageMultiplier = rand() % 101; // RNG para multiplicador de daño
+    int damageMultiplier = 1;
+    string multiplierText = "";
+    
+    // Determinar multiplicador de daño (10% probabilidad total)
+    if (RNGDamageMultiplier <= 3){ // 3% probabilidad de daño triplicado
+        damageMultiplier = 3;
+        multiplierText = "\033[31m¡DAÑO DEVASTADOR!\033[0m ";
+    } else if (RNGDamageMultiplier <= 10){ // 7% probabilidad de daño duplicado
+        damageMultiplier = 2;
+        multiplierText = "\033[33m¡DAÑO POTENCIADO!\033[0m ";
+    }
 
-    if (RNGDH < 25){
-        cout << h.DHName << " Fallo el ataque!" << endl << endl;
-    } else if (RNGDH < 50){
-        if (p.DEFENSE > h.CRITICAL_ATTACK){
+    if (RNGHades < 25){
+        cout << inf.HadesName << " Fallo su ataque... su Guadaña casi revana tu alma..." << endl << endl;
+    } else {
+        int finalDamage = (inf.ATTACK * damageMultiplier) - p.DEFENSE;
+        if (p.DEFENSE > (inf.ATTACK * damageMultiplier)){
             cout << "El enemigo no es capaz de penetrar tu defensa!" << endl;
         } else {
-            cout << h.DHName << " realizo un ataque critico!" << endl;
-            p.HP -= h.CRITICAL_ATTACK - p.DEFENSE;
-            cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << h.CRITICAL_ATTACK - p.DEFENSE << " de dano critico!" << endl << endl;
+            cout << multiplierText << inf.HadesName << " realizo un ataque exitoso" << endl;
+            p.HP -= finalDamage;
+            cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << finalDamage << " de dano." << endl;
+            if (damageMultiplier > 1){
+                cout << "\033[31m¡El poder del inframundo multiplica el daño x" << damageMultiplier << "!\033[0m" << endl;
+            }
+        }
+        cout << endl;
+    }
+}
+
+// NUEVA FUNCIÓN: Habilidad especial de Hades usando mana
+void HadesSpecialAbility(Player& p, DHades& inf){
+    int RNGSpecial = rand() % 101;
+    int manaCost = 40; // Costo de mana para la habilidad especial
+    
+    if (inf.MANA >= manaCost){
+        inf.MANA -= manaCost;
+        
+        if (RNGSpecial <= 33){
+            // Llamarada Infernal
+            cout << "\033[31m" << inf.HadesName << " invoca una LLAMARADA INFERNAL!\033[0m" << endl;
+            Sleep(1000);
+            cout << "¡Las llamas del inframundo te envuelven!" << endl;
+            int damage = (inf.ATTACK * 2) - p.DEFENSE;
+            if (damage > 0){
+                p.HP -= damage;
+                cout << "\033[34m" << p.PlayerName << "\033[0m" << " recibió " << damage << " de daño infernal!" << endl;
+            } else {
+                cout << "Tu defensa resistió las llamas!" << endl;
+            }
+        } else if (RNGSpecial <= 66){
+            // Drenaje de Almas
+            cout << "\033[35m" << inf.HadesName << " usa DRENAJE DE ALMAS!\033[0m" << endl;
+            Sleep(1000);
+            cout << "¡Sientes como tu esencia vital es absorbida!" << endl;
+            int drainAmount = 30;
+            p.HP -= drainAmount;
+            inf.HP = min(inf.HP + drainAmount, inf.MAX_HP);
+            cout << "\033[34m" << p.PlayerName << "\033[0m" << " pierde " << drainAmount << " HP!" << endl;
+            cout << inf.HadesName << " se cura " << drainAmount << " HP!" << endl;
+        } else {
+            // Sombras Paralizantes
+            cout << "\033[90m" << inf.HadesName << " conjura SOMBRAS PARALIZANTES!\033[0m" << endl;
+            Sleep(1000);
+            cout << "¡Las sombras del inframundo te drenan la energía mágica!" << endl;
+            int manaDrain = 25;
+            p.MANA = max(0, p.MANA - manaDrain);
+            cout << "\033[34m" << p.PlayerName << "\033[0m" << " pierde " << manaDrain << " de MANA!" << endl;
         }
     } else {
-        if (p.DEFENSE > h.ATTACK){
-            cout << "El enemigo no es capaz de penetrar tu defensa!" << endl;
-        } else {
-            cout << h.DHName << " realizo un ataque exitoso" << endl;
-            p.HP -= h.ATTACK - p.DEFENSE;
-            cout << "\033[34m" << p.PlayerName << "\033[0m" << " Recibio: " << h.ATTACK - p.DEFENSE << " de dano." << endl << endl;
-        }
+        // Si no tiene mana suficiente, ataque normal
+        HadesAttackPlayer(p, inf);
     }
-    cout << endl;
 }
 
-string TalkDH[] = {
-    "Intentas hablar con el \033[31mdios Hypnos\033[0m", // 0
-    "Le haces una peticion al \033[31mdios Hypnos\033[0m", // 1 
-    "Intentas sacarle platica al \033[31mdios Hypnos\033[0m ", // 2
-    "Intentas sacarle platica al \033[31mdios Hypnos\033[0m ", // 3
-    "Intentas sacarle platica al \033[31mdios Hypnos\033[0m "  // 4
+string TalkHades[] = {
+    "Intentas hacer un trato con el \033[31mRey del inframundo Hades\033[0m", // 0
+    "Le ofrece una galleta a Hades", // 1
+    "Saca un sombrero de copa y te lo pones ", // 2
+    "le lanzas una flor", // 3
+    "Intentas sacarle platica al \033[31mRey del inframundo Hades\033[0m "  // 4
 };
 
-void DHBattle(Player& p, DHypnos& h){
+void HadesBattle(Player& p, DHades& inf){
 
     int TempDefense = p.DEFENSE; // guardamos una variable de defensa temporal, para evitar posibles conflictos futuros en caso de que se cambie
     int PlayerHp = p.HP; // variables para guardar los datos del Player y Enemy en una funcion checkpoint
     int PlayerMana = p.MANA;
-    int DHMaxHp = h.MAX_HP;
-    int DHHP = h.HP;
-    int DHMana = h.MANA;
+    int HadesMaxHp = inf.MAX_HP;
+    int HadesHP = inf.HP;
+    int HadesMana = inf.MANA;
     int option, option_attack, option_action, option_GameOver, option_exmagic, option_item;  // variables de opciones dentro de switchs                              // variable para pausar el codigo y proceder cuando el usuario decida
     bool battleOver = false;  // bandera para terminar la batalla
-    bool RageDH = false;   // bandera para el modo rage del enemigo
+    bool RageHades = false;   // bandera para el modo rage del enemigo
     bool Return = false;
-    int TurnCount = 0;       // la cantidad de turnos a sobrevivir para completar la pelea
 
     do{
-        int RNGTalkDH = rand() % 101; // variables RNG dentro del do para que se generen nuevos numeros
+        int RNGTalkHades = rand() % 101; // variables RNG dentro del do para que se generen nuevos numeros
+        int RNGHadesSpecial = rand() % 101; // RNG para habilidad especial de Hades
         bool RegMana = true;      // bandera para regenerar MANA
         int RandomEvent = rand() % 101;
-        cout << "Oponente: " << "\033[33m" << h.DHName << "\033[0m" << endl; // Codigo ANSI amarillo
-        EnemyHpBar(h);
-        cout << h.DHName << " Esta observando tus sueños." << endl << endl;
+        cout << "Oponente: " << "\033[33m" << inf.HadesName << "\033[0m" << endl; // Codigo ANSI amarillo
+        EnemyHpBar(inf);
         HpBar(p); // barra de vida dinamica
         ManaBar(p); // barra de mana dinamica
-        cout << "Turno: " << "\033[33m" << TurnCount << "\033[0m" << endl;
-        cout << "Resiste 20 turnos lo mejor que puedas..." << endl;
-        cout << endl;
         
-        cout << "\033[34m" << p.PlayerName << "\033[0m" << endl;
-        cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n5. MERCY\n";
-        cin >> option;      
+        // Mostrar mana de Hades
+        cout << "MANA " << inf.HadesName << ": " << inf.MANA << "/" << inf.MAX_MANA << endl << endl;
+        
+        cout << "1. ATTACK\n2. MAGIC\n3. ACTION\n4. ITEM\n\n";
+        cin >> option;
 
-    Clear();
+        Clear();
         switch (option){ // switch general
         case 1: // ATTACK
-            cout << "1. " << h.DHName << " HP: " << h.HP << "/" << h.MAX_HP << endl;
+            cout << "1. " << inf.HadesName << " HP: " << inf.HP << "/" << inf.MAX_HP << endl;
             cout << "2. RETURN" << endl; 
             cin >> option_attack;
 
             switch (option_attack){ // switch de case 1
             case 1: 
-                TurnCount++;
-                    PlayerAttackDH(p, h); // atacas al enemigo // 25% de fallar // 25% de critico
+                    PlayerAttackHades(p, inf); // atacas al enemigo // 25% de fallar // 25% de critico
                     cout << endl;
-                    DHAttackPlayer(p, h); // el enemigo te ataca // 25% de fallar
+                    
+                    // Decidir si Hades usa habilidad especial (20% probabilidad si tiene mana suficiente)
+                    if (RNGHadesSpecial <= 20 && inf.MANA >= 40){
+                        HadesSpecialAbility(p, inf);
+                    } else {
+                        HadesAttackPlayer(p, inf); // el enemigo te ataca con posibilidad de daño multiplicado
+                    }
                 break;
             case 2: // RETURN
             RegMana = false;
@@ -239,18 +295,22 @@ void DHBattle(Player& p, DHypnos& h){
 // end case 1
         case 2: // MAGIC
         RegMana = false;
-            if (p.MagicDefault != p.Magic2){ // si te curas dummy no te atacara
+            if (p.MagicDefault != p.Magic2){ // si te curas no te atacara
                 Clear();
-                PlayerMagic(p, h, Return);
+                PlayerMagic(p, inf, Return);
                 cout << endl;
                 if (!Return) {
-                    DHAttackPlayer(p, h);
-                    TurnCount++;
+                    // Decidir si Hades usa habilidad especial
+                    if (RNGHadesSpecial <= 20 && inf.MANA >= 40){
+                        HadesSpecialAbility(p, inf);
+                    } else {
+                        HadesAttackPlayer(p, inf);
+                    }
                     Return = false;
                 }
             } else {
                 Clear();
-                PlayerMagic(p, h, Return);
+                PlayerMagic(p, inf, Return);
                 cout << endl;
             }
             break;
@@ -271,17 +331,15 @@ void DHBattle(Player& p, DHypnos& h){
                 Clear();
                 break;
             case 2: // ENEMY DESCRIPTION
-
             RegMana = false;
                 Clear();
-                ShowStats(h); // llamar funcion
+                ShowStats(inf); // llamar funcion
                 cout << endl;
                 cin.ignore();
                 cin.get();
                 Clear();
                 break;
             case 3: // EXCHANGE MAGIC
-
             RegMana = false;
                 Clear();
                 cout << "Intercambiar magia actual:\n";
@@ -295,7 +353,7 @@ void DHBattle(Player& p, DHypnos& h){
                         cout << "Ya tienes equipada esta magia" << endl;
                     } else {
                         p.MagicDefault = p.Magic1;
-                        cout << "Te equipaste: " << p.MagicDefault << endl;
+                        cout << "Te quipaste: " << p.MagicDefault << endl;
                     }
                     Sleep(1000);
                     cout << endl;
@@ -306,7 +364,7 @@ void DHBattle(Player& p, DHypnos& h){
                         cout << "Ya tienes equipada esta magia" << endl;
                     } else {
                         p.MagicDefault = p.Magic2;
-                        cout << "Te equipaste: " << p.MagicDefault << endl;
+                        cout << "Te quipaste: " << p.MagicDefault << endl;
                     }
                     Sleep(1000);
                     cout << endl;
@@ -324,38 +382,67 @@ void DHBattle(Player& p, DHypnos& h){
             case 4: // ACT 1 - RAGE MODE
                 Clear();
             
-                if (!RageDH) {
-                    cout << "Intentas de alguna manera ofender a Hypnos... pero eres conciente que su actitud es irracional" << endl;
-                    RageDH = true;
+                if (!RageHades) {
+                    cout << "Intentas de alguna manera ofender a Hades... pero eres conciente que nada de esto funcionara." << endl;
+                    RageHades = true;
                     Sleep(1500);
                     
                 } else {
                     RegMana = false;
-                    cout << "Ya has intentado hacer enojar al " << h.DHName << " y no surtio ningun efecto en el...\n";
+                    cout << "Ya has intentado hacer enojar al " << inf.HadesName << " y no surtio ningun efecto en el...\n";
                 }
                 cout << endl;
                 break;
             case 5: // HABLAR
             Clear();
-                cout << "Intentas hablar con " << h.DHName << endl;
+                cout << "Intentas hablar con " << inf.HadesName << endl;
                 Sleep(1500);
 
-                cout << h.DHName << " No hablara contigo. Te pide que te concentres y des lo mejor de tí." << endl;
+                if (RNGTalkHades <= 20){
+                    cout << TalkHades[0] << endl;
+                    cout << p.PlayerName << ": Hades, ¿y si hacemos un trato? Yo te ayudo a organizar el inframundo y tú me das un pase VIP.\n";
+                    cout << inf.HadesName << ": Trato tentador, pero mi idea de organización es caos controlado... y tú pareces más caos descontrolado.";
+
+                } else if (RNGTalkHades > 20 && RNGTalkHades <= 40){
+                    cout << TalkHades[1] << endl;
+                    cout << inf.HadesName << ": ¿Qué es esto? ¿Intentas sobornarme con galletas? ¡Ni el dios del inframundo se vende por snacks baratos!...\n";
+                    RegMana = false;
+                } else if (RNGTalkHades > 40 && RNGTalkHades <= 60){
+                    cout << TalkHades[2] << endl;
+                    cout << inf.HadesName << ": ¿Crees que un sombrero fancy me va a impresionar? Yo tengo un reino entero y tú solo un mal peinado.\n";
+                } else if (RNGTalkHades > 60 && RNGTalkHades <= 80){
+                    cout << TalkHades[3] << endl; cout << p.PlayerName << ": Hypnos, ¿puedes hacer que mis enemigos tengan pesadillas?";
+                    cout << inf.HadesName << ": Claro, pero solo si me pagas con siestas extra largas.";
+                }
+
+                Sleep(2500);
+                cout << "\n¡El \033[31mDios Hypnos\033[0m ataca repentinamente!" << endl;
+                Sleep(1000);
+                
+                // Decidir si usa habilidad especial después de hablar
+                if (RNGHadesSpecial <= 20 && inf.MANA >= 40){
+                    HadesSpecialAbility(p, inf);
+                } else {
+                    HadesAttackPlayer(p, inf);
+                }
                 break;
 
-            case 6: // PACIFY
+            
+            case 7: // DEFEND
             RegMana = false;
             Clear();
-                cout << "Intentas pacificar a Hypnos... él ya es pacifico..." << endl << endl;
-                break;
-            case 7:
-            Clear();
-                cout << "Te defiendes del proximo ataque de " << h.DHName << endl;
+                cout << "Te defiendes del proximo ataque de " << inf.HadesName << endl;
                 cout << "Tu defensa de multiplico x2 este turno." << endl;
                 cout << "Recuperas +20 \033[34mMANA\033[0m" << endl << endl;
                 p.MANA = min(p.MANA + 20, p.MAX_MANA);
                 p.DEFENSE = TempDefense * 2;
-                DHAttackPlayer(p, h);
+                
+                // Decidir si usa habilidad especial mientras te defiendes
+                if (RNGHadesSpecial <= 20 && inf.MANA >= 40){
+                    HadesSpecialAbility(p, inf);
+                } else {
+                    HadesAttackPlayer(p, inf);
+                }
                 p.DEFENSE = TempDefense;
                 break;
             case 8: // RETURN
@@ -375,27 +462,18 @@ void DHBattle(Player& p, DHypnos& h){
             cout << endl;
         break;
 // end case 4
-        case 5:
-            Clear();
-            cout << "Intentas perdonar a Hypnos pero el ya te ha perdonado a tí... solo te prueba como si fueras su hijo." << endl;
-            break;
         default:
             DefaultError();
             break;
         }
 
-        if (RegMana) {
-            p.MANA = min(p.MANA + 10, p.MAX_MANA);
+        // Regeneración de mana para Hades cada turno
+        if (RegMana && inf.MANA < inf.MAX_MANA){
+            inf.MANA = min(inf.MANA + 10, inf.MAX_MANA);
         }
 
-        Clear();
-            if(TurnCount >= 20){
-            cout << "\n\033[32mHaz pasado la prueba\033[0m" << endl;
-            battleOver = true;
-            }
-
         if(p.HP <= 0){
-            cout << h.DHName << " ha derrotado a " << "\033[34m" << p.PlayerName << "\033[0m" << endl;
+            cout << inf.HadesName << " ha derrotado a " << "\033[34m" << p.PlayerName << "\033[0m" << endl;
             cout << "\033[31mGAME OVER\033[0m" << endl;
             cout << "\033[33mContinue?\033[0m\n1. YES\n2. NO\n\n";
             cin >> option_GameOver;
@@ -406,7 +484,7 @@ void DHBattle(Player& p, DHypnos& h){
                 cout << "Retornando con valor..." << endl;
                 cout << "Volviendo al último checkpoint...\n" << endl;
                 Sleep(1000);
-                Checkpoint(p, h, PlayerHp, PlayerMana, DHHP, DHMana, DHMaxHp); // llamar funcion de checkpoint
+                Checkpoint(p, inf, PlayerHp, PlayerMana, HadesHP, HadesMana, HadesMaxHp); // llamar funcion de checkpoint
                 Clear();
                 break;
             case 2:
@@ -420,6 +498,13 @@ void DHBattle(Player& p, DHypnos& h){
                 break;  // variable para continuar o no
                 }
             }
+            
+        // Verificar si Hades fue derrotado
+        if(inf.HP <= 0){
+            cout << "\033[32m¡Has derrotado a " << inf.HadesName << "!\033[0m" << endl;
+            cout << "\033[33m¡VICTORIA!\033[0m" << endl;
+            battleOver = true;
+        }
 
     } while (!battleOver); // condicion para que termine la batalla
 }

@@ -22,6 +22,8 @@
 #include "src/Battles/NihilusBattle/NihilusFight.h"
 #include "src/Data/HypnosData/Hypnos.h"
 #include "src/Battles/HypnosBattle/DHBattle.h"
+#include "src/Data/Hades_Data/Hades.h"
+#include "src/Battles/HadesBattle/HadesFight.h"
 
 using namespace std;
 
@@ -44,6 +46,7 @@ int main(){
     Nihilus Nihi = Nihilus_Data();
     KingMagnus Km = KMagnus_Data();
     DHypnos h = DH_Data();
+    DHades inf = Hades_Data();
 
     cout << endl;
     cout << "\033[3;4mLoading to continue your adventure...\033[0m" << endl;
@@ -59,7 +62,7 @@ Clear();
     //MountOlympus(p, Km); // Capitulo 4 - Monte Olimpo
     // Sky(p, h); // Capitulo 5 - Reino de Zeus
 
-    DHBattle(p, h);
+    // HadesBattle(p, inf);
 
     return 0;
 }

@@ -3,7 +3,7 @@
 #include <time.h>
 #include <algorithm>
 #include "Data/PlayerData/PlayerData.h"
-#include "Data/CerberusData/Cerberus.h"
+#include "Cerberus.h"
 #include "BattleUtils/BattleUtils.h"
 
 using namespace std;

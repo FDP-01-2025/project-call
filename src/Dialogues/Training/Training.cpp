@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include <cstdlib>
+#include "BattleUtils/BattleUtils.h"
 #include "Data/PlayerData/PlayerData.h"
 using namespace std;
 void PrintWithPause_T(const string& Text, int Pause){
