@@ -13,9 +13,9 @@ AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde en
   - `<iostream>`
   - `<windows.h>`
   - `<ctime>`
-  - `<fstream>`
   - `<algorithm>`
-  - `<vector>`
+  - `<chrono>`
+  - `<thread>`
 
 ## 🧩 Funcionalidades principales
 
@@ -29,42 +29,34 @@ AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde en
 
 - **Variables y tipos de datos:**
   - Ejemplo: 
- 
- ![Ejemplo de tipo de datos\n](/resources/Images/Variables%20.png)
+ ![Ejemplo de tipo de datos](/resources/Images/Variables%20.png)
 
 - **Condicionales (if, else):**
   - Ejemplo: 
-  
-  ![Ejemplo de if, else\n](/resources/Images/If,%20else.png)
+  ![Ejemplo de if, else](/resources/Images/If,%20else.png)
 
 - **Bucles:**
   - Ejemplo: dibujar la barra de vida.
-  
-  ![Ejemplo de bucle\n](/resources/Images/For.png)
+  ![Ejemplo de bucle](/resources/Images/For.png)
 
 - **Funciones:**
   - Ejemplo: 
-  
-  ![Ejemplo de funciones\n](/resources/Images/Funcion.png)
+  ![Ejemplo de funciones](/resources/Images/Funcion.png)
 
 - **Arrays / vectores:**
   - Ejemplo: guardar dialogos.
-  
-  ![Ejemplo de Array\n](/resources/Images/Array.png)
+  ![Ejemplo de Array](/resources/Images/Array.png)
 
 
 ## 🖼 Mockups y ejemplo de pantallas
 
 - Pantalla de combate con stats y comandos
-
-![Ejemplo\n](/resources/Images/Interfaz.jpg)
+![Ejemplo:](/resources/Images/Interfaz.jpg)
 - Pantalla de "Game Over" con opción de continuar
-
-![Ejemplo\n](/resources/Images/game%20over.jpg)
 
 ## 📦 Requisitos mínimos
 
-- **RAM:** 2 GB
+- **RAM:** 6 GB
 - **Procesador:** Intel Pentium 400 MHz o superior
 - **Espacio:** 200 MB
 
@@ -72,7 +64,7 @@ AshesOfOlympus es un RPG en consola ambientado en la mitología griega, donde en
 
 ```bash
 cd ruta/al/proyecto
-g++ -Isrc main.cpp ... -o AshesOfOlympus.exe
+g++ -Isrc main.cpp src/Dialogues/Prologue/Prologue.cpp src/Dialogues/Training/Training.cpp src/Dialogues/Tutorial/Tutorial.cpp src/Data/PlayerData/PlayerData.cpp src/Data/NaikaData/Naika.cpp src/Data/NaikaDummy/NaikaDummy.cpp src/Battles/NaikaDummy/NaBattle.cpp src/Data/EliteSData/EliteSlime.cpp src/Battles/SlimeBattle/Sbattle.cpp src/Data/TrollData/Troll.cpp src/Battles/TrollBattle/TrollFight.cpp src/BattleUtils/BattleUtils.cpp src/Data/GolemData/Golem.cpp src/Battles/GolemBattle/GolemFight.cpp src/Data/NihilusData/Nihilus.cpp src/Battles/NihilusBattle/NihilusFight.cpp src/Data/KingMagnus/KingMagnus.cpp src/Battles/KMBattle/KMBattle.cpp src/Dialogues/DeepCave/Cave.cpp src/Dialogues/Forest/Forest.cpp src/Dialogues/AtenasCity/Atenas.cpp src/Data/HypnosData/Hypnos.cpp src/Battles/HypnosBattle/DHBattle.cpp src/Dialogues/Olympus/Olympus.cpp src/Dialogues/Sky/Sky.cpp src/Data/Hades_Data/Hades.cpp src//Battles/HadesBattle/HadesFight.cpp src/Dialogues/Underworld/Underw.cpp -o Run
 ```
 
 > Sustituye `...` por los archivos `.cpp` del proyecto.
@@ -80,7 +72,7 @@ g++ -Isrc main.cpp ... -o AshesOfOlympus.exe
 ## 💾 Ejecución
 
 ```bash
-./AshesOfOlympus.exe
+.\'Run.exe'
 ```
 
 ## 🧑‍💻 Equipo

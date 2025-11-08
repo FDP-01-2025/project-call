@@ -7,6 +7,32 @@
 
 using namespace std;
 
+void ShowAshesOfOlympus() {
+    cout << "\033[35m"; // Inicia color amarillo
+    cout << " █████╗ ███████╗██╗  ██╗███████╗███████╗\n";
+    cout << "██╔══██╗██╔════╝██║  ██║██╔════╝██╔════╝\n";
+    cout << "███████║███████╗███████║█████╗  ███████╗\n";
+    cout << "██╔══██║╚════██║██╔══██║██╔══╝  ╚════██║\n";
+    cout << "██║  ██║███████║██║  ██║███████╗███████║\n";
+    cout << "╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝\n";
+    cout << "             ASHES                    \n\n";
+    cout << " ██████╗ ███████╗\n";
+    cout << "██╔═══██╗██╔════╝\n";
+    cout << "██║   ██║█████╗  \n";
+    cout << "██║   ██║██╔══╝  \n";
+    cout << "╚██████╔╝██║     \n";
+    cout << " ╚═════╝ ╚═╝     \n";
+    cout << "       OF        \n\n";
+    cout << " ██████╗ ██╗    ██   ██╗ ███╗   ███╗██████╗ ██╗   ██╗███████╗\n";
+    cout << "██╔═══██╗██║     ██ ██╔╝ ████╗ ████║██╔══██╗██║   ██║██╔════╝\n";
+    cout << "██║   ██║██║      ██╔═╝  ██╔████╔██║██████╔╝██║   ██║███████╗\n";
+    cout << "██║▄▄ ██║██║      ██║    ██║╚██╔╝██║██╔═══╝ ██║   ██║╚════██║\n";
+    cout << "╚██████╔╝███████╗ ██║    ██║ ╚═╝ ██║██║     ╚██████╔╝███████║\n";
+    cout << " ╚══▀▀═╝ ╚══════╝ ╚═╝     ╚╝     ╚═╝╚═╝      ╚═════╝ ╚══════╝\n";
+    cout << "                              OLYMPUS                        \n\n";
+    cout << "\033[0m"; // Reset color
+}
+
 void ShowGameOver() {
     cout << "\033[31m"; // Comenzar color rojo
 
@@ -23,7 +49,7 @@ void ShowGameOver() {
 void PtC() {
     cout << "\033[2m[Presiona Enter para continuar...]\033[0m"; // Imprimir el mensaje corregido
     cin.clear(); // Limpia flags de error
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpiar cualquier caracter residual en el buffer
+    cin.ignore(numeric_limits<streamsize>::max(),'\n'); // Limpiar cualquier caracter residual en el buffer
     cin.get(); // Esperar a que el jugador presione Enter
 }
 

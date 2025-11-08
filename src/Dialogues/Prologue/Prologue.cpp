@@ -118,20 +118,20 @@ void Prologue(){
     string V2 = "Voz misteriosa 2";
     string H1 = "Hoplita 1";
     string H2 = "Hoplita 2";
-    string Black = "\033[30m";
+    string Purple = "\033[35m";
     string Yellow = "\033[33m";
     string Green = "\033[32m";
 
     string colors[] = {
-    Black, Black, Black, Black, Yellow, Black, Black, Yellow, Yellow, Yellow, Black, Yellow, Yellow, Yellow,
-    Black, Black, Yellow, Yellow, Yellow, Black, Yellow, Black, Black, Yellow, Yellow, Yellow, Yellow, Yellow,
-    Yellow, Yellow, Black, Black, Yellow, Yellow, Yellow, Black, Yellow, Black, Yellow, Yellow, Yellow, Yellow,
-    Yellow, Black, Black, Yellow, Yellow, Black, Yellow, Yellow, Yellow, Black, Black, Yellow, Yellow, Black,
-    Black, Black, Yellow, Black, Black, Yellow, Yellow, Yellow
+    Purple, Purple, Purple, Purple, Yellow, Purple, Purple, Yellow, Yellow, Yellow, Purple, Yellow, Yellow, Yellow,
+    Purple, Purple, Yellow, Yellow, Yellow, Purple, Yellow, Purple, Purple, Yellow, Yellow, Yellow, Yellow, Yellow,
+    Yellow, Yellow, Purple, Purple, Yellow, Yellow, Yellow, Purple, Yellow, Purple, Yellow, Yellow, Yellow, Yellow,
+    Yellow, Purple, Purple, Yellow, Yellow, Purple, Yellow, Yellow, Yellow, Purple, Purple, Yellow, Yellow, Purple,
+    Purple, Purple, Yellow, Purple, Purple, Yellow, Yellow, Yellow
     };
 
     string ColorsH[] = {
-        Green, Yellow, Yellow, Green, Yellow, Black
+        Green, Yellow, Yellow, Green, Yellow, Purple
     };
 
     string prefixes[] = {

@@ -2,6 +2,7 @@
 #define BATTLE_UTILS_H
 #include "Data/PlayerData/PlayerData.h"
 
+void ShowAshesOfOlympus(); // muestra el titulo del juego
 void ShowGameOver(); // muestra el game over
 void PtC(); // Press to continue
 void Clear(); // Clear the console
